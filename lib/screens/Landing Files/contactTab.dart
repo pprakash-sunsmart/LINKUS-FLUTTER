@@ -31,17 +31,13 @@ class _contactsTabState extends State<contactsTab> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: Text(
-                          'All contacts ',
-                          style: TextStyle(color: Colors.black),
-                        ),
+                      Text(
+                        'All contacts ',
+                        style: TextStyle(color: Colors.black),
                       ),
-                      Expanded(
-                        child: Text(
-                          '(30)',
-                          style: TextStyle(color: Colors.black),
-                        ),
+                      Text(
+                        '(30)',
+                        style: TextStyle(color: Colors.black),
                       ),
                     ],
                   ),
@@ -54,17 +50,13 @@ class _contactsTabState extends State<contactsTab> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: Text(
-                        'Live Contacts ',
-                        style: TextStyle(color: Colors.black),
-                      ),
+                    Text(
+                      'Live Contacts ',
+                      style: TextStyle(color: Colors.black),
                     ),
-                    Expanded(
-                      child: Text(
-                        '(10)',
-                        style: TextStyle(color: Colors.black),
-                      ),
+                    Text(
+                      '(10)',
+                      style: TextStyle(color: Colors.black),
                     ),
                   ],
                 ),
