@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:linkus/screens/Landing%20Files/LandingScreen.dart';
-
-import 'screens/Login Files/loginscreen.dart';
+import 'package:linkus/screens/Login%20Files/loginscreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Link Us',
-      home: landingPage(),
+      home: LoginScreen(),
     );
   }
 }
