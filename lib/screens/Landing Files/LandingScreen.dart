@@ -2,10 +2,9 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:linkus/screens/Landing%20Stuffs/recentTab.dart';
-
 import 'contactTab.dart';
 import 'groupTab.dart';
+import 'recentTab.dart';
 
 class landingPage extends StatefulWidget {
   const landingPage({super.key});

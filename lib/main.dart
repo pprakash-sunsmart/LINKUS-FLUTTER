@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:linkus/screens/Login%20Files/loginscreen.dart';
+import 'screens/Login Files/loginscreen.dart';
 
 void main() {
   runApp(const MyApp());

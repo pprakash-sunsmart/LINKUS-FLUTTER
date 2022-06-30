@@ -1,8 +1,8 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, file_names, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:linkus/screens/Landing%20Stuffs/allcontacts.dart';
 
+import 'allcontacts.dart';
 import 'liveContacts.dart';
 
 class contactsTab extends StatefulWidget {
