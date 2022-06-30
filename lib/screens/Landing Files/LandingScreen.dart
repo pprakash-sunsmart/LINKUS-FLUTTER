@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:linkus/screens/change%20Password/change_password.dart';
 import 'package:linkus/screens/profile/my_profile.dart';
 
-
 import 'contactTab.dart';
 import 'groupTab.dart';
 import 'recentTab.dart';
@@ -68,17 +67,25 @@ class _landingPageState extends State<landingPage> {
                           PopupMenuItem(
                             value: 1,
                             height: 0,
-                            child: 
-                            InkWell(
-                              onTap: (){
-                               Navigator.pushAndRemoveUntil<dynamic>(
-          context,
-          MaterialPageRoute<dynamic>(
-            builder: (BuildContext context) {
-                return ProfilePage();
-              },
-            ),
-            (_) => true);},
+                            child: InkWell(
+                              onTap: () {
+                                // Navigator.pushAndRemoveUntil<dynamic>(context,
+                                //     MaterialPageRoute<dynamic>(
+                                //   builder: (BuildContext context) {
+                                //     return ProfilePage();
+                                //   },
+                                // ), (_) => true);
+                                Navigator.pop(context);
+                                Navigator.pushAndRemoveUntil<dynamic>(
+                                  context,
+                                  MaterialPageRoute<dynamic>(
+                                    builder: (BuildContext context) =>
+                                        ProfilePage(),
+                                  ),
+                                  (route) => true,
+                                  //if you want to disable back feature set to false
+                                );
+                              },
                               child: Row(
                                 children: [
                                   Icon(Icons.person),
@@ -102,17 +109,15 @@ class _landingPageState extends State<landingPage> {
                           PopupMenuItem(
                             value: 2,
                             height: 0,
-                            child: 
-                            InkWell(
-                              onTap: (){
-                               Navigator.pushAndRemoveUntil<dynamic>(
-          context,
-          MaterialPageRoute<dynamic>(
-            builder: (BuildContext context) {
-                return ChangePassword();
-              },
-            ),
-            (_) => true);},
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushAndRemoveUntil<dynamic>(context,
+                                    MaterialPageRoute<dynamic>(
+                                  builder: (BuildContext context) {
+                                    return ChangePassword();
+                                  },
+                                ), (_) => true);
+                              },
                               child: Row(
                                 children: [
                                   Icon(Icons.key),

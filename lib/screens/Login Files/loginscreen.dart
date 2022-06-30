@@ -86,15 +86,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: MediaQuery.of(context).size.height * 0.09,
                   ),
                   MasterTextField(
-                    contentPadding:EdgeInsets.only() ,
+                    contentPadding: EdgeInsets.symmetric(vertical: 5),
                     label: "Mobile Number",
                     Controller: nameController,
-                
                     PrefixIcon: Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Container(
                         decoration: const BoxDecoration(
-                          
 
                             // borderRadius: BorderRadius.circular(4),
                             color: Color.fromRGBO(56, 210, 0, 1)),
@@ -107,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     fillColor: Colors.white,
                     filled: true,
                     enabledborder: InputBorder.none,
-                    focusedborder:InputBorder.none,
+                    focusedborder: InputBorder.none,
                     obscureText: false,
                     keyboardType: TextInputType.number,
                   ),
@@ -115,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
                   MasterTextField(
-                    contentPadding:EdgeInsets.only() ,
+                    contentPadding: EdgeInsets.symmetric(vertical: 5),
                     label: "Password",
                     PrefixIcon: Padding(
                       padding: const EdgeInsets.only(right: 10),
@@ -128,11 +126,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: Colors.white,
                           )),
                     ),
-                     fillColor: Colors.white,
+                    fillColor: Colors.white,
                     filled: true,
-                  
                     enabledborder: InputBorder.none,
-                    focusedborder:InputBorder.none,
+                    focusedborder: InputBorder.none,
                     obscureText: _showPassword,
                     Controller: passwordController,
                     SuffixIcon: Padding(
