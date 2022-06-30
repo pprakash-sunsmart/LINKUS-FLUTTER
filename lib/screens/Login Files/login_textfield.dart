@@ -10,6 +10,12 @@ class MasterTextField extends StatefulWidget {
   bool obscureText;
   //final Validate;
   dynamic keyboardType;
+  dynamic focusedborder;
+  dynamic enabledborder;
+  dynamic fillColor;
+  bool filled;
+  dynamic contentPadding;
+
 
   MasterTextField(
       {Key? key,
@@ -17,7 +23,12 @@ class MasterTextField extends StatefulWidget {
       required this.Controller,
       required this.PrefixIcon,
       this.SuffixIcon,
+      required this.enabledborder,
+      required this.focusedborder,
+      required this.fillColor,
+      required this.filled,
       required this.obscureText,
+      required this.contentPadding,
       required this.keyboardType})
       : super(key: key);
 
@@ -44,10 +55,11 @@ class _MasterTextFieldState extends State<MasterTextField> {
                 keyboardType: widget.keyboardType,
                 //validator: widget.Validate,
                 decoration: InputDecoration(
-                  focusedBorder: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  fillColor: Colors.white,
-                  filled: true,
+                  contentPadding: widget.contentPadding,
+                  focusedBorder: widget.focusedborder,
+                  enabledBorder: widget.enabledborder,
+                  fillColor: widget.fillColor,
+                  filled: widget.filled,
                   border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(6.0)),
                     borderSide: BorderSide(color: Colors.white),
