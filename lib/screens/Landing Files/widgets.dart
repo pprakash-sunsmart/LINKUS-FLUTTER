@@ -91,41 +91,39 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20)),
-                  child: Flexible(
-                    child: TextFormField(
-                      cursorHeight: 16,
-                      cursorColor: Colors.grey.shade900,
-                      decoration: InputDecoration(
-                          enabledBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(vertical: 8),
-                          hintText: 'Type a message',
-                          prefixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image(
-                                  image:
-                                      AssetImage('assets/images/smiley.png'))),
-                          suffixIcon: IconButton(
+                  child: TextFormField(
+                    cursorHeight: 16,
+                    cursorColor: Colors.grey.shade900,
+                    decoration: InputDecoration(
+                        enabledBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(vertical: 8),
+                        hintText: 'Type a message',
+                        prefixIcon: IconButton(
                             onPressed: () {},
-                            icon: Container(
-                              height: 90,
-                              width: 90,
-                              decoration: BoxDecoration(
-                                  color: Color.fromRGBO(1, 123, 255, 1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              // child: Image(
-                              //   image:
-                              //       AssetImage('assets/images/attachments.png'),
+                            icon: Image(
+                                image:
+                                    AssetImage('assets/images/smiley.png'))),
+                        suffixIcon: IconButton(
+                          onPressed: () {},
+                          icon: Container(
+                            height: 90,
+                            width: 90,
+                            decoration: BoxDecoration(
+                                color: Color.fromRGBO(1, 123, 255, 1),
+                                borderRadius: BorderRadius.circular(20)),
+                            // child: Image(
+                            //   image:
+                            //       AssetImage('assets/images/attachments.png'),
 
-                              // ),
-                              child: Icon(
-                                Icons.attachment,
-                                color: Colors.white,
-                                size: 20,
-                              ),
+                            // ),
+                            child: Icon(
+                              Icons.attachment,
+                              color: Colors.white,
+                              size: 20,
                             ),
-                            // iconSize: 25,
-                          )),
-                    ),
+                          ),
+                          // iconSize: 25,
+                        )),
                   )),
             ),
             SizedBox(
