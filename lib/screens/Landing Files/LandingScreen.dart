@@ -33,13 +33,25 @@ class _landingPageState extends State<landingPage> {
                     backgroundColor: Color.fromRGBO(1, 123, 255, 1),
                     leading: Padding(
                       padding: EdgeInsets.only(top: 10, left: 20, bottom: 10),
-                      child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: profImg
-                              ? Icon(
-                                  Icons.person,
-                                )
-                              : Icon(Icons.abc)),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pushAndRemoveUntil<dynamic>(
+                            context,
+                            MaterialPageRoute<dynamic>(
+                              builder: (BuildContext context) => ProfilePage(),
+                            ),
+                            (route) => true,
+                            //if you want to disable back feature set to false
+                          );
+                        },
+                        child: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: profImg
+                                ? Icon(
+                                    Icons.person,
+                                  )
+                                : Icon(Icons.abc)),
+                      ),
                     ),
                     title: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -323,6 +335,7 @@ class _landingPageState extends State<landingPage> {
                     Tab(icon: groupTab()),
                   ],
                 ),
+                bottomSheet: footer(),
               ),
             )));
   }

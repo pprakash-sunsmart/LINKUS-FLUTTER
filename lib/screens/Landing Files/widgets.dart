@@ -203,3 +203,38 @@ class _MainmenuState extends State<Mainmenu> {
     );
   }
 }
+
+class footer extends StatelessWidget {
+  const footer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        color: Color.fromRGBO(1, 123, 255, 1),
+        height: 20,
+        child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Center(
+                    child: Text(
+                      '\u00a9 Copyright Ecnchat.io',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  Center(
+                      child: Text(
+                    'Enchat',
+                    style: TextStyle(color: Colors.white),
+                  )),
+                ],
+              ),
+            )));
+  }
+}
