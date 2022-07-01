@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, camel_case_types, file_names
 
 import 'package:flutter/material.dart';
+import 'package:linkus/screens/chatscreen%20Files/groupChat.dart';
 
 import 'widgets.dart';
 
@@ -46,6 +47,10 @@ class _groupTabState extends State<groupTab> {
                   ),
                 ))),
         ChatList(
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => groupChat()));
+          },
           profIcon: Icon(Icons.group),
           msgText: null,
           msgdte$tme: Text(''),

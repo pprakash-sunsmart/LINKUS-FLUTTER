@@ -10,6 +10,7 @@ class ChatList extends StatefulWidget {
   final ntfctnCnt;
   final msgdte$tme;
   final ItmCnt;
+  final onTap;
   const ChatList({
     Key? key,
     required this.profIcon,
@@ -18,6 +19,7 @@ class ChatList extends StatefulWidget {
     required this.ntfctnCnt,
     required this.msgdte$tme,
     required this.ItmCnt,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -35,10 +37,7 @@ class _ChatListState extends State<ChatList> {
             return Column(
               children: [
                 ListTile(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => NewChat()));
-                  },
+                  onTap: widget.onTap,
                   leading: CircleAvatar(
                     // radius: 25,
                     child: widget.profIcon,
@@ -89,41 +88,38 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20)),
-                  child: Flexible(
-                    child: TextFormField(
-                      cursorHeight: 16,
-                      cursorColor: Colors.grey.shade900,
-                      decoration: InputDecoration(
-                          enabledBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(vertical: 8),
-                          hintText: 'Type a message',
-                          prefixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Image(
-                                  image:
-                                      AssetImage('assets/images/smiley.png'))),
-                          suffixIcon: IconButton(
+                  child: TextFormField(
+                    cursorHeight: 16,
+                    cursorColor: Colors.grey.shade900,
+                    decoration: InputDecoration(
+                        enabledBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(vertical: 8),
+                        hintText: 'Type a message',
+                        prefixIcon: IconButton(
                             onPressed: () {},
-                            icon: Container(
-                              height: 90,
-                              width: 90,
-                              decoration: BoxDecoration(
-                                  color: Color.fromRGBO(1, 123, 255, 1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              // child: Image(
-                              //   image:
-                              //       AssetImage('assets/images/attachments.png'),
+                            icon: Image(
+                                image: AssetImage('assets/images/smiley.png'))),
+                        suffixIcon: IconButton(
+                          onPressed: () {},
+                          icon: Container(
+                            height: 90,
+                            width: 90,
+                            decoration: BoxDecoration(
+                                color: Color.fromRGBO(1, 123, 255, 1),
+                                borderRadius: BorderRadius.circular(20)),
+                            // child: Image(
+                            //   image:
+                            //       AssetImage('assets/images/attachments.png'),
 
-                              // ),
-                              child: Icon(
-                                Icons.attachment,
-                                color: Colors.white,
-                                size: 20,
-                              ),
+                            // ),
+                            child: Icon(
+                              Icons.attachment,
+                              color: Colors.white,
+                              size: 20,
                             ),
-                            // iconSize: 25,
-                          )),
-                    ),
+                          ),
+                          // iconSize: 25,
+                        )),
                   )),
             ),
             SizedBox(
@@ -148,5 +144,40 @@ class _ChatInputBoxState extends State<ChatInputBox> {
         ),
       ),
     );
+  }
+}
+
+class footer extends StatelessWidget {
+  const footer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        color: Color.fromRGBO(1, 123, 255, 1),
+        height: 20,
+        child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Center(
+                    child: Text(
+                      '\u00a9 Copyright Ecnchat.io',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  Center(
+                      child: Text(
+                    'Enchat',
+                    style: TextStyle(color: Colors.white),
+                  )),
+                ],
+              ),
+            )));
   }
 }

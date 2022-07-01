@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../chatscreen Files/individualChat.dart';
 import 'widgets.dart';
 
 class allContacts extends StatefulWidget {
@@ -32,6 +33,10 @@ class _allContactsState extends State<allContacts> {
           ),
         ),
         ChatList(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PersonalChat()));
+          },
           profIcon: Icon(Icons.person),
           msgText: null,
           msgdte$tme: Text(''),

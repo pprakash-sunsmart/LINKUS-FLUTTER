@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:linkus/screens/Landing%20Files/LandingScreen.dart';
 
 import '../Login Files/login_textfield.dart';
 
@@ -16,8 +15,7 @@ class _ChangePasswordState extends State<ChangePassword> {
   var cnfrmPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(1, 123, 255, 1),
         automaticallyImplyLeading: false,
@@ -112,6 +110,6 @@ class _ChangePasswordState extends State<ChangePassword> {
           ],
         ),
       ),
-    ));
+    );
   }
 }

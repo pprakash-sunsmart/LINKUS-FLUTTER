@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: MediaQuery.of(context).size.height * 0.09,
                   ),
                   MasterTextField(
-                    contentPadding: EdgeInsets.symmetric(vertical: 5),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 5),
                     label: "Mobile Number",
                     Controller: nameController,
                     PrefixIcon: Padding(
@@ -113,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
                   MasterTextField(
-                    contentPadding: EdgeInsets.symmetric(vertical: 5),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 5),
                     label: "Password",
                     PrefixIcon: Padding(
                       padding: const EdgeInsets.only(right: 10),

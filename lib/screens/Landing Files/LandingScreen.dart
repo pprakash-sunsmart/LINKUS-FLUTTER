@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, prefer_const_constructors, avoid_unnecessary_containers, file_names, sized_box_for_whitespace
+// ignore_for_file: camel_case_types, prefer_const_constructors, avoid_unnecessary_containers, file_names, sized_box_for_whitespace, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/change%20Password/change_password.dart';
@@ -7,6 +7,7 @@ import 'package:linkus/screens/profile/my_profile.dart';
 import 'contactTab.dart';
 import 'groupTab.dart';
 import 'recentTab.dart';
+import 'widgets.dart';
 
 class landingPage extends StatefulWidget {
   const landingPage({super.key});
@@ -30,13 +31,25 @@ class _landingPageState extends State<landingPage> {
                   backgroundColor: Color.fromRGBO(1, 123, 255, 1),
                   leading: Padding(
                     padding: EdgeInsets.only(top: 10, left: 20, bottom: 10),
-                    child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: profImg
-                            ? Icon(
-                                Icons.person,
-                              )
-                            : Icon(Icons.abc)),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil<dynamic>(
+                          context,
+                          MaterialPageRoute<dynamic>(
+                            builder: (BuildContext context) => ProfilePage(),
+                          ),
+                          (route) => true,
+                          //if you want to disable back feature set to false
+                        );
+                      },
+                      child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: profImg
+                              ? Icon(
+                                  Icons.person,
+                                )
+                              : Icon(Icons.abc)),
+                    ),
                   ),
                   title: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -69,12 +82,6 @@ class _landingPageState extends State<landingPage> {
                             height: 0,
                             child: InkWell(
                               onTap: () {
-                                // Navigator.pushAndRemoveUntil<dynamic>(context,
-                                //     MaterialPageRoute<dynamic>(
-                                //   builder: (BuildContext context) {
-                                //     return ProfilePage();
-                                //   },
-                                // ), (_) => true);
                                 Navigator.pop(context);
                                 Navigator.pushAndRemoveUntil<dynamic>(
                                   context,
@@ -376,6 +383,7 @@ class _landingPageState extends State<landingPage> {
                     Tab(icon: groupTab()),
                   ],
                 ),
+                bottomSheet: footer(),
               ),
             )));
   }

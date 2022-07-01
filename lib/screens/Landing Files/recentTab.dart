@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../chatscreen Files/individualChat.dart';
 import 'widgets.dart';
 
 class recentTab extends StatefulWidget {
@@ -29,6 +30,10 @@ class _recentTabState extends State<recentTab> {
           ),
         ),
         ChatList(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PersonalChat()));
+          },
           ntfctnCnt: CircleAvatar(
               radius: 10,
               child: Text(

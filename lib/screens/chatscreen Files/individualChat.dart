@@ -1,17 +1,17 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:linkus/screens/Landing%20Files/widgets.dart';
 
-class NewChat extends StatefulWidget {
-  const NewChat({super.key});
+class PersonalChat extends StatefulWidget {
+  const PersonalChat({super.key});
 
   @override
-  State<NewChat> createState() => _NewChatState();
+  State<PersonalChat> createState() => _PersonalChatState();
 }
 
-class _NewChatState extends State<NewChat> {
+class _PersonalChatState extends State<PersonalChat> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
