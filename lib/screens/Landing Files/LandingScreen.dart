@@ -1,8 +1,11 @@
-// ignore_for_file: camel_case_types, prefer_const_constructors, avoid_unnecessary_containers, file_names, sized_box_for_whitespace
+// ignore_for_file: camel_case_types, prefer_const_constructors, avoid_unnecessary_containers, file_names, sized_box_for_whitespace, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:linkus/screens/Landing%20Files/widgets.dart';
+import 'package:linkus/screens/calendar/mycalendar.dart';
 import 'package:linkus/screens/change%20Password/change_password.dart';
 import 'package:linkus/screens/profile/my_profile.dart';
+import 'package:linkus/screens/project_milestone/project_milestone.dart';
 
 import 'contactTab.dart';
 import 'groupTab.dart';
@@ -57,297 +60,211 @@ class _landingPageState extends State<landingPage> {
                   ),
                   actions: [
                     Theme(
-                      data: Theme.of(context).copyWith(
-                        dividerTheme: DividerThemeData(
-                            color: Colors.black, thickness: 0.5),
-                        iconTheme: IconThemeData(color: Colors.white),
-                      ),
-                      child: PopupMenuButton<int>(
-                        itemBuilder: (context) => [
-                          PopupMenuItem(
-                            value: 1,
-                            height: 0,
-                            child: InkWell(
-                              onTap: () {
-                                // Navigator.pushAndRemoveUntil<dynamic>(context,
-                                //     MaterialPageRoute<dynamic>(
-                                //   builder: (BuildContext context) {
-                                //     return ProfilePage();
-                                //   },
-                                // ), (_) => true);
-                                Navigator.pop(context);
-                                Navigator.pushAndRemoveUntil<dynamic>(
-                                  context,
-                                  MaterialPageRoute<dynamic>(
-                                    builder: (BuildContext context) =>
-                                        ProfilePage(),
-                                  ),
-                                  (route) => true,
-                                  //if you want to disable back feature set to false
-                                );
-                              },
-                              child: Row(
-                                children: [
-                                  Icon(Icons.person),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    "My Profile",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          PopupMenuDivider(),
-                          // popupmenu item 2
-                          PopupMenuItem(
-                            value: 2,
-                            height: 0,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.pushAndRemoveUntil<dynamic>(context,
+                        data: Theme.of(context).copyWith(
+                          dividerTheme: DividerThemeData(
+                              color: Colors.black, thickness: 0.5),
+                          iconTheme: IconThemeData(color: Colors.white),
+                        ),
+                        child: 
+                        
+                        
+                        Column(
+                          children: [
+                            Mainmenu(
+                                value: 1,
+                                text: "My Profile",
+                                Icon: Icon(Icons.person),
+                                height: 0,
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Navigator.pushAndRemoveUntil<dynamic>(
+                                    context,
                                     MaterialPageRoute<dynamic>(
-                                  builder: (BuildContext context) {
-                                    return ChangePassword();
-                                  },
-                                ), (_) => true);
-                              },
-                              child: Row(
-                                children: [
-                                  Icon(Icons.key),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    "Change Password",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
+                                      builder: (BuildContext context) =>
+                                          ProfilePage(),
                                     ),
-                                  )
-                                ],
-                              ),
-                            ),
+                                    (route) => true,
+                                    //if you want to disable back feature set to false
+                                  );
+                                }),
+                                Mainmenu(
+                      value: 2,
+                      text: "Change Password",
+                      Icon: Icon(Icons.key),
+                      height: 0,
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushAndRemoveUntil<dynamic>(
+                          context,
+                          MaterialPageRoute<dynamic>(
+                            builder: (BuildContext context) => ChangePassword(),
                           ),
-                          PopupMenuDivider(),
-                          PopupMenuItem(
-                            height: 0,
-                            value: 3,
-                            // row has two child icon and text
-                            child: Row(
-                              children: [
-                                Icon(Icons.calendar_month),
-                                SizedBox(
-                                  // sized box with width 10
-                                  width: 10,
-                                ),
-                                Text(
-                                  "My Calendar",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )
-                              ],
-                            ),
+                          (route) => true,
+                          //if you want to disable back feature set to false
+                        );}),
+                
+                                    Mainmenu(
+                      value: 3,
+                      text: "My Calendar",
+                      Icon: Icon(Icons.calendar_month),
+                      height: 0,
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushAndRemoveUntil<dynamic>(
+                          context,
+                          MaterialPageRoute<dynamic>(
+                            builder: (BuildContext context) => Calendar(),
                           ),
-                          PopupMenuDivider(),
-                          PopupMenuItem(
-                            value: 4,
-                            height: 0,
-                            // row has two child icon and text
-                            child: Row(
-                              children: [
-                                Icon(Icons.task),
-                                SizedBox(
-                                  // sized box with width 10
-                                  width: 10,
-                                ),
-                                Text(
-                                  "My task",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          PopupMenuDivider(),
-                          PopupMenuItem(
-                            value: 5,
-                            height: 0,
-                            // row has two child icon and text
-                            child: Row(
-                              children: [
-                                Icon(Icons.bookmark),
-                                SizedBox(
-                                  // sized box with width 10
-                                  width: 10,
-                                ),
-                                Text(
-                                  "My Shelf",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          PopupMenuDivider(),
-                          PopupMenuItem(
-                            value: 6,
-                            height: 0,
-                            // row has two child icon and text
-                            child: Row(
-                              children: [
-                                Icon(Icons.handshake_outlined),
-                                SizedBox(
-                                  // sized box with width 10
-                                  width: 10,
-                                ),
-                                Text(
-                                  "MOM",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          PopupMenuDivider(),
-                          PopupMenuItem(
-                            value: 6,
-                            height: 0,
-                            // row has two child icon and text
-                            child: Row(
-                              children: [
-                                Icon(Icons.star),
-                                SizedBox(
-                                  // sized box with width 10
-                                  width: 10,
-                                ),
-                                Text(
-                                  "Starred",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          PopupMenuDivider(),
-                          PopupMenuItem(
-                            height: 0,
-                            value: 7,
-                            // row has two child icon and text
-                            child: Row(
-                              children: [
-                                Icon(Icons.dashboard_customize_outlined),
-                                SizedBox(
-                                  // sized box with width 10
-                                  width: 10,
-                                ),
-                                Text(
-                                  "Customization",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          PopupMenuDivider(),
-                          PopupMenuItem(
-                            value: 8,
-                            height: 0,
-                            // row has two child icon and text
-                            child: Row(
-                              children: [
-                                Icon(Icons.cake),
-                                SizedBox(
-                                  // sized box with width 10
-                                  width: 10,
-                                ),
-                                Text(
-                                  "Birthday",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          PopupMenuDivider(),
-
-                          PopupMenuItem(
-                            value: 9,
-                            height: 0,
-                            // row has two child icon and text
-                            child: Row(
-                              children: [
-                                Icon(Icons.approval_sharp),
-                                SizedBox(
-                                  // sized box with width 10
-                                  width: 10,
-                                ),
-                                Text(
-                                  "Project MileStone",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          PopupMenuDivider(),
-
-                          PopupMenuItem(
-                            height: 0,
-                            // row has two child icon and text
-                            child: Row(
-                              children: [
-                                Icon(Icons.logout),
-                                SizedBox(
-                                  // sized box with width 10
-                                  width: 10,
-                                ),
-                                Text(
-                                  "Log Out",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                        color: Color.fromRGBO(1, 123, 255, 1),
+                          (route) => true,
+                          //if you want to disable back feature set to false
+                        );
+                      },
                       ),
-                    )
+                    Mainmenu(
+                      value: 4,
+                      text: "My Task",
+                      Icon: Icon(Icons.task),
+                      height: 0,
+                      onTap: () {
+                        // Navigator.pop(context);
+                        // Navigator.pushAndRemoveUntil<dynamic>(
+                        //   context,
+                        //   MaterialPageRoute<dynamic>(
+                        //     builder: (BuildContext context) =>
+                        //         ProfilePage(),
+                        //   ),
+                        //   (route) => true,
+                        //   //if you want to disable back feature set to false
+                        // );
+                      },
+                    ),
+                    Mainmenu(
+                      value: 5,
+                      text: "My Shelf",
+                      Icon: Icon(Icons.bookmark),
+                      height: 0,
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushAndRemoveUntil<dynamic>(
+                          context,
+                          MaterialPageRoute<dynamic>(
+                            builder: (BuildContext context) => ProfilePage(),
+                          ),
+                          (route) => true,
+                          //if you want to disable back feature set to false
+                        );
+                      },
+                    ),
+                    Mainmenu(
+                      value: 6,
+                      text: "MOM",
+                      Icon: Icon(Icons.handshake_outlined),
+                      height: 0,
+                      onTap: () {
+                        // Navigator.pop(context);
+                        // Navigator.pushAndRemoveUntil<dynamic>(
+                        //   context,
+                        //   MaterialPageRoute<dynamic>(
+                        //     builder: (BuildContext context) =>
+                        //         ProfilePage(),
+                        //   ),
+                        //   (route) => true,
+                        //   //if you want to disable back feature set to false
+                        // );
+                      },
+                    ),
+                    Mainmenu(
+                      value: 7,
+                      text: "Starred",
+                      Icon: Icon(Icons.star),
+                      height: 0,
+                      onTap: () {
+                        // Navigator.pop(context);
+                        // Navigator.pushAndRemoveUntil<dynamic>(
+                        //   context,
+                        //   MaterialPageRoute<dynamic>(
+                        //     builder: (BuildContext context) =>
+                        //         ProfilePage(),
+                        //   ),
+                        //   (route) => true,
+                        //   //if you want to disable back feature set to false
+                        // );
+                      },
+                    ),
+                    Mainmenu(
+                      value: 8,
+                      text: "Customization",
+                      Icon: Icon(Icons.dashboard_customize),
+                      height: 0,
+                      onTap: () {
+                        // Navigator.pop(context);
+                        // Navigator.pushAndRemoveUntil<dynamic>(
+                        //   context,
+                        //   MaterialPageRoute<dynamic>(
+                        //     builder: (BuildContext context) =>
+                        //         ProfilePage(),
+                        //   ),
+                        //   (route) => true,
+                        //   //if you want to disable back feature set to false
+                        // );
+                      },
+                    ),
+                    Mainmenu(
+                      value: 9,
+                      text: "Birthday",
+                      Icon: Icon(Icons.cake),
+                      height: 0,
+                      onTap: () {
+                        // Navigator.pop(context);
+                        // Navigator.pushAndRemoveUntil<dynamic>(
+                        //   context,
+                        //   MaterialPageRoute<dynamic>(
+                        //     builder: (BuildContext context) =>
+                        //         ProfilePage(),
+                        //   ),
+                        //   (route) => true,
+                        //   //if you want to disable back feature set to false
+                        // );
+                      },
+                    ),
+                    Mainmenu(
+                      value: 10,
+                      text: "Project Milestone",
+                      Icon: Icon(Icons.tornado),
+                      height: 0,
+                      onTap: () {
+                        // Navigator.pop(context);
+                        // Navigator.pushAndRemoveUntil<dynamic>(
+                        //   context,
+                        //   MaterialPageRoute<dynamic>(
+                        //     builder: (BuildContext context) =>
+                        //         ProfilePage(),
+                        //   ),
+                        //   (route) => true,
+                        //   //if you want to disable back feature set to false
+                        // );
+                      },
+                    ),
+                    Mainmenu(
+                      value: 11,
+                      text: "LogOut",
+                      Icon: Icon(Icons.logout),
+                      height: 0,
+                      onTap: () {
+                        // Navigator.pop(context);
+                        // Navigator.pushAndRemoveUntil<dynamic>(
+                        //   context,
+                        //   MaterialPageRoute<dynamic>(
+                        //     builder: (BuildContext context) =>
+                        //         ProfilePage(),
+                        //   ),
+                        //   (route) => true,
+                        //   //if you want to disable back feature set to false
+                        // );
+                      },
+                    ),
+                          ],
+                        ))
                   ],
                   bottom: const TabBar(
                     tabs: [

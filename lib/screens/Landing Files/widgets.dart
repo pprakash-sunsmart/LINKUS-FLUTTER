@@ -1,7 +1,9 @@
-// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables, non_constant_identifier_names
+// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables, non_constant_identifier_names, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/chatscreen%20Files/individualChat.dart';
+
+import '../profile/my_profile.dart';
 
 class ChatList extends StatefulWidget {
   final profIcon;
@@ -148,5 +150,61 @@ class _ChatInputBoxState extends State<ChatInputBox> {
         ),
       ),
     );
+  }
+}
+class Mainmenu extends StatefulWidget {
+  final int value;
+  final double height;
+  final text;
+  final onTap;
+  final Icon;
+
+
+
+  const Mainmenu({super.key,
+  required this.value,required this.height,required this.text,required this.onTap,
+  required this.Icon});
+
+  @override
+  State<Mainmenu> createState() => _MainmenuState();
+}
+
+class _MainmenuState extends State<Mainmenu> {
+  @override
+  Widget build(BuildContext context) {
+    return  
+           
+                         ListView(
+                           children:[ PopupMenuItem(
+                         
+                              value: widget.value,
+                              height: widget.height,
+                              child: InkWell(
+                                onTap:widget.onTap,
+                                
+                                child: Row(
+                                  children: [
+                                   widget.Icon,
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      widget.text,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              
+                            ),
+ ]                        );
+ 
+                          
+        
+      
   }
 }
