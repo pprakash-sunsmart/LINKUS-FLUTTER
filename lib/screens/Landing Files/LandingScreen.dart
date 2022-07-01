@@ -58,215 +58,217 @@ class _landingPageState extends State<landingPage> {
                       )
                     ],
                   ),
-                  actions: [
-                    Theme(
-                        data: Theme.of(context).copyWith(
-                          dividerTheme: DividerThemeData(
-                              color: Colors.black, thickness: 0.5),
-                          iconTheme: IconThemeData(color: Colors.white),
-                        ),
-                        child: 
+                  // actions: [
+                  //   Theme(
+                  //       data: Theme.of(context).copyWith(
+                  //         dividerTheme: DividerThemeData(
+                  //             color: Colors.black, thickness: 0.5),
+                  //         iconTheme: IconThemeData(color: Colors.white),
+                  //       ),
+                  //       child: 
                         
-                        
-                        Column(
-                          children: [
-                            Mainmenu(
-                                value: 1,
-                                text: "My Profile",
-                                Icon: Icon(Icons.person),
-                                height: 0,
-                                onTap: () {
-                                  Navigator.pop(context);
-                                  Navigator.pushAndRemoveUntil<dynamic>(
-                                    context,
-                                    MaterialPageRoute<dynamic>(
-                                      builder: (BuildContext context) =>
-                                          ProfilePage(),
-                                    ),
-                                    (route) => true,
-                                    //if you want to disable back feature set to false
-                                  );
-                                }),
-                                Mainmenu(
-                      value: 2,
-                      text: "Change Password",
-                      Icon: Icon(Icons.key),
-                      height: 0,
-                      onTap: () {
-                        Navigator.pop(context);
-                        Navigator.pushAndRemoveUntil<dynamic>(
-                          context,
-                          MaterialPageRoute<dynamic>(
-                            builder: (BuildContext context) => ChangePassword(),
-                          ),
-                          (route) => true,
-                          //if you want to disable back feature set to false
-                        );}),
-                
-                                    Mainmenu(
-                      value: 3,
-                      text: "My Calendar",
-                      Icon: Icon(Icons.calendar_month),
-                      height: 0,
-                      onTap: () {
-                        Navigator.pop(context);
-                        Navigator.pushAndRemoveUntil<dynamic>(
-                          context,
-                          MaterialPageRoute<dynamic>(
-                            builder: (BuildContext context) => Calendar(),
-                          ),
-                          (route) => true,
-                          //if you want to disable back feature set to false
-                        );
-                      },
-                      ),
-                    Mainmenu(
-                      value: 4,
-                      text: "My Task",
-                      Icon: Icon(Icons.task),
-                      height: 0,
-                      onTap: () {
-                        // Navigator.pop(context);
-                        // Navigator.pushAndRemoveUntil<dynamic>(
-                        //   context,
-                        //   MaterialPageRoute<dynamic>(
-                        //     builder: (BuildContext context) =>
-                        //         ProfilePage(),
-                        //   ),
-                        //   (route) => true,
-                        //   //if you want to disable back feature set to false
-                        // );
-                      },
-                    ),
-                    Mainmenu(
-                      value: 5,
-                      text: "My Shelf",
-                      Icon: Icon(Icons.bookmark),
-                      height: 0,
-                      onTap: () {
-                        Navigator.pop(context);
-                        Navigator.pushAndRemoveUntil<dynamic>(
-                          context,
-                          MaterialPageRoute<dynamic>(
-                            builder: (BuildContext context) => ProfilePage(),
-                          ),
-                          (route) => true,
-                          //if you want to disable back feature set to false
-                        );
-                      },
-                    ),
-                    Mainmenu(
-                      value: 6,
-                      text: "MOM",
-                      Icon: Icon(Icons.handshake_outlined),
-                      height: 0,
-                      onTap: () {
-                        // Navigator.pop(context);
-                        // Navigator.pushAndRemoveUntil<dynamic>(
-                        //   context,
-                        //   MaterialPageRoute<dynamic>(
-                        //     builder: (BuildContext context) =>
-                        //         ProfilePage(),
-                        //   ),
-                        //   (route) => true,
-                        //   //if you want to disable back feature set to false
-                        // );
-                      },
-                    ),
-                    Mainmenu(
-                      value: 7,
-                      text: "Starred",
-                      Icon: Icon(Icons.star),
-                      height: 0,
-                      onTap: () {
-                        // Navigator.pop(context);
-                        // Navigator.pushAndRemoveUntil<dynamic>(
-                        //   context,
-                        //   MaterialPageRoute<dynamic>(
-                        //     builder: (BuildContext context) =>
-                        //         ProfilePage(),
-                        //   ),
-                        //   (route) => true,
-                        //   //if you want to disable back feature set to false
-                        // );
-                      },
-                    ),
-                    Mainmenu(
-                      value: 8,
-                      text: "Customization",
-                      Icon: Icon(Icons.dashboard_customize),
-                      height: 0,
-                      onTap: () {
-                        // Navigator.pop(context);
-                        // Navigator.pushAndRemoveUntil<dynamic>(
-                        //   context,
-                        //   MaterialPageRoute<dynamic>(
-                        //     builder: (BuildContext context) =>
-                        //         ProfilePage(),
-                        //   ),
-                        //   (route) => true,
-                        //   //if you want to disable back feature set to false
-                        // );
-                      },
-                    ),
-                    Mainmenu(
-                      value: 9,
-                      text: "Birthday",
-                      Icon: Icon(Icons.cake),
-                      height: 0,
-                      onTap: () {
-                        // Navigator.pop(context);
-                        // Navigator.pushAndRemoveUntil<dynamic>(
-                        //   context,
-                        //   MaterialPageRoute<dynamic>(
-                        //     builder: (BuildContext context) =>
-                        //         ProfilePage(),
-                        //   ),
-                        //   (route) => true,
-                        //   //if you want to disable back feature set to false
-                        // );
-                      },
-                    ),
-                    Mainmenu(
-                      value: 10,
-                      text: "Project Milestone",
-                      Icon: Icon(Icons.tornado),
-                      height: 0,
-                      onTap: () {
-                        // Navigator.pop(context);
-                        // Navigator.pushAndRemoveUntil<dynamic>(
-                        //   context,
-                        //   MaterialPageRoute<dynamic>(
-                        //     builder: (BuildContext context) =>
-                        //         ProfilePage(),
-                        //   ),
-                        //   (route) => true,
-                        //   //if you want to disable back feature set to false
-                        // );
-                      },
-                    ),
-                    Mainmenu(
-                      value: 11,
-                      text: "LogOut",
-                      Icon: Icon(Icons.logout),
-                      height: 0,
-                      onTap: () {
-                        // Navigator.pop(context);
-                        // Navigator.pushAndRemoveUntil<dynamic>(
-                        //   context,
-                        //   MaterialPageRoute<dynamic>(
-                        //     builder: (BuildContext context) =>
-                        //         ProfilePage(),
-                        //   ),
-                        //   (route) => true,
-                        //   //if you want to disable back feature set to false
-                        // );
-                      },
-                    ),
-                          ],
-                        ))
-                  ],
-                  bottom: const TabBar(
+                  //       PopupMenuButton(
+                  //         itemBuilder: (BuildContext context)=>{ Column(
+                  //           children: [
+                  //             Mainmenu(
+                  //                 value: 1,
+                  //                 text: "My Profile",
+                  //                 Icon: Icon(Icons.person),
+                  //                 height: 0,
+                  //                 onTap: () {
+                  //                   Navigator.pop(context);
+                  //                   Navigator.pushAndRemoveUntil<dynamic>(
+                  //                     context,
+                  //                     MaterialPageRoute<dynamic>(
+                  //                       builder: (BuildContext context) =>
+                  //                           ProfilePage(),
+                  //                     ),
+                  //                     (route) => true,
+                  //                     //if you want to disable back feature set to false
+                  //                   );
+                  //                 }),
+                  //                 Mainmenu(
+                  //                             value: 2,
+                  //                             text: "Change Password",
+                  //                             Icon: Icon(Icons.key),
+                  //                             height: 0,
+                  //                             onTap: () {
+                  //         Navigator.pop(context);
+                  //         Navigator.pushAndRemoveUntil<dynamic>(
+                  //           context,
+                  //           MaterialPageRoute<dynamic>(
+                  //             builder: (BuildContext context) => ChangePassword(),
+                  //           ),
+                  //           (route) => true,
+                  //           //if you want to disable back feature set to false
+                  //         );}),
+                                        
+                  //                     Mainmenu(
+                  //                             value: 3,
+                  //                             text: "My Calendar",
+                  //                             Icon: Icon(Icons.calendar_month),
+                  //                             height: 0,
+                  //                             onTap: () {
+                  //         Navigator.pop(context);
+                  //         Navigator.pushAndRemoveUntil<dynamic>(
+                  //           context,
+                  //           MaterialPageRoute<dynamic>(
+                  //             builder: (BuildContext context) => Calendar(),
+                  //           ),
+                  //           (route) => true,
+                  //           //if you want to disable back feature set to false
+                  //         );
+                  //                             },
+                  //                             ),
+                  //                           Mainmenu(
+                  //                             value: 4,
+                  //                             text: "My Task",
+                  //                             Icon: Icon(Icons.task),
+                  //                             height: 0,
+                  //                             onTap: () {
+                  //         // Navigator.pop(context);
+                  //         // Navigator.pushAndRemoveUntil<dynamic>(
+                  //         //   context,
+                  //         //   MaterialPageRoute<dynamic>(
+                  //         //     builder: (BuildContext context) =>
+                  //         //         ProfilePage(),
+                  //         //   ),
+                  //         //   (route) => true,
+                  //         //   //if you want to disable back feature set to false
+                  //         // );
+                  //                             },
+                  //                           ),
+                  //                           Mainmenu(
+                  //                             value: 5,
+                  //                             text: "My Shelf",
+                  //                             Icon: Icon(Icons.bookmark),
+                  //                             height: 0,
+                  //                             onTap: () {
+                  //         Navigator.pop(context);
+                  //         Navigator.pushAndRemoveUntil<dynamic>(
+                  //           context,
+                  //           MaterialPageRoute<dynamic>(
+                  //             builder: (BuildContext context) => ProfilePage(),
+                  //           ),
+                  //           (route) => true,
+                  //           //if you want to disable back feature set to false
+                  //         );
+                  //                             },
+                  //                           ),
+                  //                           Mainmenu(
+                  //                             value: 6,
+                  //                             text: "MOM",
+                  //                             Icon: Icon(Icons.handshake_outlined),
+                  //                             height: 0,
+                  //                             onTap: () {
+                  //         // Navigator.pop(context);
+                  //         // Navigator.pushAndRemoveUntil<dynamic>(
+                  //         //   context,
+                  //         //   MaterialPageRoute<dynamic>(
+                  //         //     builder: (BuildContext context) =>
+                  //         //         ProfilePage(),
+                  //         //   ),
+                  //         //   (route) => true,
+                  //         //   //if you want to disable back feature set to false
+                  //         // );
+                  //                             },
+                  //                           ),
+                  //                           Mainmenu(
+                  //                             value: 7,
+                  //                             text: "Starred",
+                  //                             Icon: Icon(Icons.star),
+                  //                             height: 0,
+                  //                             onTap: () {
+                  //         // Navigator.pop(context);
+                  //         // Navigator.pushAndRemoveUntil<dynamic>(
+                  //         //   context,
+                  //         //   MaterialPageRoute<dynamic>(
+                  //         //     builder: (BuildContext context) =>
+                  //         //         ProfilePage(),
+                  //         //   ),
+                  //         //   (route) => true,
+                  //         //   //if you want to disable back feature set to false
+                  //         // );
+                  //                             },
+                  //                           ),
+                  //                           Mainmenu(
+                  //                             value: 8,
+                  //                             text: "Customization",
+                  //                             Icon: Icon(Icons.dashboard_customize),
+                  //                             height: 0,
+                  //                             onTap: () {
+                  //         // Navigator.pop(context);
+                  //         // Navigator.pushAndRemoveUntil<dynamic>(
+                  //         //   context,
+                  //         //   MaterialPageRoute<dynamic>(
+                  //         //     builder: (BuildContext context) =>
+                  //         //         ProfilePage(),
+                  //         //   ),
+                  //         //   (route) => true,
+                  //         //   //if you want to disable back feature set to false
+                  //         // );
+                  //                             },
+                  //                           ),
+                  //                           Mainmenu(
+                  //                             value: 9,
+                  //                             text: "Birthday",
+                  //                             Icon: Icon(Icons.cake),
+                  //                             height: 0,
+                  //                             onTap: () {
+                  //         // Navigator.pop(context);
+                  //         // Navigator.pushAndRemoveUntil<dynamic>(
+                  //         //   context,
+                  //         //   MaterialPageRoute<dynamic>(
+                  //         //     builder: (BuildContext context) =>
+                  //         //         ProfilePage(),
+                  //         //   ),
+                  //         //   (route) => true,
+                  //         //   //if you want to disable back feature set to false
+                  //         // );
+                  //                             },
+                  //                           ),
+                  //                           Mainmenu(
+                  //                             value: 10,
+                  //                             text: "Project Milestone",
+                  //                             Icon: Icon(Icons.tornado),
+                  //                             height: 0,
+                  //                             onTap: () {
+                  //         // Navigator.pop(context);
+                  //         // Navigator.pushAndRemoveUntil<dynamic>(
+                  //         //   context,
+                  //         //   MaterialPageRoute<dynamic>(
+                  //         //     builder: (BuildContext context) =>
+                  //         //         ProfilePage(),
+                  //         //   ),
+                  //         //   (route) => true,
+                  //         //   //if you want to disable back feature set to false
+                  //         // );
+                  //                             },
+                  //                           ),
+                  //                           Mainmenu(
+                  //                             value: 11,
+                  //                             text: "LogOut",
+                  //                             Icon: Icon(Icons.logout),
+                  //                             height: 0,
+                  //                             onTap: () {
+                  //         // Navigator.pop(context);
+                  //         // Navigator.pushAndRemoveUntil<dynamic>(
+                  //         //   context,
+                  //         //   MaterialPageRoute<dynamic>(
+                  //         //     builder: (BuildContext context) =>
+                  //         //         ProfilePage(),
+                  //         //   ),
+                  //         //   (route) => true,
+                  //         //   //if you want to disable back feature set to false
+                  //         // );
+                  //                             },
+                  //                           ),
+                  //           ],
+                          
+                  //   );}))
+                  // ],
+                 
+                   bottom: const TabBar(
                     tabs: [
                       Tab(
                           icon: Text(

@@ -174,34 +174,32 @@ class _MainmenuState extends State<Mainmenu> {
   Widget build(BuildContext context) {
     return  
            
-                         ListView(
-                           children:[ PopupMenuItem(
+                         PopupMenuItem(
                          
-                              value: widget.value,
-                              height: widget.height,
-                              child: InkWell(
-                                onTap:widget.onTap,
-                                
-                                child: Row(
-                                  children: [
-                                   widget.Icon,
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      widget.text,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
+                            value: widget.value,
+                            height: widget.height,
+                            child: InkWell(
+                              onTap:widget.onTap,
                               
+                              child: Row(
+                                children: [
+                                 widget.Icon,
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    widget.text,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
- ]                        );
+                            
+                          );
  
                           
         
