@@ -37,7 +37,7 @@ class _PersonalChatState extends State<PersonalChat> {
                       width: 10,
                     ),
                     Expanded(
-                        child: Text('Developer SSG - 001',
+                        child: Text('individual chat',
                             style: TextStyle(fontSize: 18)))
                   ],
                 ),
@@ -45,8 +45,75 @@ class _PersonalChatState extends State<PersonalChat> {
                   IconButton(
                       onPressed: () {}, icon: const Icon(Icons.video_call)),
                   IconButton(onPressed: () {}, icon: const Icon(Icons.call)),
-                  IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.more_vert)),
+                  Theme(
+                      data: Theme.of(context).copyWith(
+                        dividerTheme: const DividerThemeData(
+                            color: Colors.black, thickness: 0.5),
+                        iconTheme: const IconThemeData(color: Colors.white),
+                      ),
+                      child: PopupMenuButton(
+                          color: const Color.fromRGBO(1, 123, 255, 1),
+                          itemBuilder: (context) => [
+                                PopupMenuItem(
+                                    child: Column(
+                                  children: [
+                                    Mainmenu(
+                                        value: 1,
+                                        height: 0,
+                                        text: 'Profile',
+                                        onTap: () {},
+                                        Icon: const Icon(Icons.person)),
+                                    PopupMenuDivider()
+                                  ],
+                                )),
+                                PopupMenuItem(
+                                    child: Column(
+                                  children: [
+                                    Mainmenu(
+                                        value: 2,
+                                        height: 0,
+                                        text: 'Search',
+                                        onTap: () {},
+                                        Icon: const Icon(Icons.search)),
+                                    PopupMenuDivider()
+                                  ],
+                                )),
+                                PopupMenuItem(
+                                    child: Mainmenu(
+                                        value: 2,
+                                        height: 0,
+                                        text: 'File Filter',
+                                        onTap: () {},
+                                        Icon: const Icon(Icons.file_open))),
+                                PopupMenuItem(
+                                    child: Mainmenu(
+                                        value: 2,
+                                        height: 0,
+                                        text: 'Chat Filter',
+                                        onTap: () {},
+                                        Icon: const Icon(Icons.delete))),
+                                PopupMenuItem(
+                                    child: Mainmenu(
+                                        value: 2,
+                                        height: 0,
+                                        text: 'Block',
+                                        onTap: () {},
+                                        Icon: const Icon(Icons.lock))),
+                                PopupMenuItem(
+                                    child: Mainmenu(
+                                        value: 2,
+                                        height: 0,
+                                        text: 'Clear Chat',
+                                        onTap: () {},
+                                        Icon: const Icon(Icons.delete))),
+                                PopupMenuItem(
+                                    child: Mainmenu(
+                                        value: 2,
+                                        height: 0,
+                                        text: 'Wall Paper',
+                                        onTap: () {},
+                                        Icon: const Icon(Icons.wallpaper))),
+                              ])),
                 ],
               ),
               body: Container(
