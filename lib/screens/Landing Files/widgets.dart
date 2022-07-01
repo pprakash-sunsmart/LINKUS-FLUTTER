@@ -20,6 +20,7 @@ class ChatList extends StatefulWidget {
     required this.ntfctnCnt,
     required this.msgdte$tme,
     required this.ItmCnt,
+    required onTap,
   }) : super(key: key);
 
   @override
@@ -38,8 +39,10 @@ class _ChatListState extends State<ChatList> {
               children: [
                 ListTile(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => NewChat()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PersonalChat()));
                   },
                   leading: CircleAvatar(
                     // radius: 25,
@@ -150,6 +153,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
     );
   }
 }
+
 class Mainmenu extends StatefulWidget {
   final int value;
   final double height;
@@ -157,11 +161,13 @@ class Mainmenu extends StatefulWidget {
   final onTap;
   final Icon;
 
-
-
-  const Mainmenu({super.key,
-  required this.value,required this.height,required this.text,required this.onTap,
-  required this.Icon});
+  const Mainmenu(
+      {super.key,
+      required this.value,
+      required this.height,
+      required this.text,
+      required this.onTap,
+      required this.Icon});
 
   @override
   State<Mainmenu> createState() => _MainmenuState();
@@ -170,37 +176,63 @@ class Mainmenu extends StatefulWidget {
 class _MainmenuState extends State<Mainmenu> {
   @override
   Widget build(BuildContext context) {
-    return  
-           
-                         PopupMenuItem(
-                         
-                            value: widget.value,
-                            height: widget.height,
-                            child: InkWell(
-                              onTap:widget.onTap,
-                              
-                              child: Row(
-                                children: [
-                                 widget.Icon,
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    widget.text,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            
-                          );
- 
-                          
-        
-      
+    return PopupMenuItem(
+      value: widget.value,
+      height: widget.height,
+      child: InkWell(
+        onTap: widget.onTap,
+        child: Row(
+          children: [
+            widget.Icon,
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              widget.text,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class footer extends StatelessWidget {
+  const footer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        color: Color.fromRGBO(1, 123, 255, 1),
+        height: 20,
+        child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Center(
+                    child: Text(
+                      '\u00a9 Copyright Ecnchat.io',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  Center(
+                      child: Text(
+                    'Enchat',
+                    style: TextStyle(color: Colors.white),
+                  )),
+                ],
+              ),
+            )));
   }
 }

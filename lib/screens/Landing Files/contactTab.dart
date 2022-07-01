@@ -26,39 +26,18 @@ class _contactsTabState extends State<contactsTab> {
             SizedBox(
               height: 50,
               child: Center(
-                child: Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'All contacts ',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      Text(
-                        '(30)',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
+                child: Text(
+                  'All contacts (30)',
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),
             SizedBox(
               height: 50,
               child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Live Contacts ',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    Text(
-                      '(10)',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ],
+                child: Text(
+                  'Live Contacts (10)',
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),

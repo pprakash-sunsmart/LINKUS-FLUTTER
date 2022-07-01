@@ -31,6 +31,7 @@ class _liveContactsState extends State<liveContacts> {
           ),
         ),
         ChatList(
+          onTap: null,
           profIcon: Icon(Icons.person),
           msgText: null,
           msgdte$tme: Text(''),

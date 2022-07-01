@@ -1,17 +1,16 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
-import 'package:linkus/screens/Landing%20Files/widgets.dart';
+import '../Landing Files/widgets.dart';
 
-class PersonalChat extends StatefulWidget {
-  const PersonalChat({super.key});
+class groupChat extends StatefulWidget {
+  const groupChat({super.key});
 
   @override
-  State<PersonalChat> createState() => _PersonalChatState();
+  State<groupChat> createState() => _groupChatState();
 }
 
-class _PersonalChatState extends State<PersonalChat> {
+class _groupChatState extends State<groupChat> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -24,7 +23,7 @@ class _PersonalChatState extends State<PersonalChat> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back),
                 ),
                 leadingWidth: 25,
                 title: Row(
@@ -42,8 +41,7 @@ class _PersonalChatState extends State<PersonalChat> {
                   ],
                 ),
                 actions: [
-                  IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.video_call)),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
                   IconButton(onPressed: () {}, icon: const Icon(Icons.call)),
                   IconButton(
                       onPressed: () {}, icon: const Icon(Icons.more_vert)),
@@ -52,7 +50,7 @@ class _PersonalChatState extends State<PersonalChat> {
               body: Container(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
                           'assets/images/chatBackground.jpg',
@@ -60,12 +58,12 @@ class _PersonalChatState extends State<PersonalChat> {
                         fit: BoxFit.cover)),
                 child: SingleChildScrollView(
                     child: Column(
-                  children: [
+                  children: const [
                     // Text('data' * 50000),
                   ],
                 )),
               ),
-              bottomSheet: ChatInputBox(),
+              bottomSheet: const ChatInputBox(),
             )));
   }
 }
