@@ -25,7 +25,7 @@ class _ChangePasswordState extends State<ChangePassword> {
           ),
           onPressed: () {
             Navigator.pop(context);
-            Navigator.pop(context);
+            
           },
         ),
         title: const Text("Change Password"),
@@ -96,9 +96,14 @@ class _ChangePasswordState extends State<ChangePassword> {
               child: Row(
                 children: [
                   ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          //  backgroundColor:  Color(0xff2b3d6b)
-                          ),
+                     
+                          style: ButtonStyle(
+             backgroundColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.pressed))
+               return  Color(0xff2b3d6b);
+              return  Color(0xff2b3d6b);
+            },),),
                       onPressed: () {},
                       child: const Text(
                         "Submit",
