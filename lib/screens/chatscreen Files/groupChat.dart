@@ -20,12 +20,14 @@ class _groupChatState extends State<groupChat> {
             child: Scaffold(
               appBar: AppBar(
                 leading: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(Icons.arrow_back),
-                ),
-                leadingWidth: 25,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: 25,
+                    )),
+                leadingWidth: 30,
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
@@ -36,15 +38,84 @@ class _groupChatState extends State<groupChat> {
                       width: 10,
                     ),
                     Expanded(
-                        child: Text('Developer SSG - 001',
-                            style: TextStyle(fontSize: 18)))
+                        child:
+                            Text('Group Chat', style: TextStyle(fontSize: 18)))
                   ],
                 ),
                 actions: [
                   IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
                   IconButton(onPressed: () {}, icon: const Icon(Icons.call)),
-                  IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.more_vert)),
+                  Theme(
+                      data: Theme.of(context).copyWith(
+                        dividerTheme: const DividerThemeData(
+                            color: Colors.black, thickness: 0.5),
+                        iconTheme: const IconThemeData(color: Colors.white),
+                      ),
+                      child: PopupMenuButton(
+                          color: const Color.fromRGBO(1, 123, 255, 1),
+                          itemBuilder: (context) => [
+                                PopupMenuItem(
+                                    child: Column(
+                                  children: [
+                                    Mainmenu(
+                                        value: 1,
+                                        height: 0,
+                                        text: 'Group Information',
+                                        onTap: () {},
+                                        Icon: const Icon(Icons.person)),
+                                    PopupMenuDivider()
+                                  ],
+                                )),
+                                PopupMenuItem(
+                                    child: Column(
+                                  children: [
+                                    Mainmenu(
+                                        value: 2,
+                                        height: 0,
+                                        text: 'File Filter',
+                                        onTap: () {},
+                                        Icon: const Icon(Icons.file_open)),
+                                    PopupMenuDivider()
+                                  ],
+                                )),
+                                PopupMenuItem(
+                                    child: Column(
+                                  children: [
+                                    Mainmenu(
+                                        value: 2,
+                                        height: 0,
+                                        text: 'Chat Filter',
+                                        onTap: () {},
+                                        Icon: const Icon(Icons.abc)),
+                                    PopupMenuDivider()
+                                  ],
+                                )),
+                                PopupMenuItem(
+                                    child: Column(
+                                  children: [
+                                    Mainmenu(
+                                        value: 2,
+                                        height: 0,
+                                        text: 'Clear Chat',
+                                        onTap: () {},
+                                        Icon: const Icon(Icons.delete)),
+                                    PopupMenuDivider()
+                                  ],
+                                )),
+                                PopupMenuItem(
+                                    child: Column(
+                                  children: [
+                                    Mainmenu(
+                                        value: 2,
+                                        height: 0,
+                                        text: 'Wall Paper',
+                                        onTap: () {},
+                                        Icon:
+                                            const Icon(Icons.wallpaper_sharp)),
+                                    PopupMenuDivider()
+                                  ],
+                                )),
+                              ])),
                 ],
               ),
               body: Container(
@@ -58,8 +129,8 @@ class _groupChatState extends State<groupChat> {
                         fit: BoxFit.cover)),
                 child: SingleChildScrollView(
                     child: Column(
-                  children: const [
-                    // Text('data' * 50000),
+                  children: [
+                    // Text('data' * 500),
                   ],
                 )),
               ),
