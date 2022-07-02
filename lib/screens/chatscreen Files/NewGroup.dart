@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:linkus/screens/Landing%20Files/widgets.dart';
 
 class NewGroup extends StatefulWidget {
   const NewGroup({super.key});
@@ -15,9 +14,7 @@ class _NewGroupState extends State<NewGroup> {
   bool value = false;
   @override
   Widget build(BuildContext context) {
-    int index = 0;
-    return Container(
-        child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
@@ -45,14 +42,14 @@ class _NewGroupState extends State<NewGroup> {
             ),
           ),
           NewGroupContact(
-              profIcon: Icon(Icons.person),
-              msgText: Text('Junior Developer'),
-              contactName: Text('Developer'),
+              profIcon: const Icon(Icons.person),
+              msgText: const Text('Junior Developer'),
+              contactName: const Text('Developer'),
               ntfctnCnt: Checkbox(
                 onChanged: null,
                 value: value,
               ),
-              msgdte$tme: SizedBox(),
+              msgdte$tme: const SizedBox(),
               ItmCnt: 20,
               onTap: () {}),
         ],
@@ -60,15 +57,17 @@ class _NewGroupState extends State<NewGroup> {
       bottomSheet: TextFormField(
         decoration: InputDecoration(
             suffixIcon: TextButton(
-                onPressed: () {},
-                child: const Text(
-                  'Select all',
-                  style: TextStyle(color: Colors.black),
-                )),
+              onPressed: () {},
+              child: const Text(
+                'Select all',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
             hintText: 'Type a Group Name',
-            contentPadding: EdgeInsets.symmetric(horizontal: 20)),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 20)),
       ),
-    ));
+    );
   }
 }
 

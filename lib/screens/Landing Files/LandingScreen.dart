@@ -5,7 +5,6 @@ import 'package:linkus/screens/Landing%20Files/widgets.dart';
 import 'package:linkus/screens/calendar/mycalendar.dart';
 import 'package:linkus/screens/change%20Password/change_password.dart';
 import 'package:linkus/screens/profile/my_profile.dart';
-import 'package:linkus/screens/project_milestone/project_milestone.dart';
 
 import 'contactTab.dart';
 import 'groupTab.dart';
