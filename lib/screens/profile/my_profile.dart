@@ -20,9 +20,13 @@ class _ProfilePageState extends State<ProfilePage> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          // automaticallyImplyLeading: false,
+          leadingWidth: 30,
           leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: Icon(
+                Icons.arrow_back,
+                size: 25,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               }),

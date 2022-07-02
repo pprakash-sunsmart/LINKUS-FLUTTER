@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, camel_case_types, file_names
 
 import 'package:flutter/material.dart';
+import 'package:linkus/screens/chatscreen%20Files/NewGroup.dart';
 import 'package:linkus/screens/chatscreen%20Files/groupChat.dart';
 
 import 'widgets.dart';
@@ -24,7 +25,16 @@ class _groupTabState extends State<groupTab> {
             child: Card(
                 elevation: 5,
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil<dynamic>(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (BuildContext context) => NewGroup(),
+                      ),
+                      (route) => true,
+                      //if you want to disable back feature set to false
+                    );
+                  },
                   child: Container(
                     width: MediaQuery.of(context).size.width / 1,
                     height: MediaQuery.of(context).size.height * 0.05,

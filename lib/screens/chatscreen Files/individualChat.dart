@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:linkus/screens/Landing%20Files/widgets.dart';
 
+import '../profile/my_profile.dart';
+
 class PersonalChat extends StatefulWidget {
   const PersonalChat({super.key});
 
@@ -21,12 +23,14 @@ class _PersonalChatState extends State<PersonalChat> {
             child: Scaffold(
               appBar: AppBar(
                 leading: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.arrow_back),
-                ),
-                leadingWidth: 25,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: 25,
+                    )),
+                leadingWidth: 30,
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
@@ -61,7 +65,17 @@ class _PersonalChatState extends State<PersonalChat> {
                                         value: 1,
                                         height: 0,
                                         text: 'Profile',
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.pushAndRemoveUntil<dynamic>(
+                                            context,
+                                            MaterialPageRoute<dynamic>(
+                                              builder: (BuildContext context) =>
+                                                  ProfilePage(),
+                                            ),
+                                            (route) => true,
+                                            //if you want to disable back feature set to false
+                                          );
+                                        },
                                         Icon: const Icon(Icons.person)),
                                     PopupMenuDivider()
                                   ],
@@ -79,40 +93,65 @@ class _PersonalChatState extends State<PersonalChat> {
                                   ],
                                 )),
                                 PopupMenuItem(
-                                    child: Mainmenu(
+                                    child: Column(
+                                  children: [
+                                    Mainmenu(
                                         value: 2,
                                         height: 0,
                                         text: 'File Filter',
                                         onTap: () {},
-                                        Icon: const Icon(Icons.file_open))),
+                                        Icon: const Icon(Icons.file_open)),
+                                    PopupMenuDivider()
+                                  ],
+                                )),
                                 PopupMenuItem(
-                                    child: Mainmenu(
+                                    child: Column(
+                                  children: [
+                                    Mainmenu(
                                         value: 2,
                                         height: 0,
                                         text: 'Chat Filter',
                                         onTap: () {},
-                                        Icon: const Icon(Icons.delete))),
+                                        Icon: const Icon(Icons.delete)),
+                                    PopupMenuDivider()
+                                  ],
+                                )),
                                 PopupMenuItem(
-                                    child: Mainmenu(
+                                    child: Column(
+                                  children: [
+                                    Mainmenu(
                                         value: 2,
                                         height: 0,
                                         text: 'Block',
                                         onTap: () {},
-                                        Icon: const Icon(Icons.lock))),
+                                        Icon: const Icon(Icons.lock)),
+                                    PopupMenuDivider()
+                                  ],
+                                )),
                                 PopupMenuItem(
-                                    child: Mainmenu(
+                                    child: Column(
+                                  children: [
+                                    Mainmenu(
                                         value: 2,
                                         height: 0,
                                         text: 'Clear Chat',
                                         onTap: () {},
-                                        Icon: const Icon(Icons.delete))),
+                                        Icon: const Icon(Icons.delete)),
+                                    PopupMenuDivider()
+                                  ],
+                                )),
                                 PopupMenuItem(
-                                    child: Mainmenu(
+                                    child: Column(
+                                  children: [
+                                    Mainmenu(
                                         value: 2,
                                         height: 0,
                                         text: 'Wall Paper',
                                         onTap: () {},
-                                        Icon: const Icon(Icons.wallpaper))),
+                                        Icon: const Icon(Icons.wallpaper)),
+                                    PopupMenuDivider()
+                                  ],
+                                )),
                               ])),
                 ],
               ),
