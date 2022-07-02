@@ -17,50 +17,58 @@ class _NewGroupState extends State<NewGroup> {
   Widget build(BuildContext context) {
     int index = 0;
     return Container(
-      child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.arrow_back,
-                  size: 25,
-                )),
-            leadingWidth: 35,
-            title: const Text('Contacts'),
-          ),
-          body: Container(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: Card(
-                    elevation: 5,
-                    child: TextFormField(
-                        decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: Icon(Icons.search),
-                            label: Text('Search'),
-                            contentPadding: EdgeInsets.symmetric())),
-                  ),
-                ),
-                NewGroupContact(
-                    profIcon: Icon(Icons.person),
-                    msgText: Text('Junior Developer'),
-                    contactName: Text('Developer'),
-                    ntfctnCnt: Checkbox(
-                      onChanged: null,
-                      value: value,
-                    ),
-                    msgdte$tme: SizedBox(),
-                    ItmCnt: 20,
-                    onTap: () {}),
-              ],
+        child: Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              size: 25,
+            )),
+        leadingWidth: 35,
+        title: const Text('Contacts'),
+      ),
+      body: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: Card(
+              elevation: 5,
+              child: TextFormField(
+                  decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      prefixIcon: Icon(Icons.search),
+                      label: Text('Search'),
+                      contentPadding: EdgeInsets.symmetric())),
             ),
-          )),
-    );
+          ),
+          NewGroupContact(
+              profIcon: Icon(Icons.person),
+              msgText: Text('Junior Developer'),
+              contactName: Text('Developer'),
+              ntfctnCnt: Checkbox(
+                onChanged: null,
+                value: value,
+              ),
+              msgdte$tme: SizedBox(),
+              ItmCnt: 20,
+              onTap: () {}),
+        ],
+      ),
+      bottomSheet: TextFormField(
+        decoration: InputDecoration(
+            suffixIcon: TextButton(
+                onPressed: () {},
+                child: const Text(
+                  'Select all',
+                  style: TextStyle(color: Colors.black),
+                )),
+            hintText: 'Type a Group Name',
+            contentPadding: EdgeInsets.symmetric(horizontal: 20)),
+      ),
+    ));
   }
 }
 
