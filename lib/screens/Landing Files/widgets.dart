@@ -177,7 +177,9 @@ class _MainmenuState extends State<Mainmenu> {
   @override
   Widget build(BuildContext context) {
     return PopupMenuItem(
+     
       value: widget.value,
+      
       height: widget.height,
       child: InkWell(
         onTap: widget.onTap,
@@ -198,6 +200,8 @@ class _MainmenuState extends State<Mainmenu> {
           ],
         ),
       ),
+      
+      
     );
   }
 }

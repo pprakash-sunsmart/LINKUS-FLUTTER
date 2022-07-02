@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class MasterTextField extends StatefulWidget {
-  String label;
+  String hintText;
   dynamic Controller;
   dynamic PrefixIcon;
   dynamic SuffixIcon;
@@ -19,7 +19,7 @@ class MasterTextField extends StatefulWidget {
 
   MasterTextField(
       {Key? key,
-      required this.label,
+      required this.hintText,
       required this.Controller,
       required this.PrefixIcon,
       this.SuffixIcon,
@@ -66,7 +66,7 @@ class _MasterTextFieldState extends State<MasterTextField> {
                   ),
                   prefixIcon: widget.PrefixIcon,
                   suffixIcon: widget.SuffixIcon,
-                  hintText: widget.label,
+                  hintText: widget.hintText,
                   hintStyle: const TextStyle(fontSize: 15),
                 ),
                 //obscureText: widget.obscureText,

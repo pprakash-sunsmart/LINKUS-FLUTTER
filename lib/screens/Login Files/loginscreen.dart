@@ -52,6 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
         height: double.infinity,
         width: double.infinity,
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           // backgroundColor: const Color.fromRGBO(1, 123, 255, 1),
 
           body: Container(
@@ -86,16 +87,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: MediaQuery.of(context).size.height * 0.09,
                   ),
                   MasterTextField(
-                    contentPadding: EdgeInsets.symmetric(vertical: 1),
-                    label: "Mobile Number",
+                    contentPadding: EdgeInsets.symmetric(vertical: 12),
+                    hintText: "Mobile Number",
                     Controller: nameController,
-                    PrefixIcon: Padding(
+                    PrefixIcon: 
+                    Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Container(
-                        decoration: const BoxDecoration(
+                        // decoration: const BoxDecoration(
 
                             // borderRadius: BorderRadius.circular(4),
-                            color: Color.fromRGBO(56, 210, 0, 1)),
+                            color: Color.fromRGBO(56, 210, 0, 1),
+                          // ),
                         child: const Icon(
                           Icons.person,
                           color: Colors.white,
@@ -113,8 +116,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
                   MasterTextField(
-                    contentPadding: EdgeInsets.symmetric(vertical: 1),
-                    label: "Password",
+                    contentPadding: EdgeInsets.symmetric(vertical: 12),
+                    hintText: "Password",
                     PrefixIcon: Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Container(
@@ -191,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               const SizedBox(
-                                width: 5,
+                                width: 15,
                               ),
                               const Text(
                                 "Remember Password?",

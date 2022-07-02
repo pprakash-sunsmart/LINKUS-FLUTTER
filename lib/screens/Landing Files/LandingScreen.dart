@@ -6,6 +6,7 @@ import 'package:linkus/screens/calendar/mycalendar.dart';
 import 'package:linkus/screens/change%20Password/change_password.dart';
 import 'package:linkus/screens/profile/my_profile.dart';
 import 'package:linkus/screens/project_milestone/project_milestone.dart';
+import 'package:linkus/screens/task/mytask.dart';
 
 import 'contactTab.dart';
 import 'groupTab.dart';
@@ -26,6 +27,7 @@ class _landingPageState extends State<landingPage> {
         child: Container(
             width: double.infinity,
             height: double.infinity,
+            // ignore: sort_child_properties_last
             child: DefaultTabController(
               length: 3,
               child: Scaffold(
@@ -78,6 +80,7 @@ class _landingPageState extends State<landingPage> {
                           iconTheme: IconThemeData(color: Colors.white),
                         ),
                         child: PopupMenuButton(
+                      
                           color: Color.fromRGBO(1, 123, 255, 1),
                           itemBuilder: (context) => [
                             PopupMenuItem(
@@ -100,216 +103,276 @@ class _landingPageState extends State<landingPage> {
                                           //if you want to disable back feature set to false
                                         );
                                       }),
-                                  PopupMenuDivider()
+                                       PopupMenuDivider(),]),),
+                                 
+                                   PopupMenuItem(
+                              child: Column(
+                                children: [
+                                  Mainmenu(
+                                      value: 2,
+                                      text: "Change Password",
+                                      Icon: Icon(Icons.key),
+                                      height: 0,
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        Navigator.pushAndRemoveUntil<dynamic>(
+                                          context,
+                                          MaterialPageRoute<dynamic>(
+                                            builder: (BuildContext context) =>
+                                                ChangePassword(),
+                                          ),
+                                          (route) => true,
+                                          //if you want to disable back feature set to false
+                                        );}),
+                                        PopupMenuDivider(),
+                                ],
+                              ),),
+                                  
+                
+                            
+                             
+                           
+                                PopupMenuItem(
+                              child: Column(
+                                children: [
+                                  Mainmenu(
+                                    value: 3,
+                                    text: "My Calendar",
+                                    Icon: Icon(Icons.calendar_month),
+                                    height: 0,
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      Navigator.pushAndRemoveUntil<dynamic>(
+                                        context,
+                                        MaterialPageRoute<dynamic>(
+                                          builder: (BuildContext context) =>
+                                              Calendar(),
+                                        ),
+                                        (route) => true,
+                                        //if you want to disable back feature set to false
+                                      );
+                                    },
+                                  ),
+                                  PopupMenuDivider(),
                                 ],
                               ),
                             ),
+                          
                             PopupMenuItem(
-                              child: Mainmenu(
-                                value: 3,
-                                text: "My Calendar",
-                                Icon: Icon(Icons.calendar_month),
-                                height: 0,
-                                onTap: () {
-                                  Navigator.pop(context);
-                                  Navigator.pushAndRemoveUntil<dynamic>(
-                                    context,
-                                    MaterialPageRoute<dynamic>(
-                                      builder: (BuildContext context) =>
-                                          Calendar(),
-                                    ),
-                                    (route) => true,
-                                    //if you want to disable back feature set to false
-                                  );
-                                },
+                              child: Column(
+                                children: [
+                                  Mainmenu(
+                                    value: 4,
+                                    text: "My Task",
+                                    Icon: Icon(Icons.task),
+                                    height: 0.1,
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      Navigator.pushAndRemoveUntil<dynamic>(
+                                        context,
+                                        MaterialPageRoute<dynamic>(
+                                          builder: (BuildContext context) =>
+                                              MyTask(),
+                                        ),
+                                        (route) => true,
+                                        //if you want to disable back feature set to false
+                                      );
+                                    },
+                                  ),
+                                   PopupMenuDivider(),
+                                ],
                               ),
                             ),
-                            PopupMenuItem(
-                              child: Mainmenu(
-                                value: 4,
-                                text: "My Task",
-                                Icon: Icon(Icons.task),
-                                height: 0,
-                                onTap: () {
-                                  // Navigator.pop(context);
-                                  // Navigator.pushAndRemoveUntil<dynamic>(
-                                  //   context,
-                                  //   MaterialPageRoute<dynamic>(
-                                  //     builder: (BuildContext context) =>
-                                  //         ProfilePage(),
-                                  //   ),
-                                  //   (route) => true,
-                                  //   //if you want to disable back feature set to false
-                                  // );
-                                },
+                           
+                                PopupMenuItem(
+                              child: Column(
+                                children: [
+                                  Mainmenu(
+                                    value: 5,
+                                    text: "My Shelf",
+                                    Icon: Icon(Icons.bookmark),
+                                    height: 0,
+                                    onTap: () {
+                                      // Navigator.pop(context);
+                                      // Navigator.pushAndRemoveUntil<dynamic>(
+                                      //   context,
+                                      //   MaterialPageRoute<dynamic>(
+                                      //     builder: (BuildContext context) =>
+                                      //         ProfilePage(),
+                                      //   ),
+                                      //   (route) => true,
+                                      //   //if you want to disable back feature set to false
+                                      // );
+                                    },
+                                  ),
+                                PopupMenuDivider(), ],
                               ),
                             ),
+                            
                             PopupMenuItem(
-                              child: Mainmenu(
-                                value: 5,
-                                text: "My Shelf",
-                                Icon: Icon(Icons.bookmark),
-                                height: 0,
-                                onTap: () {
-                                  Navigator.pop(context);
-                                  Navigator.pushAndRemoveUntil<dynamic>(
-                                    context,
-                                    MaterialPageRoute<dynamic>(
-                                      builder: (BuildContext context) =>
-                                          ProfilePage(),
-                                    ),
-                                    (route) => true,
-                                    //if you want to disable back feature set to false
-                                  );
-                                },
+                              child: Column(
+                                children: [
+                                  Mainmenu(
+                                    value: 6,
+                                    text: "MOM",
+                                    Icon: Icon(Icons.handshake_outlined),
+                                    height: 0,
+                                    onTap: () {
+                                      // Navigator.pop(context);
+                                      // Navigator.pushAndRemoveUntil<dynamic>(
+                                      //   context,
+                                      //   MaterialPageRoute<dynamic>(
+                                      //     builder: (BuildContext context) =>
+                                      //         ProfilePage(),
+                                      //   ),
+                                      //   (route) => true,
+                                      //   //if you want to disable back feature set to false
+                                      // );
+                                    },
+                                  ),
+                                PopupMenuDivider(), ],
                               ),
                             ),
+                              
                             PopupMenuItem(
-                              child: Mainmenu(
-                                  value: 2,
-                                  text: "Change Password",
-                                  Icon: Icon(Icons.key),
-                                  height: 0,
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                    Navigator.pushAndRemoveUntil<dynamic>(
-                                      context,
-                                      MaterialPageRoute<dynamic>(
-                                        builder: (BuildContext context) =>
-                                            ChangePassword(),
-                                      ),
-                                      (route) => true,
-                                      //if you want to disable back feature set to false
-                                    );
-                                  }),
-                            ),
-                            PopupMenuItem(
-                              child: Mainmenu(
-                                value: 6,
-                                text: "MOM",
-                                Icon: Icon(Icons.handshake_outlined),
-                                height: 0,
-                                onTap: () {
-                                  // Navigator.pop(context);
-                                  // Navigator.pushAndRemoveUntil<dynamic>(
-                                  //   context,
-                                  //   MaterialPageRoute<dynamic>(
-                                  //     builder: (BuildContext context) =>
-                                  //         ProfilePage(),
-                                  //   ),
-                                  //   (route) => true,
-                                  //   //if you want to disable back feature set to false
-                                  // );
-                                },
+                              child: Column(
+                                children: [
+                                  Mainmenu(
+                                    value: 7,
+                                    text: "Starred",
+                                    Icon: Icon(Icons.star),
+                                    height: 0,
+                                    onTap: () {
+                                      // Navigator.pop(context);
+                                      // Navigator.pushAndRemoveUntil<dynamic>(
+                                      //   context,
+                                      //   MaterialPageRoute<dynamic>(
+                                      //     builder: (BuildContext context) =>
+                                      //         ProfilePage(),
+                                      //   ),
+                                      //   (route) => true,
+                                      //   //if you want to disable back feature set to false
+                                      // );
+                                    },
+                                  ),
+                                PopupMenuDivider(), ],
                               ),
                             ),
+                              
                             PopupMenuItem(
-                              child: Mainmenu(
-                                value: 7,
-                                text: "Starred",
-                                Icon: Icon(Icons.star),
-                                height: 0,
-                                onTap: () {
-                                  // Navigator.pop(context);
-                                  // Navigator.pushAndRemoveUntil<dynamic>(
-                                  //   context,
-                                  //   MaterialPageRoute<dynamic>(
-                                  //     builder: (BuildContext context) =>
-                                  //         ProfilePage(),
-                                  //   ),
-                                  //   (route) => true,
-                                  //   //if you want to disable back feature set to false
-                                  // );
-                                },
+                              child: Column(
+                                children: [
+                                  Mainmenu(
+                                    value: 8,
+                                    text: "Customization",
+                                    Icon: Icon(Icons.dashboard_customize),
+                                    height: 0,
+                                    onTap: () {
+                                      // Navigator.pop(context);
+                                      // Navigator.pushAndRemoveUntil<dynamic>(
+                                      //   context,
+                                      //   MaterialPageRoute<dynamic>(
+                                      //     builder: (BuildContext context) =>
+                                      //         ProfilePage(),
+                                      //   ),
+                                      //   (route) => true,
+                                      //   //if you want to disable back feature set to false
+                                      // );
+                                    },
+                                  ),
+                                PopupMenuDivider(), ],
                               ),
                             ),
+                             
                             PopupMenuItem(
-                              child: Mainmenu(
-                                value: 8,
-                                text: "Customization",
-                                Icon: Icon(Icons.dashboard_customize),
-                                height: 0,
-                                onTap: () {
-                                  // Navigator.pop(context);
-                                  // Navigator.pushAndRemoveUntil<dynamic>(
-                                  //   context,
-                                  //   MaterialPageRoute<dynamic>(
-                                  //     builder: (BuildContext context) =>
-                                  //         ProfilePage(),
-                                  //   ),
-                                  //   (route) => true,
-                                  //   //if you want to disable back feature set to false
-                                  // );
-                                },
+                              child: Column(
+                                children: [
+                                  Mainmenu(
+                                    value: 9,
+                                    text: "Birthday",
+                                    Icon: Icon(Icons.cake),
+                                    height: 0,
+                                    onTap: () {
+                                      // Navigator.pop(context);
+                                      // Navigator.pushAndRemoveUntil<dynamic>(
+                                      //   context,
+                                      //   MaterialPageRoute<dynamic>(
+                                      //     builder: (BuildContext context) =>
+                                      //         ProfilePage(),
+                                      //   ),
+                                      //   (route) => true,
+                                      //   //if you want to disable back feature set to false
+                                      // );
+                                    },
+                                  ),
+                                PopupMenuDivider(), ],
                               ),
                             ),
+                             
                             PopupMenuItem(
-                              child: Mainmenu(
-                                value: 9,
-                                text: "Birthday",
-                                Icon: Icon(Icons.cake),
-                                height: 0,
-                                onTap: () {
-                                  // Navigator.pop(context);
-                                  // Navigator.pushAndRemoveUntil<dynamic>(
-                                  //   context,
-                                  //   MaterialPageRoute<dynamic>(
-                                  //     builder: (BuildContext context) =>
-                                  //         ProfilePage(),
-                                  //   ),
-                                  //   (route) => true,
-                                  //   //if you want to disable back feature set to false
-                                  // );
-                                },
+                              child: Column(
+                                children: [
+                                  Mainmenu(
+                                    value: 10,
+                                    text: "Project Milestone",
+                                    Icon: Icon(Icons.tornado),
+                                    height: 0,
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      Navigator.pushAndRemoveUntil<dynamic>(
+                                        context,
+                                        MaterialPageRoute<dynamic>(
+                                          builder: (BuildContext context) =>
+                                              ProjectMilestone(),
+                                        ),
+                                        (route) => true,
+                                        //if you want to disable back feature set to false
+                                      );
+                                    },
+                                  ),
+                                PopupMenuDivider(), ],
                               ),
                             ),
+                             
                             PopupMenuItem(
-                              child: Mainmenu(
-                                value: 10,
-                                text: "Project Milestone",
-                                Icon: Icon(Icons.tornado),
-                                height: 0,
-                                onTap: () {
-                                  // Navigator.pop(context);
-                                  // Navigator.pushAndRemoveUntil<dynamic>(
-                                  //   context,
-                                  //   MaterialPageRoute<dynamic>(
-                                  //     builder: (BuildContext context) =>
-                                  //         ProfilePage(),
-                                  //   ),
-                                  //   (route) => true,
-                                  //   //if you want to disable back feature set to false
-                                  // );
-                                },
-                              ),
-                            ),
-                            PopupMenuItem(
-                              child: Mainmenu(
-                                value: 11,
-                                text: "LogOut",
-                                Icon: Icon(Icons.logout),
-                                height: 0,
-                                onTap: () {
-                                  // Navigator.pop(context);
-                                  // Navigator.pushAndRemoveUntil<dynamic>(
-                                  //   context,
-                                  //   MaterialPageRoute<dynamic>(
-                                  //     builder: (BuildContext context) =>
-                                  //         ProfilePage(),
-                                  //   ),
-                                  //   (route) => true,
-                                  //   //if you want to disable back feature set to false
-                                  // );
-                                },
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                              child: Column(
+                                children: [
+                                  Mainmenu(
+                                    value: 11,
+                                    text: "LogOut",
+                                    Icon: Icon(Icons.logout),
+                                    height: 0,
+                                    onTap: () {
+                                      // Navigator.pop(context);
+                                      // Navigator.pushAndRemoveUntil<dynamic>(
+                                      //   context,
+                                      //   MaterialPageRoute<dynamic>(
+                                      //     builder: (BuildContext context) =>
+                                      //         ProfilePage(),
+                                      //   ),
+                                      //   (route) => true,
+                                      //   //if you want to disable back feature set to false
+                                      // );
+                                    },
+                                  ),
+                                  PopupMenuDivider(),
+                                ],
+                              ),),
+                          
+                        
+                                
+                          ]),),
+                            
+                      
+                           
+                           
+                          
+                        
+                      
+    
 
                     // )
-                    // ],
+                    ],
 
                     bottom: const TabBar(tabs: [
                       Tab(
