@@ -16,6 +16,7 @@ class MasterTextField extends StatefulWidget {
   bool filled;
   dynamic contentPadding;
 
+
   MasterTextField(
       {Key? key,
       required this.hintText,
