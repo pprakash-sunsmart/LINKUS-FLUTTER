@@ -43,10 +43,12 @@ class _MasterTextFieldState extends State<MasterTextField> {
       children: [
         Form(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
+            padding: const EdgeInsets.symmetric(horizontal: 0),
             child: SizedBox(
-              height: MediaQuery.of(context).size.height / 20,
+              height: MediaQuery.of(context).size.height / 18,
               child: TextFormField(
+                autofocus: false,
+                
                 //keyboardType: widget.keyboardType,
 
                 obscureText: widget.obscureText,

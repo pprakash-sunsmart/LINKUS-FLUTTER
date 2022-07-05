@@ -24,7 +24,7 @@ class _DropDownToneState extends State<DropDownTone> {
   
    return Container(
     //height: MediaQuery.of(context).size.height/5,
-    width: MediaQuery.of(context).size.width/2,
+    width: MediaQuery.of(context).size.width/2.5,
     height: MediaQuery.of(context).size.height/20,
       decoration: BoxDecoration(
           border: Border.all(

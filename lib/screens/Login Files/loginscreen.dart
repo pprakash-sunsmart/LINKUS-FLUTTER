@@ -86,75 +86,89 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.09,
                   ),
-                  MasterTextField(
-                    contentPadding: EdgeInsets.symmetric(vertical: 12),
-                    hintText: "Mobile Number",
-                    Controller: nameController,
-                    PrefixIcon: 
-                    Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Container(
-                        // decoration: const BoxDecoration(
-
-                            // borderRadius: BorderRadius.circular(4),
-                            color: Color.fromRGBO(56, 210, 0, 1),
-                          // ),
-                        child: const Icon(
-                          Icons.person,
-                          color: Colors.white,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal:40),
+                    child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height/18,
+                        width: 30,
+                          color: Color.fromRGBO(56, 210, 0, 1),
+                          child: const Icon(
+                            Icons.person,
+                            color: Colors.white,
+                          )),
+                      Flexible(
+                        flex: 1,
+                        child: MasterTextField(
+                          contentPadding: null,
+                          hintText: "Mobile Number",
+                          Controller: nameController,
+                          PrefixIcon: null,
+                          fillColor: Colors.white,
+                          filled: true,
+                          enabledborder: InputBorder.none,
+                          focusedborder: InputBorder.none,
+                          obscureText: false,
+                          keyboardType: TextInputType.number,
                         ),
                       ),
-                    ),
-                    fillColor: Colors.white,
-                    filled: true,
-                    enabledborder: InputBorder.none,
-                    focusedborder: InputBorder.none,
-                    obscureText: false,
-                    keyboardType: TextInputType.number,
+                    ]),
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
-                  MasterTextField(
-                    contentPadding: EdgeInsets.symmetric(vertical: 12),
-                    hintText: "Password",
-                    PrefixIcon: Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Container(
-                          decoration: const BoxDecoration(
-                              // borderRadius: BorderRadius.circular(4),
-                              color: Color.fromRGBO(56, 210, 0, 1)),
-                          child: const Icon(
-                            Icons.key,
-                            color: Colors.white,
-                          )),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height/18,
+                          width: 30,
+                                  decoration: const BoxDecoration(
+                                      // borderRadius: BorderRadius.circular(4),
+                                      color: Color.fromRGBO(56, 210, 0, 1)),
+                                  child: const Icon(
+                                    Icons.key,
+                                    color: Colors.white,
+                                  )),
+                        
+                        Flexible(
+                          child: MasterTextField(
+                            contentPadding: null,
+                            hintText: "Password",
+                            PrefixIcon: null,
+                            fillColor: Colors.white,
+                            filled: true,
+                            enabledborder: InputBorder.none,
+                            focusedborder: InputBorder.none,
+                            obscureText: _showPassword,
+                            Controller: passwordController,
+                            SuffixIcon: null,
+                            
+                            keyboardType: null,
+                          ),
+                        ),
+                         Container(
+                          height: MediaQuery.of(context).size.height/18,
+                          width: 30,
+                                  decoration: const BoxDecoration(
+                                      // borderRadius: BorderRadius.circular(4),
+                                      color: Color.fromRGBO(56, 210, 0, 1)),
+                                  child: GestureDetector(
+                                    child: Icon(
+                                      _showPassword
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      size: 20,
+                                      color: Colors.white,
+                                    ),
+                                    onTap: () {
+                                      _togglevisibility();
+                                    },
+                                   ) )
+                        
+                      ],
                     ),
-                    fillColor: Colors.white,
-                    filled: true,
-                    enabledborder: InputBorder.none,
-                    focusedborder: InputBorder.none,
-                    obscureText: _showPassword,
-                    Controller: passwordController,
-                    SuffixIcon: Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Container(
-                          decoration: const BoxDecoration(
-                              // borderRadius: BorderRadius.circular(4),
-                              color: Color.fromRGBO(56, 210, 0, 1)),
-                          child: GestureDetector(
-                            child: Icon(
-                              _showPassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              size: 20,
-                              color: Colors.white,
-                            ),
-                            onTap: () {
-                              _togglevisibility();
-                            },
-                          )),
-                    ),
-                    keyboardType: null,
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,

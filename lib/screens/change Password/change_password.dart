@@ -31,11 +31,11 @@ class _ChangePasswordState extends State<ChangePassword> {
         title: const Text("Change Password"),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
           children: [
             MasterTextField(
-              label: "Old Password",
+              hintText: "Old Password",
               Controller: oldPassword,
               PrefixIcon: const Icon(
                 Icons.key,
@@ -52,10 +52,10 @@ class _ChangePasswordState extends State<ChangePassword> {
               focusedborder: null,
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
             MasterTextField(
-              label: "New Password",
+              hintText: "New Password",
               Controller: oldPassword,
               PrefixIcon: const Icon(
                 Icons.key,
@@ -72,10 +72,10 @@ class _ChangePasswordState extends State<ChangePassword> {
               focusedborder: null,
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
             MasterTextField(
-              label: "Confirm Password",
+              hintText: "Confirm Password",
               Controller: oldPassword,
               PrefixIcon: const Icon(
                 Icons.key_rounded,
