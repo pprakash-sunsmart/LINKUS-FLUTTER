@@ -1,5 +1,6 @@
+// ignore_for_file: camel_case_types, file_names, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../Landing Files/widgets.dart';
 
@@ -23,7 +24,7 @@ class _groupChatState extends State<groupChat> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back,
                       size: 25,
                     )),
@@ -63,7 +64,7 @@ class _groupChatState extends State<groupChat> {
                                         text: 'Group Information',
                                         onTap: () {},
                                         Icon: const Icon(Icons.person)),
-                                    PopupMenuDivider()
+                                    const PopupMenuDivider()
                                   ],
                                 )),
                                 PopupMenuItem(
@@ -75,7 +76,7 @@ class _groupChatState extends State<groupChat> {
                                         text: 'File Filter',
                                         onTap: () {},
                                         Icon: const Icon(Icons.file_open)),
-                                    PopupMenuDivider()
+                                    const PopupMenuDivider()
                                   ],
                                 )),
                                 PopupMenuItem(
@@ -87,7 +88,7 @@ class _groupChatState extends State<groupChat> {
                                         text: 'Chat Filter',
                                         onTap: () {},
                                         Icon: const Icon(Icons.abc)),
-                                    PopupMenuDivider()
+                                    const PopupMenuDivider()
                                   ],
                                 )),
                                 PopupMenuItem(
@@ -99,7 +100,7 @@ class _groupChatState extends State<groupChat> {
                                         text: 'Clear Chat',
                                         onTap: () {},
                                         Icon: const Icon(Icons.delete)),
-                                    PopupMenuDivider()
+                                    const PopupMenuDivider()
                                   ],
                                 )),
                                 PopupMenuItem(
@@ -112,7 +113,7 @@ class _groupChatState extends State<groupChat> {
                                         onTap: () {},
                                         Icon:
                                             const Icon(Icons.wallpaper_sharp)),
-                                    PopupMenuDivider()
+                                    const PopupMenuDivider()
                                   ],
                                 )),
                               ])),

@@ -1,9 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables, non_constant_identifier_names, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables, non_constant_identifier_names, prefer_const_literals_to_create_immutables, avoid_print, camel_case_types
 
 import 'package:flutter/material.dart';
-import 'package:linkus/screens/chatscreen%20Files/individualChat.dart';
-
-import '../profile/my_profile.dart';
 
 class ChatList extends StatefulWidget {
   final profIcon;
@@ -12,6 +9,7 @@ class ChatList extends StatefulWidget {
   final ntfctnCnt;
   final msgdte$tme;
   final ItmCnt;
+  final onTap;
   const ChatList({
     Key? key,
     required this.profIcon,
@@ -20,7 +18,7 @@ class ChatList extends StatefulWidget {
     required this.ntfctnCnt,
     required this.msgdte$tme,
     required this.ItmCnt,
-    required onTap,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -38,12 +36,7 @@ class _ChatListState extends State<ChatList> {
             return Column(
               children: [
                 ListTile(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PersonalChat()));
-                  },
+                  onTap: widget.onTap,
                   leading: CircleAvatar(
                     // radius: 25,
                     child: widget.profIcon,
@@ -104,26 +97,14 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                         prefixIcon: IconButton(
                             onPressed: () {},
                             icon: Image(
-                                image:
-                                    AssetImage('assets/images/smiley.png'))),
+                                image: AssetImage('assets/images/smiley.png'))),
                         suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: Container(
-                            height: 90,
-                            width: 90,
-                            decoration: BoxDecoration(
-                                color: Color.fromRGBO(1, 123, 255, 1),
-                                borderRadius: BorderRadius.circular(20)),
-                            // child: Image(
-                            //   image:
-                            //       AssetImage('assets/images/attachments.png'),
-
-                            // ),
-                            child: Icon(
-                              Icons.attachment,
-                              color: Colors.white,
-                              size: 20,
-                            ),
+                          onPressed: () {
+                            print('dsa');
+                          },
+                          icon: Image(
+                            image: AssetImage('assets/images/attachments.png'),
+                            height: 50,
                           ),
                           // iconSize: 25,
                         )),
@@ -177,23 +158,20 @@ class _MainmenuState extends State<Mainmenu> {
   @override
   Widget build(BuildContext context) {
     return PopupMenuItem(
-     
       value: widget.value,
-      
       height: widget.height,
       child: InkWell(
         onTap: widget.onTap,
         child: Row(
           children: [
             widget.Icon,
-            
             SizedBox(
               width: 10,
             ),
             Text(
               widget.text,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 16,
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),
@@ -201,8 +179,6 @@ class _MainmenuState extends State<Mainmenu> {
           ],
         ),
       ),
-      
-      
     );
   }
 }
