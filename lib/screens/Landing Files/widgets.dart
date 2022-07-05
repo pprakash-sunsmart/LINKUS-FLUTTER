@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables, non_constant_identifier_names, prefer_const_literals_to_create_immutables, avoid_print, camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:linkus/screens/chatscreen%20Files/dataList.dart';
 
 class ChatList extends StatefulWidget {
   final profIcon;
@@ -31,7 +32,7 @@ class _ChatListState extends State<ChatList> {
     return Expanded(
       child: ListView.separated(
           shrinkWrap: true,
-          itemCount: widget.ItmCnt,
+          itemCount: Employees.length,
           itemBuilder: (BuildContext context, int index) {
             return Column(
               children: [
@@ -41,8 +42,8 @@ class _ChatListState extends State<ChatList> {
                     // radius: 25,
                     child: widget.profIcon,
                   ),
-                  title: widget.contactName,
-                  subtitle: widget.msgText,
+                  title: Text(Employees[index].Name),
+                  subtitle: Text(Employees[index].jobProfile),
                   trailing: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
