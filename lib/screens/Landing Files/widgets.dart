@@ -186,13 +186,14 @@ class _MainmenuState extends State<Mainmenu> {
         child: Row(
           children: [
             widget.Icon,
+            
             SizedBox(
               width: 10,
             ),
             Text(
               widget.text,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),

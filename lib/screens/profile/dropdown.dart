@@ -8,8 +8,9 @@
 
 class _Dropdown_genderState extends State<Dropdown_gender> {
    var item=[
-'Male',
-'Female',
+'Married',
+'Unmarried',
+'Single',
 
    ];
     String? dropdownvalue;
@@ -22,7 +23,7 @@ class _Dropdown_genderState extends State<Dropdown_gender> {
   
    return Container(
     //height: MediaQuery.of(context).size.height/5,
-    width: MediaQuery.of(context).size.width/2,
+    width: MediaQuery.of(context).size.width/2.5,
     height: MediaQuery.of(context).size.height/20,
       decoration: BoxDecoration(
           border: Border.all(
