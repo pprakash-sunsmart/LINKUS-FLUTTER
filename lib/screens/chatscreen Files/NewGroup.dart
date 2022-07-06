@@ -156,17 +156,6 @@ class _NewGroupContactState extends State<NewGroupContact> {
 
           itemCount: Employees.length,
           itemBuilder: (BuildContext context, int index) {
-            // we use the index to know a particular widget within the list
-
-            // this will give you an individaul checkbostTile widget
-
-            //thanks alot bro and one more thing
-            //how to select all by selecting the select all
-            // just put some checkbox some where on your screen then loop
-            // through and set all the isChecked field to true and setState
-
-            //ok bro
-            //thank you soo much bye goodluck!
             final employee = Employees[index];
             return CheckboxListTile(
               controlAffinity: ListTileControlAffinity.trailing,

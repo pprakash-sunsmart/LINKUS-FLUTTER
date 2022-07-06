@@ -1,8 +1,13 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, file_names
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, file_names, dead_code, unrelated_type_equality_checks
 
+import 'dart:developer';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import 'package:linkus/screens/Landing%20Files/widgets.dart';
+import 'package:linkus/screens/filters/mediaFilter.dart';
+import 'package:linkus/screens/filters/searchFilter.dart';
 
 import '../profile/my_profile.dart';
 
@@ -14,8 +19,16 @@ class PersonalChat extends StatefulWidget {
 }
 
 class _PersonalChatState extends State<PersonalChat> {
+  Future _pickFile() async {
+    final result =
+
+        // await FilePicker.platform.pickFiles(allowMultiple: false);
+        await FilePicker.platform.pickFiles(type: FileType.any);
+  }
+
   @override
   Widget build(BuildContext context) {
+    bool isTextfield = false;
     return SafeArea(
         child: SizedBox(
             width: double.infinity,
@@ -33,16 +46,16 @@ class _PersonalChatState extends State<PersonalChat> {
                 leadingWidth: 30,
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
+                  children: [
                     CircleAvatar(
                       child: Icon(Icons.person),
                     ),
                     SizedBox(
                       width: 10,
                     ),
-                    Expanded(
-                        child: Text('individual chat',
-                            style: TextStyle(fontSize: 18)))
+                    isTextfield
+                        ? Text('data', style: TextStyle(fontSize: 18))
+                        : Text('xyz')
                   ],
                 ),
                 actions: [
@@ -59,39 +72,59 @@ class _PersonalChatState extends State<PersonalChat> {
                           color: const Color.fromRGBO(1, 123, 255, 1),
                           itemBuilder: (context) => [
                                 PopupMenuItem(
+                                    height: 10,
                                     child: Column(
-                                  children: [
-                                    Mainmenu(
-                                        value: 1,
-                                        height: 0,
-                                        text: 'Profile',
-                                        onTap: () {
-                                          Navigator.pushAndRemoveUntil<dynamic>(
-                                            context,
-                                            MaterialPageRoute<dynamic>(
-                                              builder: (BuildContext context) =>
-                                                  ProfilePage(),
-                                            ),
-                                            (route) => true,
-                                            //if you want to disable back feature set to false
-                                          );
-                                        },
-                                        Icon: const Icon(Icons.person)),
-                                    PopupMenuDivider()
-                                  ],
-                                )),
+                                      children: [
+                                        Mainmenu(
+                                            value: 1,
+                                            height: 0,
+                                            text: 'Profile',
+                                            onTap: () {
+                                              // Navigator.pop(context);
+                                              Navigator.pushAndRemoveUntil<
+                                                  dynamic>(
+                                                context,
+                                                MaterialPageRoute<dynamic>(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          ProfilePage(),
+                                                ),
+                                                (route) => true,
+                                                //if you want to disable back feature set to false
+                                              );
+                                            },
+                                            Icon: const Icon(Icons.person)),
+                                        PopupMenuDivider()
+                                      ],
+                                    )),
                                 PopupMenuItem(
+                                    height: 30,
                                     child: Column(
-                                  children: [
-                                    Mainmenu(
-                                        value: 2,
-                                        height: 0,
-                                        text: 'Search',
-                                        onTap: () {},
-                                        Icon: const Icon(Icons.search)),
-                                    PopupMenuDivider()
-                                  ],
-                                )),
+                                      children: [
+                                        Mainmenu(
+                                            value: 2,
+                                            height: 0,
+                                            text: 'Search',
+                                            onTap: () {
+                                              // debugger();
+
+                                              isTextfield = true;
+                                              Navigator.pop(
+                                                  context, isTextfield = true);
+                                              print(isTextfield);
+
+                                              // setState(() {
+                                              //   isTextfield = 2;
+                                              //   // print(isTextfield);
+                                              // });
+
+                                              // print("name:$isTextfield");
+                                              // Navigator.pop(context);
+                                            },
+                                            Icon: const Icon(Icons.search)),
+                                        PopupMenuDivider()
+                                      ],
+                                    )),
                                 PopupMenuItem(
                                     child: Column(
                                   children: [
@@ -99,7 +132,18 @@ class _PersonalChatState extends State<PersonalChat> {
                                         value: 2,
                                         height: 0,
                                         text: 'File Filter',
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                          Navigator.pushAndRemoveUntil<dynamic>(
+                                            context,
+                                            MaterialPageRoute<dynamic>(
+                                              builder: (BuildContext context) =>
+                                                  FileFilter(),
+                                            ),
+                                            (route) => true,
+                                            //if you want to disable back feature set to false
+                                          );
+                                        },
                                         Icon: const Icon(Icons.file_open)),
                                     PopupMenuDivider()
                                   ],
@@ -111,8 +155,19 @@ class _PersonalChatState extends State<PersonalChat> {
                                         value: 2,
                                         height: 0,
                                         text: 'Chat Filter',
-                                        onTap: () {},
-                                        Icon: const Icon(Icons.delete)),
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                          Navigator.pushAndRemoveUntil<dynamic>(
+                                            context,
+                                            MaterialPageRoute<dynamic>(
+                                              builder: (BuildContext context) =>
+                                                  SearchFilter(),
+                                            ),
+                                            (route) => true,
+                                            //if you want to disable back feature set to false
+                                          );
+                                        },
+                                        Icon: const Icon(Icons.chat)),
                                     PopupMenuDivider()
                                   ],
                                 )),
@@ -123,7 +178,68 @@ class _PersonalChatState extends State<PersonalChat> {
                                         value: 2,
                                         height: 0,
                                         text: 'Block',
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                          showDialog<String>(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return WillPopScope(
+                                                  onWillPop: () async => false,
+                                                  child: AlertDialog(
+                                                    backgroundColor:
+                                                        Color.fromARGB(
+                                                            255, 250, 241, 161),
+                                                    content: Text(
+                                                      'Do you want to block this contact?',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 15),
+                                                    ),
+                                                    title: const Text(
+                                                      'Confirm !',
+                                                      style: TextStyle(
+                                                          color: Colors.red,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 35),
+                                                    ),
+                                                    actions: <Widget>[
+                                                      ElevatedButton(
+                                                        style: ElevatedButton.styleFrom(
+                                                            shadowColor:
+                                                                Colors.grey,
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            12))),
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: const Text('No'),
+                                                      ),
+                                                      ElevatedButton(
+                                                        style: ElevatedButton.styleFrom(
+                                                            shadowColor:
+                                                                Colors.grey,
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            12))),
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                context),
+                                                        child:
+                                                            const Text('Yes'),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              });
+                                        },
                                         Icon: const Icon(Icons.lock)),
                                     PopupMenuDivider()
                                   ],
@@ -147,7 +263,96 @@ class _PersonalChatState extends State<PersonalChat> {
                                         value: 2,
                                         height: 0,
                                         text: 'Wall Paper',
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                          showDialog<String>(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return WillPopScope(
+                                                    onWillPop: () async =>
+                                                        false,
+                                                    child: AlertDialog(
+                                                        backgroundColor:
+                                                            Colors.white,
+                                                        content: Text(''),
+                                                        actions: [
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              // ElevatedButton(
+                                                              //   style: ElevatedButton.styleFrom(
+                                                              //       shadowColor:
+                                                              //           Colors
+                                                              //               .grey,
+                                                              //       shape: RoundedRectangleBorder(
+                                                              //           borderRadius:
+                                                              //               BorderRadius.circular(12))),
+                                                              //   onPressed: () {
+                                                              //     _pickFile();
+                                                              //   },
+                                                              //   child: const Text(
+                                                              //       'Gallery'),
+                                                              // ),
+
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  _pickFile();
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  decoration: BoxDecoration(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10)),
+                                                                  width: 80,
+                                                                  height: 40,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      'Gallery',
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              Colors.white),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 20,
+                                                              ),
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  decoration: BoxDecoration(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10)),
+                                                                  width: 80,
+                                                                  height: 40,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      'Default',
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              Colors.white),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ]));
+                                              });
+                                        },
                                         Icon: const Icon(Icons.wallpaper)),
                                     PopupMenuDivider()
                                   ],

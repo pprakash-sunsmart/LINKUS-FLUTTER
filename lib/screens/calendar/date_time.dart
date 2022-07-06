@@ -1,7 +1,5 @@
-
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
-
 
 class CalenderWidget extends StatefulWidget {
   dynamic firstDate;
@@ -9,43 +7,45 @@ class CalenderWidget extends StatefulWidget {
   dynamic hintText;
   dynamic enabledBorder;
   dynamic focusedBorder;
- CalenderWidget({Key? key,
- this.firstDate, this.LastDate,this.hintText,
- this.enabledBorder,this.focusedBorder}) : super(key: key);
+  dynamic icon;
+  CalenderWidget(
+      {Key? key,
+      this.firstDate,
+      this.LastDate,
+      this.hintText,
+      this.enabledBorder,
+      this.icon,
+      this.focusedBorder})
+      : super(key: key);
 
   @override
   State<CalenderWidget> createState() => _CalenderWidgetState();
 }
 
 class _CalenderWidgetState extends State<CalenderWidget> {
-   DateTime? _selectedDate;
- 
+  DateTime? _selectedDate;
 
   @override
   Widget build(BuildContext context) {
     return DateTimePicker(
-      
-      
-  firstDate:widget.firstDate,
-  
- 
-        type: DateTimePickerType.dateTime,
-         dateMask: 'd MMMM, yyyy - hh:mm a',
+        firstDate: widget.firstDate,
+        type: DateTimePickerType.date,
+        dateMask: 'dd MMMM, yyyy',
         decoration: InputDecoration(
-          
-          
           suffixIcon: Icon(
-            Icons.calendar_month,
+            widget.icon,
             color: Colors.black54,
           ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-         enabledBorder:widget.enabledBorder,
-         focusedBorder: widget.focusedBorder,
-          hintText:widget.hintText,
+          hintText: DateTime.now().toString(),
+
+          hintStyle: TextStyle(),
+          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+          enabledBorder: widget.enabledBorder,
+          focusedBorder: widget.focusedBorder,
+          // hintText: widget.hintText,
         ),
         initialDate: DateTime.now(),
-       
-        lastDate: widget.LastDate,
+        lastDate: DateTime(3000),
         validator: (value) {
           return null;
         },
@@ -54,19 +54,18 @@ class _CalenderWidgetState extends State<CalenderWidget> {
             setState(() {
               _selectedDate = value as DateTime;
             });
-            
           }
         },
-      //  selectableDayPredicate: (date) {
-    // Disable weekend days to select from the calendar
-   // if () || date.isBefore(DateTime.now()) ) {
-  //return false;
+        //  selectableDayPredicate: (date) {
+        // Disable weekend days to select from the calendar
+        // if () || date.isBefore(DateTime.now()) ) {
+        //return false;
 //}
 //return true;
 //          },
-     // We can also use onSaved
+        // We can also use onSaved
         onSaved: (value) {
-          if (value!=null) {
+          if (value != null) {
             _selectedDate = value as DateTime;
 
             // SizedBox(height: 16),
@@ -74,9 +73,8 @@ class _CalenderWidgetState extends State<CalenderWidget> {
               'Your Selected Date: $_selectedDate',
               style: TextStyle(fontSize: 16),
             );
-          
-          };
-        
-    });
+          }
+          ;
+        });
   }
 }

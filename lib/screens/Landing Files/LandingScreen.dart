@@ -91,28 +91,33 @@ class _landingPageState extends State<landingPage> {
                             itemBuilder: (context) => [
                                   PopupMenuItem(
                                     child: Column(children: [
-                                      Mainmenu(
-                                          value: 1,
-                                          text: "My Profile",
-                                          Icon: Icon(
-                                            Icons.person,
-                                            size: 15,
-                                          ),
-                                          height: 0,
-                                          onTap: () {
-                                            Navigator.pop(context);
-                                            Navigator.pushAndRemoveUntil<
-                                                dynamic>(
-                                              context,
-                                              MaterialPageRoute<dynamic>(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        ProfilePage(),
-                                              ),
-                                              (route) => true,
-                                              //if you want to disable back feature set to false
-                                            );
-                                          }),
+                                      Container(
+                                        // width:
+                                        //     MediaQuery.of(context).size.width,
+                                        // height: 20,
+                                        child: Mainmenu(
+                                            value: 1,
+                                            text: "My Profile",
+                                            Icon: Icon(
+                                              Icons.person,
+                                              size: 15,
+                                            ),
+                                            height: 0,
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                              Navigator.pushAndRemoveUntil<
+                                                  dynamic>(
+                                                context,
+                                                MaterialPageRoute<dynamic>(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          ProfilePage(),
+                                                ),
+                                                (route) => true,
+                                                //if you want to disable back feature set to false
+                                              );
+                                            }),
+                                      ),
                                       PopupMenuDivider(),
                                     ]),
                                   ),
@@ -246,11 +251,13 @@ class _landingPageState extends State<landingPage> {
                                           height: 0,
                                           onTap: () {
                                             Navigator.pop(context);
-                                            Navigator.pushAndRemoveUntil<dynamic>(
+                                            Navigator.pushAndRemoveUntil<
+                                                dynamic>(
                                               context,
                                               MaterialPageRoute<dynamic>(
-                                                builder: (BuildContext context) =>
-                                                    MOM(),
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        MOM(),
                                               ),
                                               (route) => true,
                                               //if you want to disable back feature set to false
@@ -274,11 +281,13 @@ class _landingPageState extends State<landingPage> {
                                           height: 0,
                                           onTap: () {
                                             Navigator.pop(context);
-                                            Navigator.pushAndRemoveUntil<dynamic>(
+                                            Navigator.pushAndRemoveUntil<
+                                                dynamic>(
                                               context,
                                               MaterialPageRoute<dynamic>(
-                                                builder: (BuildContext context) =>
-                                                    Starred(),
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        Starred(),
                                               ),
                                               (route) => true,
                                               //if you want to disable back feature set to false
@@ -302,11 +311,13 @@ class _landingPageState extends State<landingPage> {
                                           height: 0,
                                           onTap: () {
                                             Navigator.pop(context);
-                                            Navigator.pushAndRemoveUntil<dynamic>(
+                                            Navigator.pushAndRemoveUntil<
+                                                dynamic>(
                                               context,
                                               MaterialPageRoute<dynamic>(
-                                                builder: (BuildContext context) =>
-                                                    CustomPage(),
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        CustomPage(),
                                               ),
                                               (route) => true,
                                               //if you want to disable back feature set to false
@@ -330,11 +341,13 @@ class _landingPageState extends State<landingPage> {
                                           height: 0,
                                           onTap: () {
                                             Navigator.pop(context);
-                                            Navigator.pushAndRemoveUntil<dynamic>(
+                                            Navigator.pushAndRemoveUntil<
+                                                dynamic>(
                                               context,
                                               MaterialPageRoute<dynamic>(
-                                                builder: (BuildContext context) =>
-                                                    BirthdayPage(),
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        BirthdayPage(),
                                               ),
                                               (route) => true,
                                               //if you want to disable back feature set to false
@@ -369,7 +382,7 @@ class _landingPageState extends State<landingPage> {
                                               (route) => true,
                                               //if you want to disable back feature set to false
                                             );
-                                           },
+                                          },
                                         ),
                                         PopupMenuDivider(),
                                       ],
@@ -410,7 +423,7 @@ class _landingPageState extends State<landingPage> {
                                                         actions: <Widget>[
                                                           ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
-                                                                backgroundColor:
+                                                                shadowColor:
                                                                     Colors.grey,
                                                                 shape: RoundedRectangleBorder(
                                                                     borderRadius:
@@ -425,7 +438,7 @@ class _landingPageState extends State<landingPage> {
                                                           ),
                                                           ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
-                                                                backgroundColor:
+                                                                shadowColor:
                                                                     Colors.grey,
                                                                 shape: RoundedRectangleBorder(
                                                                     borderRadius:

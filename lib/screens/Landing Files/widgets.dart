@@ -158,28 +158,34 @@ class Mainmenu extends StatefulWidget {
 class _MainmenuState extends State<Mainmenu> {
   @override
   Widget build(BuildContext context) {
-    return PopupMenuItem(
-      value: widget.value,
-      height: widget.height,
-      child: InkWell(
-        onTap: widget.onTap,
-        child: Row(
-          children: [
-            widget.Icon,
-            
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              widget.text,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
+    return InkWell(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          widget.Icon,
+          SizedBox(
+            width: 10,
+          ),
+          InkWell(
+            onTap: widget.onTap,
+            child: Container(
+              height: 30,
+              width: 100,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  widget.text,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

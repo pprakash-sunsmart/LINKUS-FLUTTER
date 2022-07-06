@@ -1,8 +1,12 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_literals_to_create_immutables
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:linkus/screens/filters/searchFilter.dart';
+import 'package:linkus/screens/profile/groupProfile.dart';
 
 import '../Landing Files/widgets.dart';
+import '../filters/mediaFilter.dart';
 
 class groupChat extends StatefulWidget {
   const groupChat({super.key});
@@ -12,6 +16,14 @@ class groupChat extends StatefulWidget {
 }
 
 class _groupChatState extends State<groupChat> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  Future _pickFile() async {
+    final result =
+
+        // await FilePicker.platform.pickFiles(allowMultiple: false);
+        await FilePicker.platform.pickFiles(type: FileType.any);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -62,7 +74,19 @@ class _groupChatState extends State<groupChat> {
                                         value: 1,
                                         height: 0,
                                         text: 'Group Information',
-                                        onTap: () {},
+                                        onTap: () {
+                                          _scaffoldKey.currentState!
+                                              .openEndDrawer();
+                                          // Navigator.pushAndRemoveUntil<dynamic>(
+                                          //   context,
+                                          //   MaterialPageRoute<dynamic>(
+                                          //     builder: (BuildContext context) =>
+
+                                          //   ),
+                                          //   (route) => true,
+                                          //   //if you want to disable back feature set to false
+                                          // );
+                                        },
                                         Icon: const Icon(Icons.person)),
                                     const PopupMenuDivider()
                                   ],
@@ -74,7 +98,18 @@ class _groupChatState extends State<groupChat> {
                                         value: 2,
                                         height: 0,
                                         text: 'File Filter',
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                          Navigator.pushAndRemoveUntil<dynamic>(
+                                            context,
+                                            MaterialPageRoute<dynamic>(
+                                              builder: (BuildContext context) =>
+                                                  FileFilter(),
+                                            ),
+                                            (route) => true,
+                                            //if you want to disable back feature set to false
+                                          );
+                                        },
                                         Icon: const Icon(Icons.file_open)),
                                     const PopupMenuDivider()
                                   ],
@@ -86,7 +121,18 @@ class _groupChatState extends State<groupChat> {
                                         value: 2,
                                         height: 0,
                                         text: 'Chat Filter',
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                          Navigator.pushAndRemoveUntil<dynamic>(
+                                            context,
+                                            MaterialPageRoute<dynamic>(
+                                              builder: (BuildContext context) =>
+                                                  SearchFilter(),
+                                            ),
+                                            (route) => true,
+                                            //if you want to disable back feature set to false
+                                          );
+                                        },
                                         Icon: const Icon(Icons.abc)),
                                     const PopupMenuDivider()
                                   ],
@@ -110,7 +156,96 @@ class _groupChatState extends State<groupChat> {
                                         value: 2,
                                         height: 0,
                                         text: 'Wall Paper',
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                          showDialog<String>(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return WillPopScope(
+                                                    onWillPop: () async =>
+                                                        false,
+                                                    child: AlertDialog(
+                                                        backgroundColor:
+                                                            Colors.white,
+                                                        content: Text(''),
+                                                        actions: [
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              // ElevatedButton(
+                                                              //   style: ElevatedButton.styleFrom(
+                                                              //       shadowColor:
+                                                              //           Colors
+                                                              //               .grey,
+                                                              //       shape: RoundedRectangleBorder(
+                                                              //           borderRadius:
+                                                              //               BorderRadius.circular(12))),
+                                                              //   onPressed: () {
+                                                              //     _pickFile();
+                                                              //   },
+                                                              //   child: const Text(
+                                                              //       'Gallery'),
+                                                              // ),
+
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  _pickFile();
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  decoration: BoxDecoration(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10)),
+                                                                  width: 80,
+                                                                  height: 40,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      'Gallery',
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              Colors.white),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 20,
+                                                              ),
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  decoration: BoxDecoration(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10)),
+                                                                  width: 80,
+                                                                  height: 40,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      'Default',
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              Colors.white),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ]));
+                                              });
+                                        },
                                         Icon:
                                             const Icon(Icons.wallpaper_sharp)),
                                     const PopupMenuDivider()
@@ -135,6 +270,9 @@ class _groupChatState extends State<groupChat> {
                   ],
                 )),
               ),
+              // endDrawer: Drawer(
+              //   child: GroupInfo(),
+              // ),
               bottomSheet: const ChatInputBox(),
             )));
   }
