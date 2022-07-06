@@ -229,11 +229,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: ElevatedButton(
                       onPressed: login
                           ? () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const landingPage()));
+                             Navigator.pushAndRemoveUntil<dynamic>(
+                                              context,
+                                              MaterialPageRoute<dynamic>(
+                                                builder: (BuildContext context) =>
+                                                    landingPage(),
+                                              ),
+                                              (route) => false,
+                                              //if you want to disable back feature set to false
+                                            );
+                            
                             }
                           : null,
                       style: ButtonStyle(
