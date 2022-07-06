@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../chatscreen Files/dataList.dart';
 class BirthdayModel extends StatefulWidget {
   final profIcon;
   final msgText;

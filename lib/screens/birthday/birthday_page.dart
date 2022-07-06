@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'btdy_model.dart';
 class BirthdayPage extends StatefulWidget {
   const BirthdayPage({super.key});
 
@@ -33,6 +35,15 @@ style: TextStyle(
                                               label: Text('Search'),
                                               contentPadding: EdgeInsets.symmetric())),
                                     ),
+                           BirthdayModel(
+                            profIcon: Icon(Icons.person),
+                             msgText: null, 
+                             contactName: null,
+                              ntfctnCnt: null, 
+                              msgdte$tme: Text(''), 
+                              ItmCnt: null,
+                               onTap: null,
+                                btdy: Text("18/8/94"))         
      
         ],
       ),

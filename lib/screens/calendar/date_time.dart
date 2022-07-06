@@ -8,6 +8,7 @@ class CalenderWidget extends StatefulWidget {
   dynamic enabledBorder;
   dynamic focusedBorder;
   dynamic icon;
+   dynamic contentPadding;
   CalenderWidget(
       {Key? key,
       this.firstDate,
@@ -15,7 +16,7 @@ class CalenderWidget extends StatefulWidget {
       this.hintText,
       this.enabledBorder,
       this.icon,
-      this.focusedBorder})
+      this.focusedBorder,this.contentPadding})
       : super(key: key);
 
   @override
@@ -23,11 +24,16 @@ class CalenderWidget extends StatefulWidget {
 }
 
 class _CalenderWidgetState extends State<CalenderWidget> {
+  
+
+  
   DateTime? _selectedDate;
+ 
 
   @override
   Widget build(BuildContext context) {
-    return DateTimePicker(
+    return 
+    DateTimePicker(
         firstDate: widget.firstDate,
         type: DateTimePickerType.date,
         dateMask: 'dd MMMM, yyyy',
@@ -37,9 +43,9 @@ class _CalenderWidgetState extends State<CalenderWidget> {
             color: Colors.black54,
           ),
           hintText: DateTime.now().toString(),
-
+    
           hintStyle: TextStyle(),
-          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+          contentPadding: widget.contentPadding,
           enabledBorder: widget.enabledBorder,
           focusedBorder: widget.focusedBorder,
           // hintText: widget.hintText,
@@ -53,6 +59,7 @@ class _CalenderWidgetState extends State<CalenderWidget> {
           if (value.isNotEmpty) {
             setState(() {
               _selectedDate = value as DateTime;
+              
             });
           }
         },
@@ -60,14 +67,14 @@ class _CalenderWidgetState extends State<CalenderWidget> {
         // Disable weekend days to select from the calendar
         // if () || date.isBefore(DateTime.now()) ) {
         //return false;
-//}
-//return true;
-//          },
+    //}
+    //return true;
+    //          },
         // We can also use onSaved
         onSaved: (value) {
           if (value != null) {
             _selectedDate = value as DateTime;
-
+    
             // SizedBox(height: 16),
             Text(
               'Your Selected Date: $_selectedDate',

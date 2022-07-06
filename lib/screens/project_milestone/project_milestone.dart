@@ -179,7 +179,7 @@ class _ProjectMilestoneState extends State<ProjectMilestone> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 40),
+                                vertical: 5, ),
                             child: Row(children: [
                               Text(
                                 "Description",
@@ -239,6 +239,7 @@ class _ProjectMilestoneState extends State<ProjectMilestone> {
                           width: MediaQuery.of(context).size.width /2.5,
                           height: 30,
                           child: CalenderWidget(
+                            contentPadding: EdgeInsets.all(1),
                               enabledBorder: const OutlineInputBorder(
                                 borderSide:
                                     const BorderSide(color: Colors.black45),
@@ -279,6 +280,7 @@ class _ProjectMilestoneState extends State<ProjectMilestone> {
                              width: MediaQuery.of(context).size.width  /2.5,
                               height: 30,
                               child: CalenderWidget(
+                                contentPadding: EdgeInsets.all(1),
                                   enabledBorder: const OutlineInputBorder(
                                     borderSide:
                                         const BorderSide(color: Colors.black45),

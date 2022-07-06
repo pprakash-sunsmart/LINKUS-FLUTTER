@@ -171,7 +171,7 @@ class _CalendarState extends State<Calendar> with SingleTickerProviderStateMixin
                                    addEvent
                                         ?
                                          () {
-                                            
+                                        // globalFormKey.currentState!.reset();   
                                           }
                                         : null,
                                     style: ButtonStyle(

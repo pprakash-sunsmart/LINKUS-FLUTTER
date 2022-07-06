@@ -7,6 +7,11 @@ class Starred extends StatefulWidget {
 }
 
 class _StarredState extends State<Starred> {
+  void initState(){
+    setState(() {
+      
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -12,6 +12,7 @@ import 'package:linkus/screens/momscreen/mom.dart';
 import 'package:linkus/screens/profile/my_profile.dart';
 import 'package:linkus/screens/project_milestone/project_milestone.dart';
 import 'package:linkus/screens/project_milestone/project_page.dart';
+import 'package:linkus/screens/shelf/shelf.dart';
 import 'package:linkus/screens/starredscreen/starred.dart';
 import 'package:linkus/screens/task/mytask.dart';
 
@@ -222,16 +223,16 @@ class _landingPageState extends State<landingPage> {
                                           ),
                                           height: 0,
                                           onTap: () {
-                                            // Navigator.pop(context);
-                                            // Navigator.pushAndRemoveUntil<dynamic>(
-                                            //   context,
-                                            //   MaterialPageRoute<dynamic>(
-                                            //     builder: (BuildContext context) =>
-                                            //         ProfilePage(),
-                                            //   ),
-                                            //   (route) => true,
-                                            //   //if you want to disable back feature set to false
-                                            // );
+                                            Navigator.pop(context);
+                                            Navigator.pushAndRemoveUntil<dynamic>(
+                                              context,
+                                              MaterialPageRoute<dynamic>(
+                                                builder: (BuildContext context) =>
+                                                    ShelfPage(),
+                                              ),
+                                              (route) => true,
+                                              //if you want to disable back feature set to false
+                                            );
                                           },
                                         ),
                                         PopupMenuDivider(),
@@ -423,7 +424,7 @@ class _landingPageState extends State<landingPage> {
                                                         actions: <Widget>[
                                                           ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
-                                                                shadowColor:
+                                                                backgroundColor:
                                                                     Colors.grey,
                                                                 shape: RoundedRectangleBorder(
                                                                     borderRadius:
@@ -438,7 +439,7 @@ class _landingPageState extends State<landingPage> {
                                                           ),
                                                           ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
-                                                                shadowColor:
+                                                                backgroundColor:
                                                                     Colors.grey,
                                                                 shape: RoundedRectangleBorder(
                                                                     borderRadius:
