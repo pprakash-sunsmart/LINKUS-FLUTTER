@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class GroupInfo extends StatefulWidget {
   const GroupInfo({super.key});
@@ -12,9 +11,50 @@ class _GroupInfoState extends State<GroupInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: AppBar(
-        title: Text('Flutter Team'),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.close))],
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text(
+          'Flutter Team',
+          // style: TextStyle(color: Colors.black),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.close))
+        ],
+      ),
+      body: Container(
+        child: Column(
+          children: const [
+            Padding(
+              padding: EdgeInsets.only(top: 40),
+              child: Center(
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 70,
+                  child: Icon(
+                    Icons.group,
+                    color: Colors.blue,
+                    size: 60,
+                  ),
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Group Members'),
+            ),
+            Divider(
+              color: Colors.black,
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Exit Group'),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -26,6 +26,8 @@ class ChatList extends StatefulWidget {
   State<ChatList> createState() => _ChatListState();
 }
 
+final TextEditingController chatController = TextEditingController();
+
 class _ChatListState extends State<ChatList> {
   @override
   Widget build(BuildContext context) {
@@ -96,7 +98,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                         borderRadius: BorderRadius.circular(20)),
                     child: TextFormField(
                       cursorHeight: 16,
-                      controller: widget.controller,
+                      controller: chatController,
                       cursorColor: Colors.grey.shade900,
                       decoration: InputDecoration(
                           enabledBorder: InputBorder.none,
@@ -131,11 +133,18 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                     borderRadius: BorderRadius.circular(20)),
                 child: GestureDetector(
                   onLongPress: () {},
-                  child: SndIcon
+                  child: chatController != null
                       ? Image(
                           image: AssetImage('assets/images/mic.png'),
                         )
-                      : Icon(Icons.send),
+                      : Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                              child: Icon(
+                            Icons.send,
+                            size: 20,
+                          )),
+                        ),
                 ),
               ),
               SizedBox(
