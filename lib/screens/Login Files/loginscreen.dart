@@ -48,294 +48,297 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: double.infinity,
-        width: double.infinity,
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          // backgroundColor: const Color.fromRGBO(1, 123, 255, 1),
-
-          body: Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      'assets/images/bgimage.png',
-                    ),
-                    fit: BoxFit.cover)),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                // ignore: prefer_const_literals_to_create_immutables
-                children: [
-                  const Text("enchat.io",
-                      style: TextStyle(
-                          fontSize: 50,
-                          fontWeight: FontWeight.w900,
-                          decoration: TextDecoration.underline,
-                          decorationColor: Colors.white38,
-                          color: Colors.white)),
-                  const Text(
-                    "Enterprise Collaboration Platform",
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.09,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal:40),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height/18,
-                        width: 30,
-                          color: Color.fromRGBO(56, 210, 0, 1),
-                          child: const Icon(
-                            Icons.person,
-                            color: Colors.white,
-                          )),
-                      Flexible(
-                        flex: 1,
-                        child: MasterTextField(
-                          contentPadding: null,
-                          hintText: "Mobile Number",
-                          Controller: nameController,
-                          PrefixIcon: null,
-                          fillColor: Colors.white,
-                          filled: true,
-                          enabledborder: InputBorder.none,
-                          focusedborder: InputBorder.none,
-                          obscureText: false,
-                          keyboardType: TextInputType.number,
-                        ),
+    return Form(
+      key: globalFormKey,
+      child: SizedBox(
+          height: double.infinity,
+          width: double.infinity,
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            // backgroundColor: const Color.fromRGBO(1, 123, 255, 1),
+    
+            body: Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        'assets/images/bgimage.png',
                       ),
-                    ]),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: Row(
-                      children: [
+                      fit: BoxFit.cover)),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    const Text("enchat.io",
+                        style: TextStyle(
+                            fontSize: 50,
+                            fontWeight: FontWeight.w900,
+                            decoration: TextDecoration.underline,
+                            decorationColor: Colors.white38,
+                            color: Colors.white)),
+                    const Text(
+                      "Enterprise Collaboration Platform",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.09,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal:40),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                         Container(
                           height: MediaQuery.of(context).size.height/18,
                           width: 30,
-                                  decoration: const BoxDecoration(
-                                      // borderRadius: BorderRadius.circular(4),
-                                      color: Color.fromRGBO(56, 210, 0, 1)),
-                                  child: const Icon(
-                                    Icons.key,
-                                    color: Colors.white,
-                                  )),
-                        
+                            color: Color.fromRGBO(56, 210, 0, 1),
+                            child: const Icon(
+                              Icons.person,
+                              color: Colors.white,
+                            )),
                         Flexible(
+                          flex: 1,
                           child: MasterTextField(
                             contentPadding: null,
-                            hintText: "Password",
+                            hintText: "Mobile Number",
+                            Controller: nameController,
                             PrefixIcon: null,
                             fillColor: Colors.white,
                             filled: true,
                             enabledborder: InputBorder.none,
                             focusedborder: InputBorder.none,
-                            obscureText: _showPassword,
-                            Controller: passwordController,
-                            SuffixIcon: null,
-                            
-                            keyboardType: null,
+                            obscureText: false,
+                            keyboardType: TextInputType.number,
                           ),
                         ),
-                         Container(
-                          height: MediaQuery.of(context).size.height/18,
-                          width: 30,
-                                  decoration: const BoxDecoration(
-                                      // borderRadius: BorderRadius.circular(4),
-                                      color: Color.fromRGBO(56, 210, 0, 1)),
-                                  child: GestureDetector(
-                                    child: Icon(
-                                      _showPassword
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                      size: 20,
+                      ]),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: Row(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height/18,
+                            width: 30,
+                                    decoration: const BoxDecoration(
+                                        // borderRadius: BorderRadius.circular(4),
+                                        color: Color.fromRGBO(56, 210, 0, 1)),
+                                    child: const Icon(
+                                      Icons.key,
                                       color: Colors.white,
-                                    ),
-                                    onTap: () {
-                                      _togglevisibility();
-                                    },
-                                   ) )
-                        
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
-                  nameController.text.isNotEmpty &&
-                          passwordController.text.isNotEmpty
-                      ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 35),
-                          child: Row(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    isChecked = !isChecked;
-                                  });
-                                },
-                                child: Container(
-                                  height: 20,
-                                  width: 20,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color:
-                                        isChecked ? Colors.grey : Colors.white,
-                                    // border: Border.all(width: 2, color: Colors.)
-                                  ),
-                                  child: Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: isChecked
-                                          ? const Center(
-                                              child: Icon(
-                                                Icons.check,
-                                                size: 15.0,
-                                                color: Colors.white,
-                                              ),
-                                            )
-                                          : Container()),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              const Text(
-                                "Remember Password?",
-                                style: TextStyle(
-                                    color: Colors.white60,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
+                                    )),
+                          
+                          Flexible(
+                            child: MasterTextField(
+                              contentPadding: null,
+                              hintText: "Password",
+                              PrefixIcon: null,
+                              fillColor: Colors.white,
+                              filled: true,
+                              enabledborder: InputBorder.none,
+                              focusedborder: InputBorder.none,
+                              obscureText: _showPassword,
+                              Controller: passwordController,
+                              SuffixIcon: null,
+                              
+                              keyboardType: null,
+                            ),
                           ),
-                        )
-                      : Container(),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.01,
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 1.4,
-                    child: ElevatedButton(
-                      onPressed: login
-                          ? () {
-                             Navigator.pushAndRemoveUntil<dynamic>(
-                                              context,
-                                              MaterialPageRoute<dynamic>(
-                                                builder: (BuildContext context) =>
-                                                    landingPage(),
-                                              ),
-                                              (route) => false,
-                                              //if you want to disable back feature set to false
-                                            );
-                            
-                            }
-                          : null,
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.resolveWith<Color>((states) {
-                          if (states.contains(MaterialState.disabled)) {
-                            return const Color.fromRGBO(56, 210, 0, 1)
-                                .withOpacity(0.55);
-                          }
-                          return const Color.fromRGBO(56, 210, 0, 1);
-                        }),
-                      ),
-                      child: const Text(
-                        "Login",
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                           Container(
+                            height: MediaQuery.of(context).size.height/18,
+                            width: 30,
+                                    decoration: const BoxDecoration(
+                                        // borderRadius: BorderRadius.circular(4),
+                                        color: Color.fromRGBO(56, 210, 0, 1)),
+                                    child: GestureDetector(
+                                      child: Icon(
+                                        _showPassword
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                        size: 20,
+                                        color: Colors.white,
+                                      ),
+                                      onTap: () {
+                                        _togglevisibility();
+                                      },
+                                     ) )
+                          
+                        ],
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.01,
-                  ),
-                  InkWell(
-                      child: const Text(
-                        "Forgot Password?",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w900,
-                            color: Colors.white54),
-                      ),
-                      onTap: () {
-                        showDialog<String>(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return WillPopScope(
-                                onWillPop: () async => false,
-                                child: AlertDialog(
-                                  title: const Text(
-                                    'Please Enter Mobile Number',
-                                    style: TextStyle(
-                                        color: Colors.black26,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 16),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                    nameController.text.isNotEmpty &&
+                            passwordController.text.isNotEmpty
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 35),
+                            child: Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      isChecked = !isChecked;
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 20,
+                                    width: 20,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color:
+                                          isChecked ? Colors.grey : Colors.white,
+                                      // border: Border.all(width: 2, color: Colors.)
+                                    ),
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: isChecked
+                                            ? const Center(
+                                                child: Icon(
+                                                  Icons.check,
+                                                  size: 15.0,
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                            : Container()),
                                   ),
-                                  content: Form(
-                                    key: globalFormKey,
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.number,
-                                      autovalidateMode:
-                                          AutovalidateMode.onUserInteraction,
-                                      controller: forgotpswrdController,
-                                      validator: (value) {
-                                        if ((value!.length > 5) &&
-                                            value.isNotEmpty) {
-                                          return "Number should contain more than 5 characters";
-                                        }
-                                        return null;
-                                      },
-                                      decoration: const InputDecoration(
-                                        labelText: "Mobile Number",
-                                        labelStyle: TextStyle(
-                                            color: Colors.black38,
-                                            fontSize: 15),
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                const Text(
+                                  "Remember Password?",
+                                  style: TextStyle(
+                                      color: Colors.white60,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
+                          )
+                        : Container(),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.01,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 1.4,
+                      child: ElevatedButton(
+                        onPressed: login
+                            ? () {
+                               Navigator.pushAndRemoveUntil<dynamic>(
+                                                context,
+                                                MaterialPageRoute<dynamic>(
+                                                  builder: (BuildContext context) =>
+                                                      landingPage(),
+                                                ),
+                                                (route) => false,
+                                                //if you want to disable back feature set to false
+                                              );
+                              
+                              }
+                            : null,
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color>((states) {
+                            if (states.contains(MaterialState.disabled)) {
+                              return const Color.fromRGBO(56, 210, 0, 1)
+                                  .withOpacity(0.55);
+                            }
+                            return const Color.fromRGBO(56, 210, 0, 1);
+                          }),
+                        ),
+                        child: const Text(
+                          "Login",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.01,
+                    ),
+                    InkWell(
+                        child: const Text(
+                          "Forgot Password?",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white54),
+                        ),
+                        onTap: () {
+                          showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return WillPopScope(
+                                  onWillPop: () async => false,
+                                  child: AlertDialog(
+                                    title: const Text(
+                                      'Please Enter Mobile Number',
+                                      style: TextStyle(
+                                          color: Colors.black26,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 16),
+                                    ),
+                                    content: Form(
+                                      key: globalFormKey,
+                                      child: TextFormField(
+                                        keyboardType: TextInputType.number,
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
+                                        controller: forgotpswrdController,
+                                        validator: (value) {
+                                          if ((value!.length > 5) &&
+                                              value.isNotEmpty) {
+                                            return "Number should contain more than 5 characters";
+                                          }
+                                          return null;
+                                        },
+                                        decoration: const InputDecoration(
+                                          labelText: "Mobile Number",
+                                          labelStyle: TextStyle(
+                                              color: Colors.black38,
+                                              fontSize: 15),
+                                        ),
                                       ),
                                     ),
+                                    actions: <Widget>[
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            // backgroundColor: Colors.grey,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(12))),
+                                        onPressed: () {
+                                          if (globalFormKey.currentState!
+                                              .validate()) {
+                                            Navigator.pop(context);
+                                          }
+                                        },
+                                        child: const Text('CANCEL'),
+                                      ),
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            // backgroundColor: Colors.grey,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(12))),
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'CONFIRM'),
+                                        child: const Text('CONFIRM'),
+                                      ),
+                                    ],
                                   ),
-                                  actions: <Widget>[
-                                    ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          // backgroundColor: Colors.grey,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(12))),
-                                      onPressed: () {
-                                        if (globalFormKey.currentState!
-                                            .validate()) {
-                                          Navigator.pop(context);
-                                        }
-                                      },
-                                      child: const Text('CANCEL'),
-                                    ),
-                                    ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          // backgroundColor: Colors.grey,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(12))),
-                                      onPressed: () =>
-                                          Navigator.pop(context, 'CONFIRM'),
-                                      child: const Text('CONFIRM'),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            });
-                      }),
-                ]),
-          ),
-        ));
+                                );
+                              });
+                        }),
+                  ]),
+            ),
+          )),
+    );
   }
 }

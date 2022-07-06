@@ -1,8 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:linkus/screens/profile/dropdown.dart';
-import 'package:linkus/screens/profile/dropdown_tone.dart';
+import 'package:linkus/screens/mainmenu/profile/dropdown.dart';
+import 'package:linkus/screens/mainmenu/profile/dropdown_tone.dart';
 import 'package:linkus/variables/utils.dart';
 
 class ProfilePage extends StatefulWidget {

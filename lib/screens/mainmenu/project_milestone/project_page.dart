@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:linkus/screens/project_milestone/project_milestone.dart';
+import 'package:linkus/screens/mainmenu/project_milestone/project_milestone.dart';
 
 class ProjectPage extends StatefulWidget {
   const ProjectPage({super.key});

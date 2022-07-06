@@ -35,7 +35,14 @@ class _liveContactsState extends State<liveContacts> {
           profIcon: Icon(Icons.person),
           msgText: null,
           msgdte$tme: Text(''),
-          ntfctnCnt: Text(''),
+          ntfctnCnt: Container(
+            height: 10,
+            width: 10,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.green
+            ),
+          ),
           contactName: Text(
             'Developer',
           ),

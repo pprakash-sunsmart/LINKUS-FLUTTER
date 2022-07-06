@@ -1,20 +1,20 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, avoid_unnecessary_containers, file_names, sized_box_for_whitespace, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:linkus/screens/Customization/custom_page.dart';
+import 'package:linkus/screens/mainmenu/Customization/custom_page.dart';
 import 'package:linkus/screens/Landing%20Files/widgets.dart';
 import 'package:linkus/screens/Login%20Files/loginscreen.dart';
-import 'package:linkus/screens/birthday/birthday_page.dart';
-import 'package:linkus/screens/calendar/mycalendar.dart';
-import 'package:linkus/screens/change%20Password/change_password.dart';
-import 'package:linkus/screens/momscreen/mom.dart';
+import 'package:linkus/screens/mainmenu/birthday/birthday_page.dart';
+import 'package:linkus/screens/mainmenu/calendar/mycalendar.dart';
+import 'package:linkus/screens/mainmenu/change%20Password/change_password.dart';
+import 'package:linkus/screens/mainmenu/momscreen/mom.dart';
 
-import 'package:linkus/screens/profile/my_profile.dart';
-import 'package:linkus/screens/project_milestone/project_milestone.dart';
-import 'package:linkus/screens/project_milestone/project_page.dart';
-import 'package:linkus/screens/shelf/shelf.dart';
-import 'package:linkus/screens/starredscreen/starred.dart';
-import 'package:linkus/screens/task/mytask.dart';
+import 'package:linkus/screens/mainmenu/profile/my_profile.dart';
+import 'package:linkus/screens/mainmenu/project_milestone/project_milestone.dart';
+import 'package:linkus/screens/mainmenu/project_milestone/project_page.dart';
+import 'package:linkus/screens/mainmenu/shelf/shelf.dart';
+import 'package:linkus/screens/mainmenu/starredscreen/starred.dart';
+import 'package:linkus/screens/mainmenu/task/mytask.dart';
 
 import 'contactTab.dart';
 import 'groupTab.dart';
