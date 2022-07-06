@@ -16,7 +16,6 @@ class MasterTextField extends StatefulWidget {
   bool filled;
   dynamic contentPadding;
 
-
   MasterTextField(
       {Key? key,
       required this.hintText,
@@ -48,7 +47,7 @@ class _MasterTextFieldState extends State<MasterTextField> {
               height: MediaQuery.of(context).size.height / 18,
               child: TextFormField(
                 autofocus: false,
-                
+
                 //keyboardType: widget.keyboardType,
 
                 obscureText: widget.obscureText,

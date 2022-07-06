@@ -66,70 +66,83 @@ class _ChatListState extends State<ChatList> {
 }
 
 class ChatInputBox extends StatefulWidget {
-  const ChatInputBox({super.key});
+  dynamic controller;
+  ChatInputBox({super.key, required this.controller});
 
   @override
   State<ChatInputBox> createState() => _ChatInputBoxState();
 }
 
 class _ChatInputBoxState extends State<ChatInputBox> {
+  GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
+  bool SndIcon = false;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 60,
-      color: Color.fromRGBO(1, 123, 255, 1),
-      child: Padding(
-        padding: const EdgeInsets.all(9),
-        child: Row(
-          children: [
-            Flexible(
-              flex: 1,
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20)),
-                  child: TextFormField(
-                    cursorHeight: 16,
-                    cursorColor: Colors.grey.shade900,
-                    decoration: InputDecoration(
-                        enabledBorder: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(vertical: 8),
-                        hintText: 'Type a message',
-                        prefixIcon: IconButton(
-                            onPressed: () {},
+    return Form(
+      key: globalFormKey,
+      child: Container(
+        height: 60,
+        color: Color.fromRGBO(1, 123, 255, 1),
+        child: Padding(
+          padding: const EdgeInsets.all(9),
+          child: Row(
+            children: [
+              Flexible(
+                flex: 1,
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: TextFormField(
+                      cursorHeight: 16,
+                      controller: widget.controller,
+                      cursorColor: Colors.grey.shade900,
+                      decoration: InputDecoration(
+                          enabledBorder: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(vertical: 8),
+                          hintText: 'Type a message',
+                          prefixIcon: IconButton(
+                              onPressed: () {},
+                              icon: Image(
+                                  image:
+                                      AssetImage('assets/images/smiley.png'))),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              print('dsa');
+                            },
                             icon: Image(
-                                image: AssetImage('assets/images/smiley.png'))),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            print('dsa');
-                          },
-                          icon: Image(
-                            image: AssetImage('assets/images/attachments.png'),
-                            height: 50,
-                          ),
-                          // iconSize: 25,
-                        )),
-                  )),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
-              child: GestureDetector(
-                onLongPress: () {},
-                child: Image(
-                  image: AssetImage('assets/images/mic.png'),
+                              image:
+                                  AssetImage('assets/images/attachments.png'),
+                              height: 50,
+                            ),
+                            // iconSize: 25,
+                          )),
+                    )),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20)),
+                child: GestureDetector(
+                  onLongPress: () {},
+                  child: SndIcon
+                      ? Image(
+                          image: AssetImage('assets/images/mic.png'),
+                        )
+                      : Icon(Icons.send),
                 ),
               ),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-          ],
+              SizedBox(
+                width: 5,
+              ),
+            ],
+          ),
         ),
       ),
     );

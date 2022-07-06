@@ -224,11 +224,13 @@ class _landingPageState extends State<landingPage> {
                                           height: 0,
                                           onTap: () {
                                             Navigator.pop(context);
-                                            Navigator.pushAndRemoveUntil<dynamic>(
+                                            Navigator.pushAndRemoveUntil<
+                                                dynamic>(
                                               context,
                                               MaterialPageRoute<dynamic>(
-                                                builder: (BuildContext context) =>
-                                                    ShelfPage(),
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        ShelfPage(),
                                               ),
                                               (route) => true,
                                               //if you want to disable back feature set to false
@@ -422,46 +424,125 @@ class _landingPageState extends State<landingPage> {
                                                               fontSize: 15),
                                                         ),
                                                         actions: <Widget>[
-                                                          ElevatedButton(
-                                                            style: ElevatedButton.styleFrom(
-                                                                backgroundColor:
-                                                                    Colors.grey,
-                                                                shape: RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            12))),
-                                                            onPressed: () {
+                                                          // ElevatedButton(
+                                                          //   style: ElevatedButton.styleFrom(
+                                                          //       // backgroundColor:
+                                                          //           // Colors.grey,
+                                                          //       shape: RoundedRectangleBorder(
+                                                          //           borderRadius:
+                                                          //               BorderRadius.circular(
+                                                          //                   12))),
+                                                          //   onPressed: () {
+                                                          //
+                                                          //   },
+                                                          //   child: const Text(
+                                                          //       'CANCEL'),
+                                                          // ),
+                                                          InkWell(
+                                                            onTap: () {
                                                               Navigator.pop(
                                                                   context);
                                                             },
-                                                            child: const Text(
-                                                                'CANCEL'),
-                                                          ),
-                                                          ElevatedButton(
-                                                            style: ElevatedButton.styleFrom(
-                                                                backgroundColor:
-                                                                    Colors.grey,
-                                                                shape: RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            12))),
-                                                            onPressed: () =>
-                                                                Navigator
-                                                                    .pushAndRemoveUntil<
-                                                                        dynamic>(
-                                                              context,
-                                                              MaterialPageRoute<
-                                                                  dynamic>(
-                                                                builder: (BuildContext
-                                                                        context) =>
-                                                                    LoginScreen(),
+                                                            child: Container(
+                                                              width: 90,
+                                                              height: 40,
+                                                              decoration: BoxDecoration(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          124,
+                                                                          123,
+                                                                          123),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              10)),
+                                                              child: Center(
+                                                                child: Text(
+                                                                  'CANCEL',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w800,
+                                                                      fontSize:
+                                                                          15),
+                                                                ),
                                                               ),
-                                                              (route) => false,
-                                                              //if you want to disable back feature set to false
                                                             ),
-                                                            child: const Text(
-                                                                'OK'),
                                                           ),
+                                                          InkWell(
+                                                            onTap: () {
+                                                              Navigator
+                                                                  .pushAndRemoveUntil<
+                                                                      dynamic>(
+                                                                context,
+                                                                MaterialPageRoute<
+                                                                    dynamic>(
+                                                                  builder: (BuildContext
+                                                                          context) =>
+                                                                      LoginScreen(),
+                                                                ),
+                                                                (route) =>
+                                                                    false,
+                                                                //if you want to disable back feature set to false
+                                                              );
+                                                            },
+                                                            child: Container(
+                                                              width: 90,
+                                                              height: 40,
+                                                              decoration: BoxDecoration(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          124,
+                                                                          123,
+                                                                          123),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              10)),
+                                                              child: Center(
+                                                                child: Text(
+                                                                  'OK',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w800,
+                                                                      fontSize:
+                                                                          15),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          // ElevatedButton(
+                                                          //   style: ElevatedButton.styleFrom(
+                                                          //       backgroundColor:
+                                                          //           Colors.grey,
+                                                          //       shape: RoundedRectangleBorder(
+                                                          //           borderRadius:
+                                                          //               BorderRadius.circular(
+                                                          //                   12))),
+                                                          //   onPressed: () =>
+                                                          //       Navigator
+                                                          //           .pushAndRemoveUntil<
+                                                          //               dynamic>(
+                                                          //     context,
+                                                          //     MaterialPageRoute<
+                                                          //         dynamic>(
+                                                          //       builder: (BuildContext
+                                                          //               context) =>
+                                                          //           LoginScreen(),
+                                                          //     ),
+                                                          //     (route) => false,
+                                                          //     //if you want to disable back feature set to false
+                                                          //   ),
+                                                          //   child: const Text(
+                                                          //       'OK'),
+                                                          // ),
                                                         ],
                                                       ),
                                                     );

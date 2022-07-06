@@ -3,10 +3,10 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/filters/searchFilter.dart';
-import 'package:linkus/screens/mainmenu/profile/groupProfile.dart';
 
 import '../Landing Files/widgets.dart';
 import '../filters/mediaFilter.dart';
+import '../mainmenu/profile/groupProfile.dart';
 
 class groupChat extends StatefulWidget {
   const groupChat({super.key});
@@ -17,6 +17,7 @@ class groupChat extends StatefulWidget {
 
 class _groupChatState extends State<groupChat> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final TextEditingController chatController = TextEditingController();
   Future _pickFile() async {
     final result =
 
@@ -31,6 +32,7 @@ class _groupChatState extends State<groupChat> {
             width: double.infinity,
             height: double.infinity,
             child: Scaffold(
+              key: _scaffoldKey,
               appBar: AppBar(
                 leading: IconButton(
                     onPressed: () {
@@ -75,6 +77,7 @@ class _groupChatState extends State<groupChat> {
                                         height: 0,
                                         text: 'Group Information',
                                         onTap: () {
+                                          Navigator.pop(context);
                                           _scaffoldKey.currentState!
                                               .openEndDrawer();
                                           // Navigator.pushAndRemoveUntil<dynamic>(
@@ -104,7 +107,7 @@ class _groupChatState extends State<groupChat> {
                                             context,
                                             MaterialPageRoute<dynamic>(
                                               builder: (BuildContext context) =>
-                                                  FileFilter(),
+                                                  const FileFilter(),
                                             ),
                                             (route) => true,
                                             //if you want to disable back feature set to false
@@ -127,7 +130,7 @@ class _groupChatState extends State<groupChat> {
                                             context,
                                             MaterialPageRoute<dynamic>(
                                               builder: (BuildContext context) =>
-                                                  SearchFilter(),
+                                                  const SearchFilter(),
                                             ),
                                             (route) => true,
                                             //if you want to disable back feature set to false
@@ -167,7 +170,7 @@ class _groupChatState extends State<groupChat> {
                                                     child: AlertDialog(
                                                         backgroundColor:
                                                             Colors.white,
-                                                        content: Text(''),
+                                                        content: const Text(''),
                                                         actions: [
                                                           Row(
                                                             mainAxisAlignment:
@@ -203,7 +206,8 @@ class _groupChatState extends State<groupChat> {
                                                                               10)),
                                                                   width: 80,
                                                                   height: 40,
-                                                                  child: Center(
+                                                                  child:
+                                                                      const Center(
                                                                     child: Text(
                                                                       'Gallery',
                                                                       style: TextStyle(
@@ -213,7 +217,7 @@ class _groupChatState extends State<groupChat> {
                                                                   ),
                                                                 ),
                                                               ),
-                                                              SizedBox(
+                                                              const SizedBox(
                                                                 width: 20,
                                                               ),
                                                               InkWell(
@@ -231,7 +235,8 @@ class _groupChatState extends State<groupChat> {
                                                                               10)),
                                                                   width: 80,
                                                                   height: 40,
-                                                                  child: Center(
+                                                                  child:
+                                                                      const Center(
                                                                     child: Text(
                                                                       'Default',
                                                                       style: TextStyle(
@@ -270,10 +275,13 @@ class _groupChatState extends State<groupChat> {
                   ],
                 )),
               ),
-              // endDrawer: Drawer(
-              //   child: GroupInfo(),
-              // ),
-              bottomSheet: const ChatInputBox(),
+              endDrawer: Drawer(
+                width: MediaQuery.of(context).size.width / 1.4,
+                child: const GroupInfo(),
+              ),
+              bottomSheet: ChatInputBox(
+                controller: chatController,
+              ),
             )));
   }
 }

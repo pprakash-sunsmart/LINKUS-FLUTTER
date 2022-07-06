@@ -1,10 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, file_names, dead_code, unrelated_type_equality_checks
 
-import 'dart:developer';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-
 import 'package:linkus/screens/Landing%20Files/widgets.dart';
 import 'package:linkus/screens/filters/mediaFilter.dart';
 import 'package:linkus/screens/filters/searchFilter.dart';
@@ -26,6 +23,7 @@ class _PersonalChatState extends State<PersonalChat> {
         await FilePicker.platform.pickFiles(type: FileType.any);
   }
 
+  final TextEditingController chatController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     bool isTextfield = false;
@@ -274,7 +272,7 @@ class _PersonalChatState extends State<PersonalChat> {
                                                     child: AlertDialog(
                                                         backgroundColor:
                                                             Colors.white,
-                                                        content: Text(''),
+                                                        content: const Text(''),
                                                         actions: [
                                                           Row(
                                                             mainAxisAlignment:
@@ -310,7 +308,8 @@ class _PersonalChatState extends State<PersonalChat> {
                                                                               10)),
                                                                   width: 80,
                                                                   height: 40,
-                                                                  child: Center(
+                                                                  child:
+                                                                      const Center(
                                                                     child: Text(
                                                                       'Gallery',
                                                                       style: TextStyle(
@@ -320,7 +319,7 @@ class _PersonalChatState extends State<PersonalChat> {
                                                                   ),
                                                                 ),
                                                               ),
-                                                              SizedBox(
+                                                              const SizedBox(
                                                                 width: 20,
                                                               ),
                                                               InkWell(
@@ -338,7 +337,8 @@ class _PersonalChatState extends State<PersonalChat> {
                                                                               10)),
                                                                   width: 80,
                                                                   height: 40,
-                                                                  child: Center(
+                                                                  child:
+                                                                      const Center(
                                                                     child: Text(
                                                                       'Default',
                                                                       style: TextStyle(
@@ -353,8 +353,9 @@ class _PersonalChatState extends State<PersonalChat> {
                                                         ]));
                                               });
                                         },
-                                        Icon: const Icon(Icons.wallpaper)),
-                                    PopupMenuDivider()
+                                        Icon:
+                                            const Icon(Icons.wallpaper_sharp)),
+                                    const PopupMenuDivider()
                                   ],
                                 )),
                               ])),
@@ -376,7 +377,9 @@ class _PersonalChatState extends State<PersonalChat> {
                   ],
                 )),
               ),
-              bottomSheet: ChatInputBox(),
+              bottomSheet: ChatInputBox(
+                controller: chatController,
+              ),
             )));
   }
 }

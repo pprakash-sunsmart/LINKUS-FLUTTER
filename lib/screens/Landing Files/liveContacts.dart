@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/Landing%20Files/widgets.dart';
 
+import '../chatscreen Files/individualChat.dart';
+
 class liveContacts extends StatefulWidget {
   const liveContacts({super.key});
 
@@ -31,7 +33,10 @@ class _liveContactsState extends State<liveContacts> {
           ),
         ),
         ChatList(
-          onTap: null,
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PersonalChat()));
+          },
           profIcon: Icon(Icons.person),
           msgText: null,
           msgdte$tme: Text(''),
@@ -39,9 +44,7 @@ class _liveContactsState extends State<liveContacts> {
             height: 10,
             width: 10,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.green
-            ),
+                borderRadius: BorderRadius.circular(5), color: Colors.green),
           ),
           contactName: Text(
             'Developer',
