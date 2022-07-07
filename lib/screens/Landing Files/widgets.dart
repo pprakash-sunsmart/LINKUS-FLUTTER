@@ -1,9 +1,5 @@
-// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables, non_constant_identifier_names, prefer_const_literals_to_create_immutables, avoid_print, camel_case_types
+// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables, non_constant_identifier_names, prefer_const_literals_to_create_immutables, avoid_print, camel_case_types, must_be_immutable, unrelated_type_equality_checks
 
-
-import 'dart:io';
-
-import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/chatscreen%20Files/dataList.dart';
 
@@ -29,6 +25,8 @@ class ChatList extends StatefulWidget {
   @override
   State<ChatList> createState() => _ChatListState();
 }
+
+final TextEditingController chatController = TextEditingController();
 
 class _ChatListState extends State<ChatList> {
   @override
@@ -79,68 +77,25 @@ class ChatInputBox extends StatefulWidget {
 
 class _ChatInputBoxState extends State<ChatInputBox> {
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
-  bool SndIcon = false;
-  
-   bool emojiShowing = false;
-    final TextEditingController _controller = TextEditingController();
+  bool MicIcon = true;
 
-  _onEmojiSelected(Emoji emoji) {
-    _controller
-      ..text += emoji.emoji
-      ..selection = TextSelection.fromPosition(
-          TextPosition(offset: _controller.text.length));
+  // var text = chatController.value.text.length;
+  onTap(text) {
+    setState(() {
+      if (chatController.text.trim() == "") {
+        MicIcon = true;
+      } else {
+        MicIcon = false;
+      }
+    });
   }
 
-  _onBackspacePressed() {
-    _controller
-      ..text = _controller.text.characters.skipLast(1).toString()
-      ..selection = TextSelection.fromPosition(
-          TextPosition(offset: _controller.text.length));
+  @override
+  void initState() {
+    onTap(MicIcon);
+    super.initState();
   }
-showEmoji(){
-  return          Offstage(
-              offstage: !emojiShowing,
-              child: SizedBox(
-                height: 250,
-                child: EmojiPicker(
-                    onEmojiSelected: (Category category, Emoji emoji) {
-                      _onEmojiSelected(emoji);
-                    },
-                    onBackspacePressed: _onBackspacePressed,
-                    config: Config(
-                        columns: 7,
-                        // Issue: https://github.com/flutter/flutter/issues/28894
-                        emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
-                        verticalSpacing: 0,
-                        horizontalSpacing: 0,
-                        gridPadding: EdgeInsets.zero,
-                        initCategory: Category.RECENT,
-                        bgColor: const Color(0xFFF2F2F2),
-                        indicatorColor: Colors.blue,
-                        iconColor: Colors.grey,
-                        iconColorSelected: Colors.blue,
-                        progressIndicatorColor: Colors.blue,
-                        backspaceColor: Colors.blue,
-                        skinToneDialogBgColor: Colors.white,
-                        skinToneIndicatorColor: Colors.grey,
-                        enableSkinTones: true,
-                        showRecentsTab: true,
-                        recentsLimit: 28,
-                        replaceEmojiOnLimitExceed: false,
-                        noRecents: const Text(
-                          'No Recents',
-                          style: TextStyle(fontSize: 20, color: Colors.black26),
-                          textAlign: TextAlign.center,
-                        ),
-                        tabIndicatorAnimDuration: kTabScrollDuration,
-                        categoryIcons: const CategoryIcons(),
-                        buttonMode: ButtonMode.MATERIAL)),
-              ),
-            );   
-                
-          
-              
-}
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -158,76 +113,70 @@ showEmoji(){
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20)),
-                    child: 
-                    
-                        TextFormField(
-                          cursorHeight: 16,
-                          controller: widget.controller,
-                          cursorColor: Colors.grey.shade900,
-                          decoration: InputDecoration(
-                              enabledBorder: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(vertical: 8),
-                              hintText: 'Type a message',
-                              prefixIcon: IconButton(
-                                
-                                  onPressed: () {
-                                   setState(() {
-                                    
-                            emojiShowing = !emojiShowing;
-                           
-                          });
-                          showEmoji();
-                            
-                                  },
-                                  icon: Image(
-                                      image:
-                                          AssetImage('assets/images/smiley.png'))),
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  print('dsa');
-                                },
-                                icon: 
-                                InkWell(
-                                onTap: (){
-                               
-                                },
-                                  child: Image(
-                                    image:
-                                        AssetImage('assets/images/attachments.png'),
-                                    height: 50,
-                                  ),
-                                ),
-                                                              ))))),                                // iconSize: 25,
-              
-                  
-        
+                    child: TextFormField(
+                      cursorHeight: 16,
+                      controller: chatController,
+                      onTap: onTap(MicIcon),
+                      onChanged: onTap,
+                      // autovalidateMode: AutovalidateMode.always,
+                      cursorColor: Colors.grey.shade900,
+                      // onTap: onTap(),
+                      // onTap: onTap(),
+                      decoration: InputDecoration(
+                          enabledBorder: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(vertical: 8),
+                          hintText: 'Type a message',
+                          prefixIcon: IconButton(
+                              onPressed: () {},
+                              icon: Image(
+                                  image:
+                                      AssetImage('assets/images/smiley.png'))),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              print('dsa');
+                            },
+                            icon: Image(
+                              image:
+                                  AssetImage('assets/images/attachments.png'),
+                              height: 50,
+                            ),
+                            // iconSize: 25,
+                          )),
+                    )),
+              ),
               SizedBox(
                 width: 10,
               ),
               Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)),
-                child: GestureDetector(
-                  onLongPress: () {},
-                  child: SndIcon
-                      ? Image(
-                          image: AssetImage('assets/images/mic.png'),
-                        )
-                      : Icon(Icons.send),
-                ),
-              )]))));
-
-            
-          
-        
-      
-    
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: MicIcon
+                      ? InkWell(
+                          onTap: () {},
+                          child: Image(
+                            image: AssetImage('assets/images/mic.png'),
+                          ))
+                      : Padding(
+                          padding: const EdgeInsets.only(left: 3),
+                          child: Icon(
+                            Icons.send,
+                            color: Color.fromRGBO(1, 123, 255, 1),
+                            size: 20,
+                          ),
+                        )),
+              SizedBox(
+                width: 5,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
- }
-
+}
 
 class Mainmenu extends StatefulWidget {
   final int value;

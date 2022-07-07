@@ -3,10 +3,11 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/filters/searchFilter.dart';
+import 'package:linkus/screens/mainmenu/profile/groupProfile.dart';
 
 import '../Landing Files/widgets.dart';
 import '../filters/mediaFilter.dart';
-import '../mainmenu/profile/groupProfile.dart';
+import '../profile/groupProfile.dart';
 
 class groupChat extends StatefulWidget {
   const groupChat({super.key});
@@ -153,26 +154,37 @@ class _groupChatState extends State<groupChat> {
                                   ],
                                 )),
                                 PopupMenuItem(
-                                    child: Column(
-                                  children: [
-                                    Mainmenu(
-                                        value: 2,
-                                        height: 0,
-                                        text: 'Wall Paper',
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                          showDialog<String>(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return WillPopScope(
-                                                    onWillPop: () async =>
-                                                        false,
-                                                    child: AlertDialog(
-                                                        backgroundColor:
-                                                            Colors.white,
-                                                        content: const Text(''),
-                                                        actions: [
-                                                          Row(
+                                    child: Column(children: [
+                                  Mainmenu(
+                                      value: 2,
+                                      height: 0,
+                                      text: 'Wall Paper',
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        showDialog<String>(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return Container(
+                                                child: WillPopScope(
+                                                  onWillPop: () async => false,
+                                                  child: AlertDialog(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20)),
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      // content: const Text(''),
+                                                      actions: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70,
+                                                                  bottom: 10),
+                                                          child: Row(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .center,
@@ -248,14 +260,15 @@ class _groupChatState extends State<groupChat> {
                                                               ),
                                                             ],
                                                           ),
-                                                        ]));
-                                              });
-                                        },
-                                        Icon:
-                                            const Icon(Icons.wallpaper_sharp)),
-                                    const PopupMenuDivider()
-                                  ],
-                                )),
+                                                        ),
+                                                      ]),
+                                                ),
+                                              );
+                                            });
+                                      },
+                                      Icon: const Icon(Icons.wallpaper_sharp)),
+                                  const PopupMenuDivider()
+                                ]))
                               ])),
                 ],
               ),
@@ -277,7 +290,7 @@ class _groupChatState extends State<groupChat> {
               ),
               endDrawer: Drawer(
                 width: MediaQuery.of(context).size.width / 1.4,
-                child: const GroupInfo(),
+                child: GroupInfo(),
               ),
               bottomSheet: ChatInputBox(
                 controller: chatController,

@@ -257,26 +257,37 @@ class _PersonalChatState extends State<PersonalChat> {
                                   ],
                                 )),
                                 PopupMenuItem(
-                                    child: Column(
-                                  children: [
-                                    Mainmenu(
-                                        value: 2,
-                                        height: 0,
-                                        text: 'Wall Paper',
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                          showDialog<String>(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return WillPopScope(
-                                                    onWillPop: () async =>
-                                                        false,
-                                                    child: AlertDialog(
-                                                        backgroundColor:
-                                                            Colors.white,
-                                                        content: const Text(''),
-                                                        actions: [
-                                                          Row(
+                                    child: Column(children: [
+                                  Mainmenu(
+                                      value: 2,
+                                      height: 0,
+                                      text: 'Wall Paper',
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        showDialog<String>(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return Container(
+                                                child: WillPopScope(
+                                                  onWillPop: () async => false,
+                                                  child: AlertDialog(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20)),
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      // content: const Text(''),
+                                                      actions: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70,
+                                                                  bottom: 10),
+                                                          child: Row(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .center,
@@ -352,14 +363,15 @@ class _PersonalChatState extends State<PersonalChat> {
                                                               ),
                                                             ],
                                                           ),
-                                                        ]));
-                                              });
-                                        },
-                                        Icon:
-                                            const Icon(Icons.wallpaper_sharp)),
-                                    const PopupMenuDivider()
-                                  ],
-                                )),
+                                                        ),
+                                                      ]),
+                                                ),
+                                              );
+                                            });
+                                      },
+                                      Icon: const Icon(Icons.wallpaper_sharp)),
+                                  const PopupMenuDivider()
+                                ]))
                               ])),
                 ],
               ),
