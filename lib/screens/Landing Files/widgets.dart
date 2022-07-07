@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables, non_constant_identifier_names, prefer_const_literals_to_create_immutables, avoid_print, camel_case_types
+// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables, non_constant_identifier_names, prefer_const_literals_to_create_immutables, avoid_print, camel_case_types, must_be_immutable, unrelated_type_equality_checks
 
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/chatscreen%20Files/dataList.dart';
@@ -77,7 +77,24 @@ class ChatInputBox extends StatefulWidget {
 
 class _ChatInputBoxState extends State<ChatInputBox> {
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
-  bool SndIcon = false;
+  bool MicIcon = true;
+
+  // var text = chatController.value.text.length;
+  onTap(text) {
+    setState(() {
+      if (chatController.text.trim() == "") {
+        MicIcon = true;
+      } else {
+        MicIcon = false;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    onTap(MicIcon);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +116,12 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                     child: TextFormField(
                       cursorHeight: 16,
                       controller: chatController,
+                      onTap: onTap(MicIcon),
+                      onChanged: onTap,
+                      // autovalidateMode: AutovalidateMode.always,
                       cursorColor: Colors.grey.shade900,
+                      // onTap: onTap(),
+                      // onTap: onTap(),
                       decoration: InputDecoration(
                           enabledBorder: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(vertical: 8),
@@ -126,27 +148,25 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                 width: 10,
               ),
               Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)),
-                child: GestureDetector(
-                  onLongPress: () {},
-                  child: chatController != null
-                      ? Image(
-                          image: AssetImage('assets/images/mic.png'),
-                        )
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: MicIcon
+                      ? InkWell(
+                          onTap: () {},
+                          child: Image(
+                            image: AssetImage('assets/images/mic.png'),
+                          ))
                       : Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                              child: Icon(
+                          padding: const EdgeInsets.only(left: 3),
+                          child: Icon(
                             Icons.send,
+                            color: Color.fromRGBO(1, 123, 255, 1),
                             size: 20,
-                          )),
-                        ),
-                ),
-              ),
+                          ),
+                        )),
               SizedBox(
                 width: 5,
               ),
