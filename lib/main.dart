@@ -1,30 +1,167 @@
-import 'dart:ui';
 
-import 'package:expandable/expandable.dart';
+// import 'package:flutter/material.dart';
+// import 'package:linkus/screens/Login%20Files/loginscreen.dart';
+
+
+
+
+// void main() {
+//   runApp(const MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//         debugShowCheckedModeBanner: false,
+//         title: 'Link Us',
+//         home:LoginScreen());
+//   }
+// }
+
+import 'dart:io';
+
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:linkus/screens/Login%20Files/login_textfield.dart';
-import 'package:linkus/screens/Login%20Files/loginscreen.dart';
-import 'package:linkus/screens/mainmenu/calendar/date_time.dart';
-
-import 'package:linkus/screens/mainmenu/project_milestone/project_milestone.dart';
-import 'package:linkus/screens/mainmenu/project_milestone/project_page.dart';
-
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+/// Example for EmojiPickerFlutter
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
 
-  // This widget is the root of your application.
+class _MyAppState extends State<MyApp> {
+  final TextEditingController _controller = TextEditingController();
+  bool emojiShowing = false;
+
+  _onEmojiSelected(Emoji emoji) {
+    _controller
+      ..text += emoji.emoji
+      ..selection = TextSelection.fromPosition(
+          TextPosition(offset: _controller.text.length));
+  }
+
+  _onBackspacePressed() {
+    _controller
+      ..text = _controller.text.characters.skipLast(1).toString()
+      ..selection = TextSelection.fromPosition(
+          TextPosition(offset: _controller.text.length));
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Link Us',
-        home:LoginScreen());
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: const Text('Emoji Picker Example App'),
+        ),
+        body: Column(
+          children: [
+            Expanded(child: Container()),
+            Container(
+                height: 66.0,
+                color: Colors.blue,
+                child: Row(
+                  children: [
+                    Material(
+                      color: Colors.transparent,
+                      child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            emojiShowing = !emojiShowing;
+                          });
+                        },
+                        icon: const Icon(
+                          Icons.emoji_emotions,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: TextFormField(
+                            controller: _controller,
+                            style: const TextStyle(
+                                fontSize: 20.0, color: Colors.black87),
+                            decoration: InputDecoration(
+                              hintText: 'Type a message',
+                              filled: true,
+                              fillColor: Colors.white,
+                              contentPadding: const EdgeInsets.only(
+                                  left: 16.0,
+                                  bottom: 8.0,
+                                  top: 8.0,
+                                  right: 16.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(50.0),
+                              ),
+                            )),
+                      ),
+                    ),
+                    Material(
+                      color: Colors.transparent,
+                      child: IconButton(
+                          onPressed: () {
+                            // send message
+                          },
+                          icon: const Icon(
+                            Icons.send,
+                            color: Colors.white,
+                          )),
+                    )
+                  ],
+                )),
+            Offstage(
+              offstage: !emojiShowing,
+              child: SizedBox(
+                height: 250,
+                child: EmojiPicker(
+                    onEmojiSelected: (Category category, Emoji emoji) {
+                      _onEmojiSelected(emoji);
+                    },
+                    onBackspacePressed: _onBackspacePressed,
+                    config: Config(
+                        columns: 7,
+                        
+                        emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
+                        verticalSpacing: 0,
+                        horizontalSpacing: 0,
+                        gridPadding: EdgeInsets.zero,
+                        initCategory: Category.RECENT,
+                        bgColor: const Color(0xFFF2F2F2),
+                        indicatorColor: Colors.blue,
+                        iconColor: Colors.grey,
+                        iconColorSelected: Colors.blue,
+                        progressIndicatorColor: Colors.blue,
+                        backspaceColor: Colors.blue,
+                        skinToneDialogBgColor: Colors.white,
+                        skinToneIndicatorColor: Colors.grey,
+                        enableSkinTones: true,
+                        showRecentsTab: true,
+                        recentsLimit: 28,
+                        replaceEmojiOnLimitExceed: false,
+                        noRecents: const Text(
+                          'No Recents',
+                          style: TextStyle(fontSize: 20, color: Colors.black26),
+                          textAlign: TextAlign.center,
+                        ),
+                        tabIndicatorAnimDuration: kTabScrollDuration,
+                        categoryIcons: const CategoryIcons(),
+                        buttonMode: ButtonMode.MATERIAL)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
-

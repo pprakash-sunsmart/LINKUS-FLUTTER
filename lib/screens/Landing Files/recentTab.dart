@@ -1,7 +1,5 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables, camel_case_types, file_names
-
 import 'package:flutter/material.dart';
-
 import '../chatscreen Files/individualChat.dart';
 import 'widgets.dart';
 
@@ -15,7 +13,8 @@ class recentTab extends StatefulWidget {
 class _recentTabState extends State<recentTab> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return 
+    Column(
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -45,8 +44,9 @@ class _recentTabState extends State<recentTab> {
           msgText: Text('Hey broo'),
           profIcon: Icon(Icons.person),
           ItmCnt: 30,
-        )
+        ),
+   
       ],
     );
-  }
-}
+  }}
+

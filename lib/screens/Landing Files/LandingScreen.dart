@@ -4,11 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:linkus/screens/mainmenu/Customization/custom_page.dart';
 import 'package:linkus/screens/Landing%20Files/widgets.dart';
 import 'package:linkus/screens/Login%20Files/loginscreen.dart';
-import 'package:linkus/screens/mainmenu/birthday/birthday_page.dart';
 import 'package:linkus/screens/mainmenu/calendar/mycalendar.dart';
-import 'package:linkus/screens/mainmenu/change%20Password/change_password.dart';
 import 'package:linkus/screens/mainmenu/momscreen/mom.dart';
-
 import 'package:linkus/screens/mainmenu/profile/my_profile.dart';
 import 'package:linkus/screens/mainmenu/project_milestone/project_milestone.dart';
 import 'package:linkus/screens/mainmenu/project_milestone/project_page.dart';
@@ -16,6 +13,8 @@ import 'package:linkus/screens/mainmenu/shelf/shelf.dart';
 import 'package:linkus/screens/mainmenu/starredscreen/starred.dart';
 import 'package:linkus/screens/mainmenu/task/mytask.dart';
 
+import '../birthday/birthday_page.dart';
+import '../change Password/change_password.dart';
 import 'contactTab.dart';
 import 'groupTab.dart';
 import 'recentTab.dart';
