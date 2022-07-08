@@ -439,6 +439,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
       child: Wrap(
         children: [
           Container(
+            //have changed something new
             // height: MediaQuery.of(context).size.height,
             // color: Colors.transparent,
             color: Color.fromRGBO(1, 123, 255, 1),
