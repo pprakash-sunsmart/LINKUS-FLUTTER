@@ -82,10 +82,9 @@ class _CustomPageState extends State<CustomPage> {
                                         groupValue: _value,
                                         title: Text(item[index]),
                                         onChanged: (val) {
-                                          // setState2(() {
-                                          //   _value = val!;
-
-                                          // });
+                                          setState2(() {
+                                            _value = val! as int;
+                                          });
                                         },
                                       );
                                     },
@@ -96,32 +95,36 @@ class _CustomPageState extends State<CustomPage> {
                           );
                         });
                   },
-                  child: Container(
-                    height: MediaQuery.of(context).size.height / 16,
-                    width: MediaQuery.of(context).size.height / 2.2,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: Colors.black,
-                        )),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height / 16,
+                      width: MediaQuery.of(context).size.height / 2.6,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                            color: Colors.black,
+                          )),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          children: [
+                            const Text(
+                              "FontStyle : ",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 1),
+                            ),
+                            Text(item[_value]),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Spacer(),
+                            Icon(Icons.arrow_drop_down)
+                          ],
                         ),
-                        const Text(
-                          "FontStyle :",
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 1),
-                        ),
-                        Text(item[_value]),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Icon(Icons.arrow_drop_down)
-                      ],
+                      ),
                     ),
                   ),
                 ),
