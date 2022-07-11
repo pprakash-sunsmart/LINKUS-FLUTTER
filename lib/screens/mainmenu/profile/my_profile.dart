@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/mainmenu/profile/dropdown.dart';
 import 'package:linkus/screens/mainmenu/profile/dropdown_tone.dart';
-import 'package:linkus/variables/utils.dart';
+import 'package:linkus/variables/Api_Control.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    EmployeeCode,
+                    'EmployeeCode',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
@@ -102,7 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    name,
+                    'name',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
@@ -127,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    gender,
+                    'gender',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
@@ -171,7 +171,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    mobile,
+                    'mobile',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
@@ -196,7 +196,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    email,
+                    'email',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
@@ -221,7 +221,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    designation,
+                    'designation',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
@@ -246,7 +246,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    department,
+                    'department',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
@@ -271,7 +271,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    branch,
+                    'branch',
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
