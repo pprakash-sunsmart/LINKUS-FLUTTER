@@ -515,8 +515,8 @@ class _landingPageState extends State<landingPage> {
                                                                 //   onPressed: () {
                                                                 //
                                                                 //   },
-                                                                //   child: const Text(
-                                                                //       'CANCEL'),
+                                                                //   child: const Text(yfyfyifiyf
+                                                                //       'CANCEL'),dfghjbknm
                                                                 // ),
                                                                 InkWell(
                                                                   onTap: () {
