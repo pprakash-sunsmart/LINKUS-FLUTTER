@@ -61,31 +61,31 @@ class _SearchFilterState extends State<SearchFilter> {
                   ),
                 ]),
               ),
-              Expanded(
-                child: ListView.separated(
-                    // shrinkWrap: true,
+              // Expanded(
+              //   child: ListView.separated(
+              //       // shrinkWrap: true,
 
-                    itemCount: 2,
-                    itemBuilder: (BuildContext context, int index) {
-                      final employee = Employees[index];
-                      return CheckboxListTile(
-                        controlAffinity: ListTileControlAffinity.trailing,
-                        value: employee.isChecked,
-                        onChanged: (newValue) {
-                          setState(() {
-                            employee.isChecked = newValue!;
-                          });
-                        },
-                        title: Text(Employees[index].Name),
-                        secondary: CircleAvatar(child: Icon(Icons.person)),
-                        subtitle: Text(Employees[index].jobProfile),
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const Divider()),
-              )
+              //       itemCount: 2,
+              //       itemBuilder: (BuildContext context, int index) {
+              //         final employee = Employees[index];
+              //         return CheckboxListTile(
+              //           controlAffinity: ListTileControlAffinity.trailing,
+              //           value: employee.isChecked,
+              //           onChanged: (newValue) {
+              //             setState(() {
+              //               employee.isChecked = newValue!;
+              //             });
+              //           },
+              //           title: Text(Employees[index].Name),
+              //           secondary: CircleAvatar(child: Icon(Icons.person)),
+              //           subtitle: Text(Employees[index].jobProfile),
+              //           contentPadding: const EdgeInsets.symmetric(
+              //               horizontal: 20, vertical: 10),
+              //         );
+              //       },
+              //       separatorBuilder: (BuildContext context, int index) =>
+              //           const Divider()),
+              // )
             ],
           ),
         ),

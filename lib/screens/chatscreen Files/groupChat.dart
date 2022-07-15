@@ -3,7 +3,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/filters/searchFilter.dart';
-import 'package:linkus/screens/mainmenu/profile/groupProfile.dart';
 
 import '../Landing Files/widgets.dart';
 import '../filters/mediaFilter.dart';

@@ -1,327 +1,41 @@
-// // ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables, non_constant_identifier_names, prefer_const_literals_to_create_immutables, avoid_print, camel_case_types
+// ignore_for_file: import_of_legacy_library_into_null_safe, unused_field
 
-// import 'dart:io';
-
-// import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-// import 'package:flutter/material.dart';
-// import 'package:linkus/screens/chatscreen%20Files/dataList.dart';
-
-// class ChatList extends StatefulWidget {
-//   final profIcon;
-//   final msgText;
-//   final contactName;
-//   final ntfctnCnt;
-//   final msgdte$tme;
-//   final ItmCnt;
-//   final onTap;
-
-//   const ChatList({
-//     Key? key,
-//     required this.profIcon,
-//     required this.msgText,
-//     required this.contactName,
-//     required this.ntfctnCnt,
-//     required this.msgdte$tme,
-//     required this.ItmCnt,
-//     required this.onTap,
-//   }) : super(key: key);
-
-//   @override
-//   State<ChatList> createState() => _ChatListState();
-// }
-
-// final TextEditingController chatController = TextEditingController();
-
-// class _ChatListState extends State<ChatList> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Expanded(
-//       child: ListView.separated(
-//           shrinkWrap: true,
-//           itemCount: Employees.length,
-//           itemBuilder: (BuildContext context, int index) {
-//             return Column(
-//               children: [
-//                 ListTile(
-//                   onTap: widget.onTap,
-//                   leading: CircleAvatar(
-//                     // radius: 25,
-//                     child: widget.profIcon,
-//                   ),
-//                   title: Text(Employees[index].Name),
-//                   subtitle: Text(Employees[index].jobProfile),
-//                   trailing: Column(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     crossAxisAlignment: CrossAxisAlignment.end,
-//                     children: [
-//                       widget.ntfctnCnt,
-//                       SizedBox(
-//                         height: 5,
-//                       ),
-//                       widget.msgdte$tme
-//                     ],
-//                   ),
-//                 ),
-//               ],
-//             );
-//           },
-//           separatorBuilder: (BuildContext context, int index) =>
-//               const Divider()),
-//     );
-//   }
-// }
-
-// class ChatInputBox extends StatefulWidget {
-//   dynamic controller;
-//   ChatInputBox({super.key, required this.controller});
-
-//   @override
-//   State<ChatInputBox> createState() => _ChatInputBoxState();
-// }
-
-// class _ChatInputBoxState extends State<ChatInputBox> {
-//   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
-
-//   bool MicIcon = true;
-
-//   // var text = chatController.value.text.length;
-//   onTap(text) {
-//     setState(() {
-//       if (chatController.text.trim() == "") {
-//         MicIcon = true;
-//       } else {
-//         MicIcon = false;
-//       }
-//     });
-//   }
-
-//   bool SndIcon = false;
-
-//   bool emojiShowing = false;
-//   final TextEditingController _controller = TextEditingController();
-//   // final _focusNode = FocusNode();
-//   _onEmojiSelected(Emoji emoji) {
-//     _controller
-//       ..text += emoji.emoji
-//       ..selection = TextSelection.fromPosition(
-//           TextPosition(offset: _controller.text.length));
-//   }
-
-//   _onBackspacePressed() {
-//     _controller
-//       ..text = _controller.text.characters.skipLast(1).toString()
-//       ..selection = TextSelection.fromPosition(
-//           TextPosition(offset: _controller.text.length));
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Form(
-//         key: globalFormKey,
-//         child: Container(
-//             height: 60,
-//             color: Color.fromRGBO(1, 123, 255, 1),
-//             child: Padding(
-//                 padding: const EdgeInsets.all(9),
-//                 child: Row(children: [
-//                   Flexible(
-//                       flex: 1,
-//                       child: Column(
-//                         children: [
-//                           Expanded(
-//                             child: Container(
-//                                 decoration: BoxDecoration(
-//                                     color: Colors.white,
-//                                     borderRadius: BorderRadius.circular(20)),
-//                                 child: TextFormField(
-//                                     // focusNode: _focusNode,
-//                                     onTap: onTap(MicIcon),
-//                                     onChanged: onTap,
-//                                     cursorHeight: 16,
-//                                     controller: widget.controller,
-//                                     cursorColor: Colors.grey.shade900,
-//                                     decoration: InputDecoration(
-//                                         enabledBorder: InputBorder.none,
-//                                         contentPadding:
-//                                             EdgeInsets.symmetric(vertical: 8),
-//                                         hintText: 'Type a message',
-//                                         prefixIcon: IconButton(
-//                                             onPressed: () {
-//                                               setState(() {
-//                                                 emojiShowing = !emojiShowing;
-//                                                 _focusNode.unfocus();
-//                                                 FocusScope.of(context)
-//                                                     .requestFocus(_focusNode);
-//                                               });
-//                                             },
-//                                             icon: Image(
-//                                                 image: AssetImage(
-//                                                     'assets/images/smiley.png'))),
-//                                         suffixIcon: IconButton(
-//                                           onPressed: () {
-//                                             print('dsa');
-//                                           },
-//                                           icon: InkWell(
-//                                             onTap: () {},
-//                                             child: Image(
-//                                               image: AssetImage(
-//                                                   'assets/images/attachments.png'),
-//                                               height: 50,
-//                                             ),
-//                                           ),
-//                                         )))),
-//                           ),
-//                         ],
-//                       )), // iconSize: 25,
-
-//                   SizedBox(
-//                     width: 10,
-//                   ),
-//                   Container(
-//                       width: 40,
-//                       height: 40,
-//                       decoration: BoxDecoration(
-//                           color: Colors.white,
-//                           borderRadius: BorderRadius.circular(20)),
-//                       child: GestureDetector(
-//                           onLongPress: () {},
-//                           child: MicIcon
-//                               ? InkWell(
-//                                   onTap: () {},
-//                                   child: Image(
-//                                     image: AssetImage('assets/images/mic.png'),
-//                                   ))
-//                               : Padding(
-//                                   padding: const EdgeInsets.only(left: 3),
-//                                   child: Icon(
-//                                     Icons.send,
-//                                     color: Color.fromRGBO(1, 123, 255, 1),
-//                                     size: 20,
-//                                   ),
-//                                 )))
-//                 ]))));
-//   }
-// }
-
-// class Mainmenu extends StatefulWidget {
-//   final int value;
-//   final double height;
-//   final text;
-//   final onTap;
-//   final Icon;
-
-//   const Mainmenu(
-//       {super.key,
-//       required this.value,
-//       required this.height,
-//       required this.text,
-//       required this.onTap,
-//       required this.Icon});
-
-//   @override
-//   State<Mainmenu> createState() => _MainmenuState();
-// }
-
-// class _MainmenuState extends State<Mainmenu> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       child: Row(
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           widget.Icon,
-//           SizedBox(
-//             width: 10,
-//           ),
-//           InkWell(
-//             onTap: widget.onTap,
-//             child: Container(
-//               height: 30,
-//               width: 100,
-//               child: Align(
-//                 alignment: Alignment.centerLeft,
-//                 child: Text(
-//                   widget.text,
-//                   style: TextStyle(
-//                     fontSize: 14,
-//                     color: Colors.white,
-//                     fontWeight: FontWeight.w500,
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class footer extends StatelessWidget {
-//   const footer({
-//     Key? key,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//         color: Color.fromRGBO(1, 123, 255, 1),
-//         height: 20,
-//         child: Align(
-//             alignment: Alignment.bottomCenter,
-//             child: Padding(
-//               padding: const EdgeInsets.symmetric(horizontal: 10),
-//               child: Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                 crossAxisAlignment: CrossAxisAlignment.center,
-//                 children: const [
-//                   Center(
-//                     child: Text(
-//                       '\u00a9 Copyright Ecnchat.io',
-//                       style: TextStyle(color: Colors.white),
-//                     ),
-//                   ),
-//                   Center(
-//                       child: Text(
-//                     'Enchat',
-//                     style: TextStyle(color: Colors.white),
-//                   )),
-//                 ],
-//               ),
-//             )));
-//   }
-// }
-
-// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables, non_constant_identifier_names, prefer_const_literals_to_create_immutables, avoid_print, camel_case_types, must_be_immutable, unrelated_type_equality_checks
-
+import 'dart:convert';
 import 'dart:io';
 
-import 'package:camera/camera.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:linkus/screens/chatscreen%20Files/dataList.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import '../../variables/Api_Control.dart';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:http/http.dart';
+
+import 'package:localstorage/localstorage.dart';
 
 class ChatList extends StatefulWidget {
-  final profIcon;
-  final msgText;
-  final contactName;
-  final ntfctnCnt;
-  final msgdte$tme;
-  final ItmCnt;
-  final onTap;
-  const ChatList({
-    Key? key,
-    required this.profIcon,
-    required this.msgText,
-    required this.contactName,
-    required this.ntfctnCnt,
-    required this.msgdte$tme,
-    required this.ItmCnt,
-    required this.onTap,
-  }) : super(key: key);
+  dynamic chtcntLen;
+  dynamic profIcon;
+  dynamic msgText;
+  dynamic contactName;
+  dynamic ntfctnCnt;
+  dynamic msgdte$tme;
+  dynamic ItmCnt;
+  dynamic onTap;
+
+  ChatList(
+      {Key? key,
+      this.profIcon,
+      this.msgText,
+      this.contactName,
+      this.ntfctnCnt,
+      this.msgdte$tme,
+      this.ItmCnt,
+      this.onTap,
+      this.chtcntLen})
+      : super(key: key);
 
   @override
   State<ChatList> createState() => _ChatListState();
@@ -331,22 +45,77 @@ final TextEditingController chatController = TextEditingController();
 
 class _ChatListState extends State<ChatList> {
   @override
+  void initState() {
+    LoadData();
+    super.initState();
+  }
+
+  var mobileNumber;
+  var usernames = [];
+  var profilePics = [];
+  var username_length;
+  LoadData() async {
+    final LocalStorage storage = LocalStorage('localstorage_app');
+
+    mobileNumber = storage.getItem('mobileNumber');
+
+    Response response = await post(Uri.parse(RecentChats_Api), body: {
+      'myid': mobileNumber.toString(),
+    }, headers: {
+      "Content-type": "application/x-www-form-urlencoded",
+      "Accept": "application/json",
+      "charset": "utf-8"
+    });
+    print(response.body);
+    var d1 = jsonDecode(response.body);
+    var Data = d1;
+    print(Data);
+    print(Data.length);
+    // var ;
+    if (Data != null || Data != []) {
+      for (var i = 0; i < Data.length; i++) {
+        usernames.add(Data[i]['username']);
+        profilePics.add(Data[i]['buddyimage']);
+      }
+    }
+    print('--------->${usernames}');
+    setState(() {
+      username_length = usernames.length;
+      print('--------->${username_length}');
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.separated(
+    return Expanded(child: FutureBuilder(
+        // future: Future.delayed(Duration(seconds: 5)),
+        builder: ((context, snapshot) {
+      return ListView.separated(
           shrinkWrap: true,
-          itemCount: Employees.length,
+          itemCount: username_length ?? 0,
           itemBuilder: (BuildContext context, int index) {
             return Column(
               children: [
                 ListTile(
                   onTap: widget.onTap,
                   leading: CircleAvatar(
-                    // radius: 25,
-                    child: widget.profIcon,
+                    radius: 25,
+                    child: ClipOval(
+                      child: CachedNetworkImage(
+                        imageUrl: profilePics[index],
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                                CircularProgressIndicator(
+                                    value: downloadProgress.progress),
+                        errorWidget: (context, url, error) => Icon(
+                          Icons.person,
+                          size: 22,
+                        ),
+                      ),
+                    ),
                   ),
-                  title: Text(Employees[index].Name),
-                  subtitle: Text(Employees[index].jobProfile),
+                  title: Text(usernames[index]),
+                  subtitle: Text('data'),
                   trailing: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -363,8 +132,8 @@ class _ChatListState extends State<ChatList> {
             );
           },
           separatorBuilder: (BuildContext context, int index) =>
-              const Divider()),
-    );
+              const Divider());
+    })));
   }
 }
 
@@ -821,6 +590,69 @@ class _attatchmentContentsState extends State<attatchmentContents> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class allContactsList extends StatefulWidget {
+  final profIcon;
+  final msgText;
+  final contactName;
+  final ntfctnCnt;
+  final msgdte$tme;
+  final ItmCnt;
+  final onTap;
+
+  const allContactsList(
+      {required this.profIcon,
+      required this.msgText,
+      required this.contactName,
+      required this.ntfctnCnt,
+      required this.msgdte$tme,
+      required this.ItmCnt,
+      required this.onTap,
+      super.key});
+
+  @override
+  State<allContactsList> createState() => _allContactsListState();
+}
+
+class _allContactsListState extends State<allContactsList> {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.separated(
+          shrinkWrap: true,
+          itemCount: listItems.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Column(
+              children: [
+                ListTile(
+                  onTap: widget.onTap,
+                  leading: CircleAvatar(
+                      // radius: 25,
+                      backgroundColor: Colors.grey.withOpacity(0.1),
+                      backgroundImage:
+                          NetworkImage(listItems[index].photourl ?? "")),
+                  title: Text(listItems[index].Name),
+                  subtitle: Text(listItems[index].jobProfile),
+                  trailing: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      widget.ntfctnCnt,
+                      SizedBox(
+                        height: 5,
+                      ),
+                      widget.msgdte$tme
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) =>
+              const Divider()),
     );
   }
 }

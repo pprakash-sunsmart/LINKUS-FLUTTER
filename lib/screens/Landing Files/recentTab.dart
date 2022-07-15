@@ -1,5 +1,11 @@
-// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables, camel_case_types, file_names
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables, camel_case_types, file_names, unnecessary_null_comparison
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:linkus/screens/Landing%20Files/LandingScreen.dart';
+import 'package:localstorage/localstorage.dart';
+import '../../variables/Api_Control.dart';
 import '../chatscreen Files/individualChat.dart';
 import 'widgets.dart';
 
@@ -13,8 +19,8 @@ class recentTab extends StatefulWidget {
 class _recentTabState extends State<recentTab> {
   @override
   Widget build(BuildContext context) {
-    return 
-    Column(
+    // int index = 0;
+    return Column(
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -39,14 +45,14 @@ class _recentTabState extends State<recentTab> {
                 '7',
                 style: TextStyle(fontSize: 10),
               )),
+          chtcntLen: 12,
           msgdte$tme: Text('12/07/22'),
-          contactName: Text('SSG_USER_1'),
+          contactName: Text('data'),
           msgText: Text('Hey broo'),
           profIcon: Icon(Icons.person),
           ItmCnt: 30,
         ),
-   
       ],
     );
-  }}
-
+  }
+}

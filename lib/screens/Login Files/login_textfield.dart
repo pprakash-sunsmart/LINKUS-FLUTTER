@@ -8,7 +8,7 @@ class MasterTextField extends StatefulWidget {
   dynamic PrefixIcon;
   dynamic SuffixIcon;
   bool obscureText;
-  //final Validate;
+  dynamic Validate;
   dynamic keyboardType;
   dynamic focusedborder;
   dynamic enabledborder;
@@ -28,6 +28,7 @@ class MasterTextField extends StatefulWidget {
       required this.filled,
       required this.obscureText,
       required this.contentPadding,
+      this.Validate,
       required this.keyboardType})
       : super(key: key);
 
@@ -47,15 +48,14 @@ class _MasterTextFieldState extends State<MasterTextField> {
               height: MediaQuery.of(context).size.height / 18,
               child: TextFormField(
                 autofocus: false,
-
-                //keyboardType: widget.keyboardType,
-
                 obscureText: widget.obscureText,
                 controller: widget.Controller,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
                 keyboardType: widget.keyboardType,
-                //validator: widget.Validate,
+                validator: widget.Validate,
                 decoration: InputDecoration(
+                  errorStyle: const TextStyle(fontSize: 0.01),
+                  errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20)),
                   contentPadding: widget.contentPadding,
                   focusedBorder: widget.focusedborder,
                   enabledBorder: widget.enabledborder,

@@ -1,9 +1,16 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors
+
+import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:linkus/screens/mainmenu/profile/dropdown.dart';
-import 'package:linkus/screens/mainmenu/profile/dropdown_tone.dart';
+
 import 'package:linkus/variables/Api_Control.dart';
+
+import 'package:http/http.dart' as http;
+
+import 'dropdown.dart';
+import 'dropdown_tone.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -11,30 +18,105 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  var items = [
-    'work',
-    'schl',
-  ];
+  @override
+  void initState() {
+    setState(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) => MyProfileData());
+      super.initState();
+    });
+  }
+
+  var name;
+  var employee;
+  var gender;
+  var mobile;
+  var email;
+  var designation;
+  var department;
+  var branchname;
+  var photourl;
+  var marital;
+
+  MyProfileData() async {
+    showDialog(
+        context: context,
+        builder: (bc) {
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            child: Container(
+              height: 50,
+              width: 50,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        });
+
+    Map data = {
+      "mobile": "8903725995",
+    };
+    print(data);
+    String body = json.encode(data);
+    print(body);
+
+    var response = await http.post(
+      Uri.parse(MyProfile_Api),
+      body: body,
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    );
+    print("result:${response.body}");
+
+    if (response.statusCode == 200) {
+      Future.delayed(const Duration(seconds: 1)).then((value) {
+        Navigator.pop(context);
+        var ProfileModel = json.decode(response.body);
+        for (var i = 0; i < ProfileModel.length; i++) {
+          employee = ProfileModel[i]["employee"].toString();
+
+          name = ProfileModel[i]["username"].toString();
+          gender = ProfileModel[i]["gender"].toString();
+          mobile = ProfileModel[i]["mobile"].toString();
+          email = ProfileModel[i]["email"] ?? ''.toString();
+          designation = ProfileModel[i]["designation"].toString();
+          department = ProfileModel[i]["department"].toString();
+          branchname = ProfileModel[i]["branchname"].toString();
+          photourl = ProfileModel[i]["photourl"].toString();
+          marital = ProfileModel[i]["marital"].toString();
+          if (marital == 'undefined') {
+            marital = "select";
+          } else {
+            marital = marital;
+          }
+        }
+        setState(() {});
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // automaticallyImplyLeading: false,
-        leadingWidth: 30,
-        leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              size: 25,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-        backgroundColor: const Color.fromRGBO(1, 123, 255, 1),
-        title: const Text(" My Profile"),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
+        appBar: AppBar(
+          // automaticallyImplyLeading: false,
+          leadingWidth: 30,
+          leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                size: 25,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+          backgroundColor: const Color.fromRGBO(1, 123, 255, 1),
+          title: const Text(" My Profile"),
+        ),
+        body: SingleChildScrollView(
+            child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             children: [
@@ -42,27 +124,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: 10,
               ),
               Center(
-                child: Container(
-                  width: 100.0,
-                  height: 100.0,
-                  decoration: BoxDecoration(
-                    //    color: Colors.white,
-                    //  image: DecorationImage(
-                    //    image: NetworkImage('http://i.imgur.com/QSev0hg.jpg'),
-                    //    fit: BoxFit.cover,
-                    //),
-                    borderRadius: const BorderRadius.all(Radius.circular(50.0)),
-                    border: Border.all(
-                      color: Colors.grey.withOpacity(0.3),
-                      width: 4.0,
-                    ),
-                  ),
-                  child: const Icon(
-                    Icons.person,
-                    color: Colors.grey,
-                    size: 50,
-                  ),
-                ),
+                child: CircleAvatar(
+                    radius: 60,
+                    backgroundColor: Colors.grey,
+                    backgroundImage: NetworkImage(photourl ?? '')),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,
@@ -77,9 +142,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    'EmployeeCode',
+                    employee ?? ''.toString(),
                     style: const TextStyle(
-                      fontSize: 13,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -102,9 +167,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    'name',
+                    name ?? ''.toString(),
                     style: const TextStyle(
-                      fontSize: 13,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -127,9 +192,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    'gender',
+                    gender ?? ''.toString(),
                     style: const TextStyle(
-                      fontSize: 13,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -143,15 +208,17 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: MediaQuery.of(context).size.height * 0.01,
               ),
               Row(
-                children: const [
+                children: [
                   Text(
-                    "Marital Status:",
+                    "Marital Status :",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                   ),
                   SizedBox(
                     width: 5,
                   ),
-                  Dropdown_gender(),
+                  Dropdown_gender(
+                    marital_status: marital,
+                  ),
                 ],
               ),
               const Divider(
@@ -171,9 +238,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    'mobile',
+                    mobile ?? ''.toString(),
                     style: const TextStyle(
-                      fontSize: 13,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -196,9 +263,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    'email',
+                    email ?? ''.toString(),
                     style: const TextStyle(
-                      fontSize: 13,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -221,9 +288,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    'designation',
+                    designation ?? ''.toString(),
                     style: const TextStyle(
-                      fontSize: 13,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -246,9 +313,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    'department',
+                    department ?? ''.toString(),
                     style: const TextStyle(
-                      fontSize: 13,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -271,9 +338,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 5,
                   ),
                   Text(
-                    'branch',
+                    branchname ?? ''.toString(),
                     style: const TextStyle(
-                      fontSize: 13,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -304,8 +371,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ],
           ),
-        ),
-      ),
-    );
+        )));
   }
 }

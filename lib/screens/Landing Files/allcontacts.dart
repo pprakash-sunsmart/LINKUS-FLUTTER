@@ -32,7 +32,7 @@ class _allContactsState extends State<allContacts> {
                     contentPadding: EdgeInsets.symmetric())),
           ),
         ),
-        ChatList(
+        allContactsList(
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => PersonalChat()));
@@ -40,13 +40,11 @@ class _allContactsState extends State<allContacts> {
           profIcon: Icon(Icons.person),
           msgText: null,
           msgdte$tme: Text(''),
-          ntfctnCnt:Container(
+          ntfctnCnt: Container(
             height: 10,
             width: 10,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.red
-            ),
+                borderRadius: BorderRadius.circular(5), color: Colors.red),
           ),
           contactName: Text(
             'Developer',

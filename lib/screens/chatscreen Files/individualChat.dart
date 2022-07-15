@@ -7,7 +7,7 @@ import 'package:linkus/screens/Landing%20Files/widgets.dart';
 import 'package:linkus/screens/filters/mediaFilter.dart';
 import 'package:linkus/screens/filters/searchFilter.dart';
 
-import '../mainmenu/profile/my_profile.dart';
+import '../profile/my_profile.dart';
 
 class PersonalChat extends StatefulWidget {
   const PersonalChat({super.key});

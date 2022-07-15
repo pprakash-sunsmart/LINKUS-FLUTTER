@@ -1,8 +1,16 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, unrelated_type_equality_checks, avoid_print, unnecessary_string_interpolations, use_build_context_synchronously, prefer_const_constructors
+
+// import 'dart:convert';
+
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/Landing%20Files/LandingScreen.dart';
+import 'package:localstorage/localstorage.dart';
 
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../variables/Api_Control.dart';
 import 'login_textfield.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -25,6 +33,108 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       _showPassword = !_showPassword;
     });
+  }
+
+  Future<void> login_Func(String mobile, password) async {
+    try {
+      showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (bc) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          });
+      Response response = await post(Uri.parse(Login_Api), body: {
+        'mobile': int.parse(nameController.text.trim()).toString(),
+        'password': "${passwordController.text}",
+      }, headers: {
+        "Content-type": "application/x-www-form-urlencoded",
+        "Accept": "application/json",
+        "charset": "utf-8"
+      });
+      print('Dataaaaa:${response.body}');
+
+      // final LocalStorage storage = new LocalStorage('localstorage_app');
+      // storage.setItem('mobileNumber', mobile_number);
+      // storage.setItem('password', password);
+      // storage.setItem('username', username);
+      // storage.setItem('designation', designation);
+      // storage.setItem('profilepic', profilepic);
+
+      if (response.body != "Incorrect Username and Password") {
+        // Future.delayed(const Duration(seconds: 1)).then((value) {
+        // Navigator.pop(context);
+        var data = await jsonDecode(response.body);
+        var mobile_number = data[0]['mobile'];
+        var password = data[0]['password'];
+        var username = data[0]['username'];
+        var designation = data[0]['designation'];
+        var profilepic = data[0]['photourl'];
+        print(mobile_number);
+        final prefs = await SharedPreferences.getInstance();
+
+        await prefs.setString('mobileNumber', mobile_number);
+        await prefs.setString('password', password);
+        await prefs.setString('username', username);
+        await prefs.setString('designation', designation);
+        await prefs.setString('profilepic', profilepic);
+
+        Navigator.pushAndRemoveUntil<dynamic>(
+          context,
+          MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) => const landingPage(),
+          ),
+          (route) => false,
+          //if you want to disable back feature set to false
+        );
+
+        ScaffoldMessenger.maybeOf(context)
+            ?.showSnackBar(SnackBar(content: Text('Logged In Successfully')));
+
+        print('Login successfully');
+        // }
+        // );
+        // print('Logged in :- ${data.toString}');
+        // final prefs = await SharedPreferences.getInstance();
+        // prefs.setString('UserData', json.encode(data));
+
+        // print()
+
+      } else {
+        print("Task Failed");
+
+        AlertDialouge();
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+    return;
+  }
+
+  void AlertDialouge() {
+    AlertDialog alert = AlertDialog(
+      content: Text('Please Enter Valid Credentials'),
+      title: Row(
+        children: [Icon(Icons.error), Text('Error')],
+      ),
+      actions: [
+        TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },
+            child: Text('Ok')),
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   bool login = false;
@@ -56,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             // backgroundColor: const Color.fromRGBO(1, 123, 255, 1),
-    
+
             body: Container(
               height: double.infinity,
               width: double.infinity,
@@ -89,32 +199,34 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: MediaQuery.of(context).size.height * 0.09,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal:40),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                        Container(
-                          height: MediaQuery.of(context).size.height/18,
-                          width: 30,
-                            color: Color.fromRGBO(56, 210, 0, 1),
-                            child: const Icon(
-                              Icons.person,
-                              color: Colors.white,
-                            )),
-                        Flexible(
-                          flex: 1,
-                          child: MasterTextField(
-                            contentPadding: null,
-                            hintText: "Mobile Number",
-                            Controller: nameController,
-                            PrefixIcon: null,
-                            fillColor: Colors.white,
-                            filled: true,
-                            enabledborder: InputBorder.none,
-                            focusedborder: InputBorder.none,
-                            obscureText: false,
-                            keyboardType: TextInputType.number,
-                          ),
-                        ),
-                      ]),
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                                height: MediaQuery.of(context).size.height / 18,
+                                width: 30,
+                                color: const Color.fromRGBO(56, 210, 0, 1),
+                                child: const Icon(
+                                  Icons.person,
+                                  color: Colors.white,
+                                )),
+                            Flexible(
+                              flex: 1,
+                              child: MasterTextField(
+                                contentPadding: null,
+                                hintText: "Mobile Number",
+                                Controller: nameController,
+                                PrefixIcon: null,
+                                fillColor: Colors.white,
+                                filled: true,
+                                enabledborder: InputBorder.none,
+                                focusedborder: InputBorder.none,
+                                obscureText: false,
+                                keyboardType: TextInputType.number,
+                              ),
+                            ),
+                          ]),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.02,
@@ -124,16 +236,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Row(
                         children: [
                           Container(
-                            height: MediaQuery.of(context).size.height/18,
-                            width: 30,
-                                    decoration: const BoxDecoration(
-                                        // borderRadius: BorderRadius.circular(4),
-                                        color: Color.fromRGBO(56, 210, 0, 1)),
-                                    child: const Icon(
-                                      Icons.key,
-                                      color: Colors.white,
-                                    )),
-                          
+                              height: MediaQuery.of(context).size.height / 18,
+                              width: 30,
+                              decoration: const BoxDecoration(
+                                  // borderRadius: BorderRadius.circular(4),
+                                  color: Color.fromRGBO(56, 210, 0, 1)),
+                              child: const Icon(
+                                Icons.key,
+                                color: Colors.white,
+                              )),
                           Flexible(
                             child: MasterTextField(
                               contentPadding: null,
@@ -146,29 +257,27 @@ class _LoginScreenState extends State<LoginScreen> {
                               obscureText: _showPassword,
                               Controller: passwordController,
                               SuffixIcon: null,
-                              
                               keyboardType: null,
                             ),
                           ),
-                           Container(
-                            height: MediaQuery.of(context).size.height/18,
-                            width: 30,
-                                    decoration: const BoxDecoration(
-                                        // borderRadius: BorderRadius.circular(4),
-                                        color: Color.fromRGBO(56, 210, 0, 1)),
-                                    child: GestureDetector(
-                                      child: Icon(
-                                        _showPassword
-                                            ? Icons.visibility_off
-                                            : Icons.visibility,
-                                        size: 20,
-                                        color: Colors.white,
-                                      ),
-                                      onTap: () {
-                                        _togglevisibility();
-                                      },
-                                     ) )
-                          
+                          Container(
+                              height: MediaQuery.of(context).size.height / 18,
+                              width: 30,
+                              decoration: const BoxDecoration(
+                                  // borderRadius: BorderRadius.circular(4),
+                                  color: Color.fromRGBO(56, 210, 0, 1)),
+                              child: GestureDetector(
+                                child: Icon(
+                                  _showPassword
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  size: 20,
+                                  color: Colors.white,
+                                ),
+                                onTap: () {
+                                  _togglevisibility();
+                                },
+                              ))
                         ],
                       ),
                     ),
@@ -192,8 +301,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     width: 20,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color:
-                                          isChecked ? Colors.grey : Colors.white,
+                                      color: isChecked
+                                          ? Colors.grey
+                                          : Colors.white,
                                       // border: Border.all(width: 2, color: Colors.)
                                     ),
                                     child: Padding(
@@ -230,22 +340,24 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: MediaQuery.of(context).size.width / 1.4,
                       child: ElevatedButton(
                         onPressed: login
-                            ? () {
-                               Navigator.pushAndRemoveUntil<dynamic>(
-                                                context,
-                                                MaterialPageRoute<dynamic>(
-                                                  builder: (BuildContext context) =>
-                                                      landingPage(),
-                                                ),
-                                                (route) => false,
-                                                //if you want to disable back feature set to false
-                                              );
-                              
+                            ? () async {
+                                if (globalFormKey.currentState!.validate()) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text('Processing Data')));
+
+                                  login_Func(nameController.text,
+                                      passwordController.text);
+                                }
                               }
                             : null,
+                        // onPressed: () {
+                        //   Login_Func();
+                        // },
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.resolveWith<Color>((states) {
+                              MaterialStateProperty.resolveWith<Color>(
+                                  (states) {
                             if (states.contains(MaterialState.disabled)) {
                               return const Color.fromRGBO(56, 210, 0, 1)
                                   .withOpacity(0.55);

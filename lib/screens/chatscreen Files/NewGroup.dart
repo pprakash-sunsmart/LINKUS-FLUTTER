@@ -1,12 +1,13 @@
-// ignore_for_file: file_names, prefer_typing_uninitialized_variables, non_constant_identifier_names, prefer_const_constructors
-
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:linkus/screens/chatscreen%20Files/dataList.dart';
 
-import 'dataList.dart';
+import '../../variables/Api_Control.dart';
+
+import 'package:http/http.dart' as http;
 
 class NewGroup extends StatefulWidget {
   const NewGroup({super.key});
@@ -26,8 +27,8 @@ class _NewGroupState extends State<NewGroup> {
             onPressed: () {
               Navigator.pop(context);
               setState(() {
-                for (var i = 0; i < Employees.length; i++) {
-                  Employees[i].isChecked = false;
+                for (var i = 0; i < listItems.length; i++) {
+                  listItems[i].isChecked = false;
                 }
               });
             },
@@ -69,17 +70,17 @@ class _NewGroupState extends State<NewGroup> {
                     onPressed: () {
                       setState(() {
                         isVisible = true;
-                        for (var i = 0; i < Employees.length; i++) {
-                          if (Employees[i].isChecked == true) {
-                            Employees[i].isChecked = false;
+                        for (var i = 0; i < listItems.length; i++) {
+                          if (listItems[i].isChecked == true) {
+                            listItems[i].isChecked = false;
                           }
                         }
 
-                        for (var i = 0; i < Employees.length; i++) {
-                          if (Employees[i].isChecked == true) {
-                            Employees[i].isChecked = true;
-                          } else if (Employees[i].isChecked == false) {
-                            Employees[i].isChecked = true;
+                        for (var i = 0; i < listItems.length; i++) {
+                          if (listItems[i].isChecked == true) {
+                            listItems[i].isChecked = true;
+                          } else if (listItems[i].isChecked == false) {
+                            listItems[i].isChecked = true;
                           }
                         }
                         isVisible = false;
@@ -98,8 +99,8 @@ class _NewGroupState extends State<NewGroup> {
                 : InkWell(
                     onTap: () {
                       setState(() {
-                        for (var i = 0; i < Employees.length; i++) {
-                          Employees[i].isChecked = false;
+                        for (var i = 0; i < listItems.length; i++) {
+                          listItems[i].isChecked = false;
                         }
                         isVisible = true;
                       });
@@ -146,7 +147,50 @@ class NewGroupContact extends StatefulWidget {
 }
 
 class _NewGroupContactState extends State<NewGroupContact> {
+  var photo;
+  bool? hidephoto;
   bool checkedValue = false;
+
+  void initState() {
+    setState(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) => Data());
+      super.initState();
+    });
+  }
+
+  Data() async {
+    Map data = {"compid": "1"};
+    print(data);
+    String body = json.encode(data);
+    print(body);
+
+    var response = await http.post(
+      Uri.parse(Contacts_Api),
+      body: body,
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    );
+    print("length:${(response.body).length}");
+    //  print("result:${response.body}");
+
+    Contactmodel.add((jsonDecode(response.body)));
+
+    print("length:${jsonDecode(response.body).length}");
+    listItems.clear();
+    for (var i = 0; i < jsonDecode(response.body).length; i++) {
+      listItems.add(Employee(
+          id: i + 1,
+          Name: jsonDecode(response.body)[i]['username'] ?? "",
+          jobProfile: jsonDecode(response.body)[i]['designation'] ?? "",
+          photourl: jsonDecode(response.body)[i]["photourl"] ?? "",
+          isChecked: false));
+    }
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -154,22 +198,29 @@ class _NewGroupContactState extends State<NewGroupContact> {
       child: ListView.separated(
           // shrinkWrap: true,
 
-          itemCount: Employees.length,
+          itemCount: listItems.length,
           itemBuilder: (BuildContext context, int index) {
-            final employee = Employees[index];
-            return CheckboxListTile(
-              controlAffinity: ListTileControlAffinity.trailing,
-              value: employee.isChecked,
-              onChanged: (newValue) {
-                setState(() {
-                  employee.isChecked = newValue!;
-                });
-              },
-              title: Text(Employees[index].Name),
-              secondary: CircleAvatar(child: Icon(Icons.person)),
-              subtitle: Text(Employees[index].jobProfile),
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            final employee = listItems[index];
+
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 0),
+              child: CheckboxListTile(
+                controlAffinity: ListTileControlAffinity.trailing,
+                value: employee.isChecked,
+                onChanged: (newValue) {
+                  setState(() {
+                    employee.isChecked = newValue!;
+                  });
+                },
+                title: Text(listItems[index].Name),
+                secondary: CircleAvatar(
+                    backgroundColor: Colors.grey.withOpacity(0.1),
+                    backgroundImage:
+                        NetworkImage(listItems[index].photourl ?? "")),
+                subtitle: Text(listItems[index].jobProfile),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+              ),
             );
           },
           separatorBuilder: (BuildContext context, int index) =>
