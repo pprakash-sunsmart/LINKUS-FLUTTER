@@ -5,3 +5,5 @@ String RecentChats_Api = 'https://prod.herbie.ai:8153/getrecent_chatlist1';
 String Forgot_Password = 'https://prod.herbie.ai:8153/forgotpass';
 String Contacts_Api = 'https://prod.herbie.ai:8153/getUserMstComp';
 String Group_List = 'https://prod.herbie.ai:8153/getMyGroup';
+String Create_Group = 'https://prod.herbie.ai:8153/createGroup ';
+String new_password = 'https://prod.herbie.ai:8153/newPassword';

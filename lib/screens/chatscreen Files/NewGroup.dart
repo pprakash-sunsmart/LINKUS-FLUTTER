@@ -1,9 +1,10 @@
-// ignore_for_file: file_names, prefer_typing_uninitialized_variables, non_constant_identifier_names, avoid_print
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables, non_constant_identifier_names, avoid_print, prefer_const_literals_to_create_immutables
 
 import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:linkus/screens/chatscreen%20Files/dataList.dart';
 
 import '../../variables/Api_Control.dart';
@@ -19,11 +20,40 @@ class NewGroup extends StatefulWidget {
 
 class _NewGroupState extends State<NewGroup> {
   bool isVisible = true;
+  bool AddButton = false;
+  TextEditingController groupNameController = TextEditingController();
+  // create_group() async {
+  //   Response response = await post(Uri.parse(Create_Group), body: {
+  //     {
+  //       "groupcreated": "Sijin created group",
+  //       "groupimage": "default",
+  //       "groupkey": "e6d81658234569466bf217812cdbd2acc6e05",
+  //       "groupname": "Mohamed Fazil Flutter",
+  //       "groupstatus": "A",
+  //       "opengroup": false,
+  //       "owner": "8903725995",
+  //       "status": "1",
+  //       "timestamp": 1658234569466,
+  //       "uid": "8903725995"
+  //     }
+  //   }, headers: {
+  //     "Content-type": "application/x-www-form-urlencoded",
+  //     "Accept": "application/json",
+  //     "charset": "utf-8"
+  //   });
+  //   // responseStatusCode = response.statusCode;
+  //   print('()()()()()()()()()(${response.body}');
+  //   var Data = jsonDecode(response.body);
+  //   // var Data = d1;
+  //   print('()()()()()()()()()()()()()()()()$Data');
+  //   print(Data.length);
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(1, 123, 255, 1),
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -39,6 +69,21 @@ class _NewGroupState extends State<NewGroup> {
             )),
         leadingWidth: 35,
         title: const Text('Contacts'),
+        actions: [
+          AddButton == true
+              ? IconButton(
+                  onPressed: () {
+                    // create_group();
+                  },
+                  icon: const Icon(
+                    Icons.add,
+                    size: 30,
+                  ))
+              : Container(),
+          const SizedBox(
+            width: 5,
+          )
+        ],
       ),
       body: NewGroupContact(
           profIcon: const Icon(Icons.person),
@@ -49,6 +94,19 @@ class _NewGroupState extends State<NewGroup> {
           ItmCnt: null,
           onTap: () {}),
       bottomSheet: TextFormField(
+        onChanged: ((value) {
+          // print('()()()()()()()()()()$value');
+          setState(() {
+            if (value == '') {
+              setState(() {
+                AddButton = false;
+              });
+            } else {
+              AddButton = true;
+            }
+          });
+        }),
+        controller: groupNameController,
         decoration: InputDecoration(
             suffixIcon: isVisible
                 ? TextButton(
@@ -145,6 +203,31 @@ class _NewGroupContactState extends State<NewGroupContact> {
     });
   }
 
+  create_group() async {
+    Response response = await post(Uri.parse(Create_Group), body: {
+      "groupcreated": "Sijin created group",
+      "groupimage": "default",
+      "groupkey": "e6d81658234569466bf217812cdbd2acc6e05",
+      "groupname": "Mohamed Fazil Flutter",
+      "groupstatus": "A",
+      "opengroup": false,
+      "owner": "8903725995",
+      "status": "1",
+      "timestamp": 1658234569466,
+      "uid": "8903725995"
+    }, headers: {
+      "Content-type": "application/x-www-form-urlencoded",
+      "Accept": "application/json",
+      "charset": "utf-8"
+    });
+    // responseStatusCode = response.statusCode;
+    print(response.body);
+    var Data = jsonDecode(response.body);
+    // var Data = d1;
+    print(Data);
+    print(Data.length);
+  }
+
   Data() async {
     Map data = {"compid": "1"};
     print(data);
@@ -197,8 +280,8 @@ class _NewGroupContactState extends State<NewGroupContact> {
                 decoration: const InputDecoration(
                     border: InputBorder.none,
                     prefixIcon: Icon(Icons.search),
-                    label: Text('Search'),
-                    contentPadding: EdgeInsets.symmetric())),
+                    hintText: 'Search',
+                    contentPadding: EdgeInsets.symmetric(vertical: 15))),
           ),
         ),
         Expanded(
