@@ -1,5 +1,6 @@
+// ignore_for_file: avoid_unnecessary_containers, file_names
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../mainmenu/calendar/date_time.dart';
 
@@ -16,7 +17,7 @@ class _FileFilterState extends State<FileFilter> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Search Media'),
+          title: const Text('Search Media'),
         ),
         body: Container(
           child: ListView(
@@ -31,17 +32,17 @@ class _FileFilterState extends State<FileFilter> {
                     // height: MediaQuery.of(context).size.height / 2,
                     child: CalenderWidget(
                         enabledBorder: const OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.black45),
+                          borderSide: BorderSide(color: Colors.black45),
                         ),
                         focusedBorder: const OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.black26),
+                          borderSide: BorderSide(color: Colors.black26),
                         ),
                         hintText: "",
                         icon: Icons.arrow_drop_down,
                         firstDate: DateTime.now(),
                         LastDate: DateTime.now()),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   SizedBox(
@@ -68,16 +69,16 @@ class _FileFilterState extends State<FileFilter> {
                     Flexible(
                       flex: 1,
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             border: OutlineInputBorder(), hintText: 'Search'),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.search),
+                      icon: const Icon(Icons.search),
                       iconSize: 40,
                     )
                   ],

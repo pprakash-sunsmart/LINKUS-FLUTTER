@@ -1,6 +1,5 @@
-// ignore_for_file: camel_case_types, prefer_const_constructors, avoid_unnecessary_containers, file_names, sized_box_for_whitespace, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables
+// ignore_for_file: camel_case_types, prefer_const_constructors, avoid_unnecessary_containers, file_names, sized_box_for_whitespace, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables, avoid_print
 
-import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/mainmenu/Customization/custom_page.dart';
@@ -12,7 +11,6 @@ import 'package:linkus/screens/mainmenu/project_milestone/project_page.dart';
 import 'package:linkus/screens/mainmenu/shelf/shelf.dart';
 import 'package:linkus/screens/mainmenu/starredscreen/starred.dart';
 import 'package:linkus/screens/mainmenu/task/mytask.dart';
-import 'package:localstorage/localstorage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../birthday/birthday_page.dart';
 import '../change Password/change_password.dart';

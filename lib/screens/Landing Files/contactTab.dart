@@ -1,3 +1,5 @@
+// ignore_for_file: duplicate_import, camel_case_types, file_names, prefer_const_constructors_in_immutables, non_constant_identifier_names, avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -24,6 +26,7 @@ class _contactsTabState extends State<contactsTab> {
   int listlength = 0;
   int length = 0;
 
+  @override
   void initState() {
     super.initState();
 
@@ -49,25 +52,24 @@ class _contactsTabState extends State<contactsTab> {
     );
 
     Contactmodel.add((jsonDecode(response.body)));
+    var responseOfStatusCode1 = response.statusCode;
+    print('{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{{}{}$responseOfStatusCode1');
 
+    // print('++++++++++++++++++++++++++++++++++++>>>>>>>$responseOfStatusCode');
     for (var i = 0; i < jsonDecode(response.body).length; i++) {
+      responseOfStatusCode = responseOfStatusCode1;
+      print('++++++++++++++++++++++++++++++++++++>>>>>>>$responseOfStatusCode');
       if (jsonDecode(response.body)[i]["status"] == "online" ||
           jsonDecode(response.body)[i]["status"] == "Offline" ||
           jsonDecode(response.body)[i]["status"] == "offline") {
         listItems.add(Employee(
-            id: i + 1,
-            Name: jsonDecode(response.body)[i]['username'] ?? "",
-            jobProfile: jsonDecode(response.body)[i]['designation'] ?? "",
-            photourl: jsonDecode(response.body)[i]["photourl"] ?? "",
-            isChecked: false,
-            status: jsonDecode(response.body)[i]["status"] ?? ""));
-        //  for(var i=0;i<liveItems.length;i++){
-        //   if(liveItems[i].status=="online"){
-        //     iscolor=true;
-        //   }else{
-        //     iscolor=false;
-        //   }
-        // }
+          id: i + 1,
+          Name: jsonDecode(response.body)[i]['username'] ?? "",
+          jobProfile: jsonDecode(response.body)[i]['designation'] ?? "",
+          photourl: jsonDecode(response.body)[i]["photourl"] ?? "",
+          isChecked: false,
+          status: jsonDecode(response.body)[i]["status"] ?? "",
+        ));
       }
       if (jsonDecode(response.body)[i]["status"] == "online") {
         liveItems.add(Employee(
@@ -76,19 +78,14 @@ class _contactsTabState extends State<contactsTab> {
             jobProfile: jsonDecode(response.body)[i]['designation'] ?? "",
             photourl: jsonDecode(response.body)[i]["photourl"] ?? "",
             isChecked: false,
-            status: jsonDecode(response.body)[i]["status"] ?? ""));
-        // for(var i=0;i<liveItems.length;i++){
-        //   if(liveItems[i].status=="online"){
-        //     iscolor=true;
-        //   }else{
-        //     iscolor=false;
-        //   }
-        // }
-        print("res------${length}");
+            status: jsonDecode(response.body)[i]["status"] ?? "",
+            responseOfStatusCode: responseOfStatusCode));
+
+        print("res------$length");
       }
 
-      print("ans----$listlength");
-      print("xyz---$length");
+      // print("ans----$listlength");
+      // print("xyz---$length");
     }
 
     setState(() {
@@ -114,7 +111,7 @@ class _contactsTabState extends State<contactsTab> {
                   children: [
                     Text(
                       'All contacts($listlength)',
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ],
                 ),
@@ -125,13 +122,13 @@ class _contactsTabState extends State<contactsTab> {
               child: Center(
                 child: Text(
                   'Live Contacts ($length)',
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                 ),
               ),
             ),
           ]),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             Tab(
               icon: allContacts(),

@@ -20,15 +20,14 @@ class _ProjectPageState extends State<ProjectPage> {
   void show() {
     setState(() {
       _showContainer = !_showContainer;
-      _showContainer=true;
+      _showContainer = true;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return 
-     WillPopScope(
-  onWillPop: ()async => false,
+    return WillPopScope(
+      onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(1, 123, 255, 1),
@@ -50,15 +49,15 @@ class _ProjectPageState extends State<ProjectPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
-                      
                         onPressed: () {
                           show();
                         },
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
                             (Set<MaterialState> states) {
                               if (states.contains(MaterialState.pressed)) {
-                                return Color(0xff0c84b4);
+                                return const Color(0xff0c84b4);
                               }
                               return const Color(0xff0c84b4);
                             },
@@ -69,13 +68,13 @@ class _ProjectPageState extends State<ProjectPage> {
                             Icons.add_circle,
                             size: 15,
                           ),
-                          
-                         Text("Create Milestone")
+                          Text("Create Milestone")
                         ])),
                     ElevatedButton(
                         onPressed: () {},
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
                             (Set<MaterialState> states) {
                               if (states.contains(MaterialState.pressed)) {
                                 return const Color(0xff0c84b4);
@@ -95,7 +94,7 @@ class _ProjectPageState extends State<ProjectPage> {
                 ),
                 Visibility(
                   visible: _showContainer,
-                  child: ProjectMilestone(),
+                  child: const ProjectMilestone(),
                 ),
               ],
             ),

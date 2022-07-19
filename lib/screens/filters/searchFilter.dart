@@ -1,7 +1,8 @@
+// ignore_for_file: file_names, avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 
 import '../mainmenu/calendar/date_time.dart';
-import '../chatscreen Files/dataList.dart';
 
 class SearchFilter extends StatefulWidget {
   const SearchFilter({super.key});
@@ -16,7 +17,7 @@ class _SearchFilterState extends State<SearchFilter> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Search Media'),
+          title: const Text('Search Media'),
         ),
         body: Container(
           child: Column(
@@ -31,17 +32,17 @@ class _SearchFilterState extends State<SearchFilter> {
                     // height: MediaQuery.of(context).size.height / 2,
                     child: CalenderWidget(
                         enabledBorder: const OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.black45),
+                          borderSide: BorderSide(color: Colors.black45),
                         ),
                         focusedBorder: const OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.black26),
+                          borderSide: BorderSide(color: Colors.black26),
                         ),
                         hintText: "",
                         icon: Icons.arrow_drop_down,
                         firstDate: DateTime.now(),
                         LastDate: DateTime.now()),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   SizedBox(

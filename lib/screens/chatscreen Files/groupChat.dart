@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, file_names, prefer_const_literals_to_create_immutables
+// ignore_for_file: camel_case_types, file_names, prefer_const_literals_to_create_immutables, unused_local_variable, avoid_unnecessary_containers, prefer_const_constructors
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';

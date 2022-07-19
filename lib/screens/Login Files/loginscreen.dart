@@ -1,13 +1,10 @@
-// ignore_for_file: non_constant_identifier_names, unrelated_type_equality_checks, avoid_print, unnecessary_string_interpolations, use_build_context_synchronously, prefer_const_constructors
-
-// import 'dart:convert';
-
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/Landing%20Files/LandingScreen.dart';
 import 'package:localstorage/localstorage.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../variables/Api_Control.dart';
@@ -26,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final forgotpswrdController = TextEditingController();
   final ScaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> globalKey = GlobalKey<FormState>();
   bool _showPassword = false;
 
   bool isChecked = false;
@@ -35,7 +33,35 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  Future<void> login_Func(String mobile, password) async {
+  Future<void> rememberMe(phonenumber, password, isChecked) async {
+    if (isChecked == true) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      print("true condition:$isChecked");
+      await prefs.setString('phoneNumber', nameController.text.toString());
+      await prefs.setString('pwd', passwordController.text.toString());
+      await prefs.setBool('remember_me', isChecked);
+
+      print("paswrd----${prefs.getString('pwd')}");
+      print("mob---${prefs.getString('phoneNumber')}");
+      print("bool---${prefs.getBool('remember_me')}");
+    } else if (isChecked == false) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      print("falsecontition:-----$isChecked");
+      await prefs.remove('pwd');
+      await prefs.remove('phoneNumber');
+      await prefs.clear();
+      // nameController.clear();
+      //passwordController.clear();
+      print("paswrdfalse----${prefs.getString('pwd')}");
+    }
+  }
+
+  Future<void> login_Func(String mobile, password, bool isChecked) async {
+    print("ischecked:$isChecked");
+
+    rememberMe(mobile, password, isChecked);
+
+    //WidgetsFlutterBinding.ensureInitialized();
     try {
       showDialog(
           barrierDismissible: false,
@@ -54,17 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
         "charset": "utf-8"
       });
       print('Dataaaaa:${response.body}');
-
-      // final LocalStorage storage = new LocalStorage('localstorage_app');
-      // storage.setItem('mobileNumber', mobile_number);
-      // storage.setItem('password', password);
-      // storage.setItem('username', username);
-      // storage.setItem('designation', designation);
-      // storage.setItem('profilepic', profilepic);
-
       if (response.body != "Incorrect Username and Password") {
-        // Future.delayed(const Duration(seconds: 1)).then((value) {
-        // Navigator.pop(context);
         var data = await jsonDecode(response.body);
         var mobile_number = data[0]['mobile'];
         var password = data[0]['password'];
@@ -93,14 +109,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ?.showSnackBar(SnackBar(content: Text('Logged In Successfully')));
 
         print('Login successfully');
-        // }
-        // );
-        // print('Logged in :- ${data.toString}');
-        // final prefs = await SharedPreferences.getInstance();
-        // prefs.setString('UserData', json.encode(data));
-
-        // print()
-
       } else {
         print("Task Failed");
 
@@ -141,6 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+    set();
     passwordController.addListener(() {
       setState(() {
         login = passwordController.text.isNotEmpty &&
@@ -149,11 +158,155 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  set() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    print("xyzzzz:${prefs.getString('phoneNumber')!}");
+    nameController.text = prefs.getString('phoneNumber')!;
+    passwordController.text = prefs.getString('pwd')!;
+    isChecked = prefs.getBool('remember_me')!;
+    print("name-----${nameController.text}");
+    print("name-----${passwordController.text}");
+  }
+
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.%$
     passwordController.dispose();
     super.dispose();
+  }
+
+  frgt_pwd() async {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (bc) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    Map data = {"mobile": forgotpswrdController.text};
+    print(data);
+    String body = json.encode(data);
+    print(body);
+    //  showDialog(
+    //     barrierDismissible: false,
+    //     context: context,
+    //     builder: (bc) {
+    //       return Center(
+    //         child: CircularProgressIndicator(),
+    //       );
+    //     });
+
+    var response = await http.post(
+      Uri.parse(Forgot_Password),
+      body: body,
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    );
+    var xyz = jsonDecode(response.body);
+    print("ssssss:$xyz");
+    // var lngth=jsonDecode(xyz.length.toString());
+    // print(lngth);
+    print("flag:${xyz["flag"]}");
+
+    if (xyz["flag"] == "0") {
+      Navigator.pop(context);
+
+      showDialog<String>(
+          context: context,
+          builder: (BuildContext context) {
+            return WillPopScope(
+                onWillPop: () async => false,
+                child: AlertDialog(
+                    title: const Text(
+                      'Please login with registered mobile number',
+                      style: TextStyle(
+                          color: Colors.black38,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16),
+                    ),
+                    content: TextButton(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "OK",
+                            style: TextStyle(fontSize: 15, color: Colors.black),
+                          ),
+                        ],
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    )));
+          });
+    } else if (xyz["flag"] == "1") {
+      Navigator.pop(context);
+      Navigator.pop(context);
+      showDialog<String>(
+          context: context,
+          builder: (BuildContext context) {
+            return WillPopScope(
+                onWillPop: () async => false,
+                child: AlertDialog(
+                    title: const Text(
+                      'Password sent to your registered email id',
+                      style: TextStyle(
+                          color: Colors.black26,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16),
+                    ),
+                    content: TextButton(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "OK",
+                            style: TextStyle(fontSize: 15, color: Colors.black),
+                          ),
+                        ],
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    )));
+          });
+    }
+
+    // if (xyz["data"].isNotEmpty) {
+    //   showDialog<String>(
+    //       context: context,
+    //       builder: (BuildContext context) {
+    //         return WillPopScope(
+    //             onWillPop: () async => false,
+    //             child: AlertDialog(
+    //                 title: const Text(
+    //                   'Reset link sent Successfully',
+    //                   style: TextStyle(
+    //                       color: Colors.black26,
+    //                       fontWeight: FontWeight.w400,
+    //                       fontSize: 16),
+    //                 ),
+    //                 content: TextButton(
+    //                   child: Text(
+    //                     "OK",
+    //                     style: TextStyle(fontSize: 15, color: Colors.black),
+    //                   ),
+    //                   onPressed: () {
+    //                     Navigator.pop(context);
+    //                   },
+    //                 )));
+    //       });
+    // } else {
+
+    // }
+
+    setState(() {});
   }
 
   @override
@@ -292,9 +445,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    setState(() {
-                                      isChecked = !isChecked;
-                                    });
+                                    setState(
+                                      () {
+                                        isChecked = !isChecked;
+                                      },
+                                    );
                                   },
                                   child: Container(
                                     height: 20,
@@ -347,7 +502,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           content: Text('Processing Data')));
 
                                   login_Func(nameController.text,
-                                      passwordController.text);
+                                      passwordController.text, isChecked);
                                 }
                               }
                             : null,
@@ -383,6 +538,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: Colors.white54),
                         ),
                         onTap: () {
+                          forgotpswrdController.clear();
                           showDialog<String>(
                               context: context,
                               builder: (BuildContext context) {
@@ -396,26 +552,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                           fontWeight: FontWeight.w400,
                                           fontSize: 16),
                                     ),
-                                    content: Form(
-                                      key: globalFormKey,
-                                      child: TextFormField(
-                                        keyboardType: TextInputType.number,
-                                        autovalidateMode:
-                                            AutovalidateMode.onUserInteraction,
-                                        controller: forgotpswrdController,
-                                        validator: (value) {
-                                          if ((value!.length > 5) &&
-                                              value.isNotEmpty) {
-                                            return "Number should contain more than 5 characters";
-                                          }
-                                          return null;
-                                        },
-                                        decoration: const InputDecoration(
-                                          labelText: "Mobile Number",
-                                          labelStyle: TextStyle(
-                                              color: Colors.black38,
-                                              fontSize: 15),
-                                        ),
+                                    content: TextFormField(
+                                      key: globalKey,
+                                      keyboardType: TextInputType.number,
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      controller: forgotpswrdController,
+                                      validator: (value) {
+                                        if (value?.length != 10) {
+                                          return 'Mobile Number must be of 10 digit';
+                                        }
+                                        return null;
+                                      },
+                                      decoration: const InputDecoration(
+                                        labelText: "Mobile Number",
+                                        labelStyle: TextStyle(
+                                            color: Colors.black38,
+                                            fontSize: 15),
                                       ),
                                     ),
                                     actions: <Widget>[
@@ -426,22 +579,57 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 borderRadius:
                                                     BorderRadius.circular(12))),
                                         onPressed: () {
-                                          if (globalFormKey.currentState!
-                                              .validate()) {
-                                            Navigator.pop(context);
-                                          }
+                                          Navigator.pop(context);
                                         },
                                         child: const Text('CANCEL'),
                                       ),
                                       ElevatedButton(
+                                        child: const Text('CONFIRM'),
                                         style: ElevatedButton.styleFrom(
                                             // backgroundColor: Colors.grey,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(12))),
-                                        onPressed: () =>
-                                            Navigator.pop(context, 'CONFIRM'),
-                                        child: const Text('CONFIRM'),
+                                        onPressed: () {
+                                          if (forgotpswrdController
+                                                  .text.length !=
+                                              10) {
+                                            showDialog<String>(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return WillPopScope(
+                                                      onWillPop: () async =>
+                                                          false,
+                                                      child: AlertDialog(
+                                                          title: const Text(
+                                                            'Please Enter Valid Number',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black26,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontSize: 16),
+                                                          ),
+                                                          content: TextButton(
+                                                            child: Text(
+                                                              "OK",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  color: Colors
+                                                                      .black),
+                                                            ),
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                          )));
+                                                });
+                                          } else {
+                                            frgt_pwd();
+                                          }
+                                        },
                                       ),
                                     ],
                                   ),

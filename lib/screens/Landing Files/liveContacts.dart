@@ -1,12 +1,10 @@
-import 'dart:convert';
+// ignore_for_file: prefer_typing_uninitialized_variables, camel_case_types, non_constant_identifier_names, file_names
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:linkus/screens/Landing%20Files/widgets.dart';
 
-import '../../variables/Api_Control.dart';
 import '../chatscreen Files/dataList.dart';
 import '../chatscreen Files/individualChat.dart';
-import 'package:http/http.dart' as http;
 
 class liveContacts extends StatefulWidget {
   final profIcon;
@@ -32,7 +30,7 @@ class liveContacts extends StatefulWidget {
 }
 
 class _liveContactsState extends State<liveContacts> {
-  int index = 0;
+  String searchString = "";
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -44,52 +42,78 @@ class _liveContactsState extends State<liveContacts> {
           child: Card(
             elevation: 5,
             child: TextFormField(
-                decoration: InputDecoration(
+                onChanged: (value) {
+                  setState(() {
+                    searchString = value.toLowerCase();
+                  });
+                },
+                decoration: const InputDecoration(
                     border: InputBorder.none,
                     prefixIcon: Icon(Icons.search),
-                    label: Text('Search'),
-                    contentPadding: EdgeInsets.symmetric())),
+                    hintText: 'Search',
+                    contentPadding: EdgeInsets.symmetric(vertical: 15))),
           ),
         ),
         Expanded(
-            //flex: 1,
-            child: ListView.separated(
-                shrinkWrap: true,
-                itemCount: liveItems.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(children: [
-                    ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PersonalChat()));
-                      },
-                      leading: CircleAvatar(
-                        // radius: 25,
-                        backgroundColor: Colors.grey.withOpacity(0.1),
-                        backgroundImage:
-                            NetworkImage(liveItems[index].photourl ?? ''),
-                      ),
-                      title: Text(liveItems[index].Name),
-                      subtitle: Text(liveItems[index].jobProfile),
-                      trailing: Column(
-                        children: [
-                          Container(
-                            height: 10,
-                            width: 10,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.green),
+          //flex: 1,
+          child: ListView.separated(
+              shrinkWrap: true,
+              itemCount: liveItems.length,
+              itemBuilder: (BuildContext context, int index) {
+                return liveItems[index]
+                        .Name
+                        .toString()
+                        .toLowerCase()
+                        .contains(searchString)
+                    ? ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const PersonalChat()));
+                        },
+                        leading: CircleAvatar(
+                          child: ClipOval(
+                            child: CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: liveItems[index].photourl ?? "",
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) =>
+                                      CircularProgressIndicator(
+                                          value: downloadProgress.progress),
+                              errorWidget: (context, url, error) => const Icon(
+                                Icons.person,
+                                size: 22,
+                              ),
+                            ),
                           ),
-                        ],
-                      ),
-                    )
-                  ]);
-                },
-                separatorBuilder: (BuildContext context, int index) =>
-                    const Divider()))
-      ].toList(),
+                        ),
+                        title: Text(liveItems[index].Name),
+                        subtitle: Text(liveItems[index].jobProfile),
+                        trailing: Column(
+                          children: [
+                            Container(
+                              height: 10,
+                              width: 10,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Colors.green),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Container();
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return liveItems[index]
+                        .toString()
+                        .toLowerCase()
+                        .contains(searchString)
+                    ? const Divider()
+                    : Container();
+              }),
+        ),
+      ],
     );
   }
 }

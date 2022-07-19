@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables, non_constant_identifier_names, avoid_print
 
 import 'dart:convert';
-import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:linkus/variables/Api_Control.dart';
@@ -13,6 +13,8 @@ import 'dropdown.dart';
 import 'dropdown_tone.dart';
 
 class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
+
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
@@ -43,7 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
         builder: (bc) {
           return Dialog(
             backgroundColor: Colors.transparent,
-            child: Container(
+            child: SizedBox(
               height: 50,
               width: 50,
               child: Center(
@@ -123,12 +125,29 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(
                 height: 10,
               ),
-              Center(
-                child: CircleAvatar(
-                    radius: 60,
-                    backgroundColor: Colors.grey,
-                    backgroundImage: NetworkImage(photourl ?? '')),
+              CircleAvatar(
+                radius: 60,
+                child: ClipOval(
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: photourl,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) =>
+                            CircularProgressIndicator(
+                                value: downloadProgress.progress),
+                    errorWidget: (context, url, error) => const Icon(
+                      Icons.person,
+                      size: 22,
+                    ),
+                  ),
+                ),
               ),
+              // Center(
+              //   child: CircleAvatar(
+              //       radius: 60,
+              //       backgroundColor: Colors.grey,
+              //       backgroundImage: NetworkImage(photourl ?? '')),
+              // ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,
               ),

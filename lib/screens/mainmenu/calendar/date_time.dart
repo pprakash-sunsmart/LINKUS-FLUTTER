@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, must_be_immutable
+
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +42,7 @@ class _CalenderWidgetState extends State<CalenderWidget> {
           ),
           hintText: 'Select Date',
 
-          hintStyle: TextStyle(),
+          hintStyle: const TextStyle(),
           contentPadding: widget.contentPadding,
           enabledBorder: widget.enabledBorder,
           focusedBorder: widget.focusedBorder,
@@ -73,10 +75,9 @@ class _CalenderWidgetState extends State<CalenderWidget> {
             // SizedBox(height: 16),
             Text(
               'Your Selected Date: $_selectedDate',
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             );
           }
-          ;
         });
   }
 }

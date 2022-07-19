@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 class CustomPage extends StatefulWidget {
@@ -24,12 +22,12 @@ class _CustomPageState extends State<CustomPage> {
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(1, 123, 255, 1),
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           "Customization",
           style: TextStyle(letterSpacing: 1),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -58,7 +56,7 @@ class _CustomPageState extends State<CustomPage> {
                                     onPressed: () {
                                       Navigator.pop(context, null);
                                     },
-                                    child: Text('CANCEL'),
+                                    child: const Text('CANCEL'),
                                   ),
                                   ElevatedButton(
                                     onPressed: () {
@@ -66,10 +64,10 @@ class _CustomPageState extends State<CustomPage> {
                                         Navigator.pop(context, item[_value]);
                                       });
                                     },
-                                    child: Text('OK'),
+                                    child: const Text('OK'),
                                   ),
                                 ],
-                                content: Container(
+                                content: SizedBox(
                                   width: double.minPositive,
                                   height: 300,
                                   child: ListView.builder(
@@ -117,18 +115,18 @@ class _CustomPageState extends State<CustomPage> {
                                   letterSpacing: 1),
                             ),
                             Text(item[_value]),
-                            SizedBox(
+                            const SizedBox(
                               width: 15,
                             ),
-                            Spacer(),
-                            Icon(Icons.arrow_drop_down)
+                            const Spacer(),
+                            const Icon(Icons.arrow_drop_down)
                           ],
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
               ],

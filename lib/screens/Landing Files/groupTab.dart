@@ -56,7 +56,7 @@ class _groupTabState extends State<groupTab> {
                     ),
                   ),
                 ))),
-        ChatList(
+        GroupChatList(
           onTap: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => groupChat()));

@@ -1,8 +1,9 @@
-import 'dart:convert';
-import 'dart:developer';
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables, non_constant_identifier_names, avoid_print
 
+import 'dart:convert';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:linkus/screens/chatscreen%20Files/dataList.dart';
 
 import '../../variables/Api_Control.dart';
@@ -39,30 +40,14 @@ class _NewGroupState extends State<NewGroup> {
         leadingWidth: 35,
         title: const Text('Contacts'),
       ),
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Card(
-              elevation: 5,
-              child: TextFormField(
-                  decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Icon(Icons.search),
-                      label: Text('Search'),
-                      contentPadding: EdgeInsets.symmetric())),
-            ),
-          ),
-          NewGroupContact(
-              profIcon: const Icon(Icons.person),
-              msgText: null,
-              contactName: null,
-              ntfctnCnt: null,
-              msgdte$tme: const SizedBox(),
-              ItmCnt: null,
-              onTap: () {}),
-        ],
-      ),
+      body: NewGroupContact(
+          profIcon: const Icon(Icons.person),
+          msgText: null,
+          contactName: null,
+          ntfctnCnt: null,
+          msgdte$tme: const SizedBox(),
+          ItmCnt: null,
+          onTap: () {}),
       bottomSheet: TextFormField(
         decoration: InputDecoration(
             suffixIcon: isVisible
@@ -86,10 +71,10 @@ class _NewGroupState extends State<NewGroup> {
                         isVisible = false;
                       });
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 10),
-                      child: const Text(
+                    child: const Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Text(
                         'Select all',
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w800),
@@ -105,7 +90,7 @@ class _NewGroupState extends State<NewGroup> {
                         isVisible = true;
                       });
                     },
-                    child: Padding(
+                    child: const Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                       child: Text(
@@ -150,7 +135,9 @@ class _NewGroupContactState extends State<NewGroupContact> {
   var photo;
   bool? hidephoto;
   bool checkedValue = false;
+  String searchString = "";
 
+  @override
   void initState() {
     setState(() {
       WidgetsBinding.instance.addPostFrameCallback((_) => Data());
@@ -173,20 +160,21 @@ class _NewGroupContactState extends State<NewGroupContact> {
         "Access-Control-Allow-Origin": "*",
       },
     );
-    print("length:${(response.body).length}");
+    // print("length:${(response.body).length}");
     //  print("result:${response.body}");
 
     Contactmodel.add((jsonDecode(response.body)));
 
-    print("length:${jsonDecode(response.body).length}");
+    // print("length:${jsonDecode(response.body).length}");
     listItems.clear();
     for (var i = 0; i < jsonDecode(response.body).length; i++) {
       listItems.add(Employee(
-          id: i + 1,
-          Name: jsonDecode(response.body)[i]['username'] ?? "",
-          jobProfile: jsonDecode(response.body)[i]['designation'] ?? "",
-          photourl: jsonDecode(response.body)[i]["photourl"] ?? "",
-          isChecked: false));
+        id: i + 1,
+        Name: jsonDecode(response.body)[i]['username'] ?? "",
+        jobProfile: jsonDecode(response.body)[i]['designation'] ?? "",
+        photourl: jsonDecode(response.body)[i]["photourl"] ?? "",
+        isChecked: false,
+      ));
     }
 
     setState(() {});
@@ -194,37 +182,77 @@ class _NewGroupContactState extends State<NewGroupContact> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.separated(
-          // shrinkWrap: true,
-
-          itemCount: listItems.length,
-          itemBuilder: (BuildContext context, int index) {
-            final employee = listItems[index];
-
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 0),
-              child: CheckboxListTile(
-                controlAffinity: ListTileControlAffinity.trailing,
-                value: employee.isChecked,
-                onChanged: (newValue) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Card(
+            elevation: 5,
+            child: TextFormField(
+                onChanged: (value) {
                   setState(() {
-                    employee.isChecked = newValue!;
+                    searchString = value.toLowerCase();
                   });
                 },
-                title: Text(listItems[index].Name),
-                secondary: CircleAvatar(
-                    backgroundColor: Colors.grey.withOpacity(0.1),
-                    backgroundImage:
-                        NetworkImage(listItems[index].photourl ?? "")),
-                subtitle: Text(listItems[index].jobProfile),
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-              ),
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider()),
+                decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    prefixIcon: Icon(Icons.search),
+                    label: Text('Search'),
+                    contentPadding: EdgeInsets.symmetric())),
+          ),
+        ),
+        Expanded(
+          child: ListView.separated(
+              itemCount: listItems.length,
+              itemBuilder: (BuildContext context, int index) {
+                final employee = listItems[index];
+
+                return listItems[index]
+                        .Name
+                        .toString()
+                        .toLowerCase()
+                        .contains(searchString)
+                    ? CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.trailing,
+                        value: employee.isChecked,
+                        onChanged: (newValue) {
+                          setState(() {
+                            employee.isChecked = newValue!;
+                          });
+                        },
+                        title: Text(listItems[index].Name),
+                        secondary: CircleAvatar(
+                          child: ClipOval(
+                            child: CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: listItems[index].photourl ?? "",
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) =>
+                                      CircularProgressIndicator(
+                                          value: downloadProgress.progress),
+                              errorWidget: (context, url, error) => const Icon(
+                                Icons.person,
+                                size: 22,
+                              ),
+                            ),
+                          ),
+                        ),
+                        subtitle: Text(listItems[index].jobProfile),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 0),
+                      )
+                    : Container();
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return listItems[index]
+                        .toString()
+                        .toLowerCase()
+                        .contains(searchString)
+                    ? const Divider()
+                    : Container();
+              }),
+        ),
+      ],
     );
   }
 }

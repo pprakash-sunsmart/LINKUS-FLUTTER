@@ -1,4 +1,4 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe, unused_field
+// ignore_for_file: import_of_legacy_library_into_null_safe, unused_field, must_be_immutable, non_constant_identifier_names, prefer_typing_uninitialized_variables, avoid_print, camel_case_types
 
 import 'dart:convert';
 import 'dart:io';
@@ -8,12 +8,11 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/chatscreen%20Files/dataList.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../variables/Api_Control.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart';
-
-import 'package:localstorage/localstorage.dart';
 
 //wertyuioiuyfd
 class ChatList extends StatefulWidget {
@@ -55,10 +54,15 @@ class _ChatListState extends State<ChatList> {
   var usernames = [];
   var profilePics = [];
   var username_length;
+  var responseStatusCode;
+  String searchString = "";
   LoadData() async {
-    final LocalStorage storage = LocalStorage('localstorage_app');
+    final prefs = await SharedPreferences.getInstance();
+    var mobileNumber = prefs.getString('mobileNumber');
+    // final LocalStorage storage = LocalStorage('localstorage_app');
 
-    mobileNumber = storage.getItem('mobileNumber');
+    // mobileNumber = storage.getItem('mobileNumber');
+    print('--------------->$mobileNumber');
 
     Response response = await post(Uri.parse(RecentChats_Api), body: {
       'myid': mobileNumber.toString(),
@@ -67,6 +71,7 @@ class _ChatListState extends State<ChatList> {
       "Accept": "application/json",
       "charset": "utf-8"
     });
+    responseStatusCode = response.statusCode;
     print(response.body);
     var d1 = jsonDecode(response.body);
     var Data = d1;
@@ -79,62 +84,98 @@ class _ChatListState extends State<ChatList> {
         profilePics.add(Data[i]['buddyimage']);
       }
     }
-    print('--------->${usernames}');
+    print('--------->$usernames');
     setState(() {
       username_length = usernames.length;
-      print('--------->${username_length}');
+      print('--------->$username_length');
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: FutureBuilder(
-        // future: Future.delayed(Duration(seconds: 5)),
+    return FutureBuilder(
+        future: Future.delayed(const Duration(seconds: 1)),
         builder: ((context, snapshot) {
-      return ListView.separated(
-          shrinkWrap: true,
-          itemCount: username_length ?? 0,
-          itemBuilder: (BuildContext context, int index) {
-            return Column(
-              children: [
-                ListTile(
-                  onTap: widget.onTap,
-                  leading: CircleAvatar(
-                    radius: 25,
-                    child: ClipOval(
-                      child: CachedNetworkImage(
-                        imageUrl: profilePics[index],
-                        progressIndicatorBuilder:
-                            (context, url, downloadProgress) =>
-                                CircularProgressIndicator(
-                                    value: downloadProgress.progress),
-                        errorWidget: (context, url, error) => Icon(
-                          Icons.person,
-                          size: 22,
-                        ),
-                      ),
-                    ),
-                  ),
-                  title: Text(usernames[index]),
-                  subtitle: Text('data'),
-                  trailing: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      widget.ntfctnCnt,
-                      SizedBox(
-                        height: 5,
-                      ),
-                      widget.msgdte$tme
-                    ],
-                  ),
+          if (responseStatusCode == 200) {
+            return Column(children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: Card(
+                  elevation: 5,
+                  child: TextFormField(
+                      controller: chatController,
+                      // controller: ,
+                      onChanged: (value) {
+                        setState(() {
+                          searchString = value.toLowerCase();
+                        });
+                      },
+                      decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          prefixIcon: Icon(Icons.search),
+                          hintText: 'Search',
+                          contentPadding: EdgeInsets.symmetric(vertical: 15))),
                 ),
-              ],
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider());
-    })));
+              ),
+              Expanded(
+                child: ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: username_length ?? 0,
+                    itemBuilder: (BuildContext context, int index) {
+                      return usernames[index]
+                              .toString()
+                              .toLowerCase()
+                              .contains(searchString)
+                          ? ListTile(
+                              onTap: widget.onTap,
+                              leading: CircleAvatar(
+                                radius: 25,
+                                child: ClipOval(
+                                  child: CachedNetworkImage(
+                                    imageUrl: profilePics[index],
+                                    progressIndicatorBuilder: (context, url,
+                                            downloadProgress) =>
+                                        CircularProgressIndicator(
+                                            value: downloadProgress.progress),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(
+                                      Icons.person,
+                                      size: 22,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              title: Text(usernames[index]),
+                              subtitle: const Text('data'),
+                              trailing: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  widget.ntfctnCnt,
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  widget.msgdte$tme
+                                ],
+                              ),
+                            )
+                          : Container();
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return usernames[index]
+                              .toString()
+                              .toLowerCase()
+                              .contains(searchString)
+                          ? const Divider()
+                          : Container();
+                    }),
+              )
+            ]);
+          }
+
+          return const Center(child: CircularProgressIndicator());
+        }));
   }
 }
 
@@ -147,7 +188,7 @@ class ChatInputBox extends StatefulWidget {
 }
 
 class _ChatInputBoxState extends State<ChatInputBox> {
-  GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
+  GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
   bool MicIcon = true;
   bool emojiShowing = false;
   bool emojiVisibility = true;
@@ -212,7 +253,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
             //have changed something new
             // height: MediaQuery.of(context).size.height,
             // color: Colors.transparent,
-            color: Color.fromRGBO(1, 123, 255, 1),
+            color: const Color.fromRGBO(1, 123, 255, 1),
             child: Padding(
               padding: const EdgeInsets.all(9),
               child: Row(
@@ -238,7 +279,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
 
                           decoration: InputDecoration(
                               enabledBorder: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(
+                              contentPadding: const EdgeInsets.symmetric(
                                 vertical: 18,
                               ),
                               hintText: 'Type a message',
@@ -263,7 +304,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                                       });
                                       // Navigator.pop(context);
                                     },
-                                    icon: Image(
+                                    icon: const Image(
                                         image: AssetImage(
                                             'assets/images/smiley.png'))),
                               ),
@@ -273,12 +314,12 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                                     backgroundColor: Colors.transparent,
                                     context: context,
                                     builder: (BuildContext context) {
-                                      return attatchmentsOfChatInput();
+                                      return const attatchmentsOfChatInput();
                                     },
                                   );
                                 },
 
-                                icon: Image(
+                                icon: const Image(
                                   image: AssetImage(
                                       'assets/images/attachments.png'),
                                   height: 50,
@@ -287,7 +328,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                               )),
                         )),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Container(
@@ -299,11 +340,11 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                       child: MicIcon
                           ? InkWell(
                               onTap: () {},
-                              child: Image(
+                              child: const Image(
                                 image: AssetImage('assets/images/mic.png'),
                               ))
-                          : Padding(
-                              padding: const EdgeInsets.only(left: 3),
+                          : const Padding(
+                              padding: EdgeInsets.only(left: 3),
                               child: Icon(
                                 Icons.send,
                                 color: Color.fromRGBO(1, 123, 255, 1),
@@ -389,19 +430,19 @@ class _MainmenuState extends State<Mainmenu> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           widget.Icon,
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           InkWell(
             onTap: widget.onTap,
-            child: Container(
+            child: SizedBox(
               height: 30,
               width: 100,
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   widget.text,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
@@ -424,7 +465,7 @@ class footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Color.fromRGBO(1, 123, 255, 1),
+        color: const Color.fromRGBO(1, 123, 255, 1),
         height: 20,
         child: Align(
             alignment: Alignment.bottomCenter,
@@ -464,10 +505,11 @@ class _attatchmentsOfChatInputState extends State<attatchmentsOfChatInput> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 70),
-      child: Container(
+      child: SizedBox(
         height: 308,
         width: MediaQuery.of(context).size.width,
-        child: Card(margin: EdgeInsets.all(28), child: attatchmentContents()),
+        child: const Card(
+            margin: EdgeInsets.all(28), child: attatchmentContents()),
       ),
     );
   }
@@ -500,7 +542,7 @@ class _attatchmentContentsState extends State<attatchmentContents> {
                 await FilePicker.platform.pickFiles(type: FileType.any);
               },
               child: Column(
-                children: [
+                children: const [
                   CircleAvatar(
                     radius: 30,
                     backgroundColor: Color.fromARGB(255, 151, 64, 251),
@@ -511,19 +553,19 @@ class _attatchmentContentsState extends State<attatchmentContents> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Document'),
                   )
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             InkWell(
               onTap: () {},
               child: Column(
-                children: [
+                children: const [
                   CircleAvatar(
                     radius: 30,
                     backgroundColor: Colors.pink,
@@ -534,13 +576,13 @@ class _attatchmentContentsState extends State<attatchmentContents> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Camera'),
                   )
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 25,
             ),
             InkWell(
@@ -548,7 +590,7 @@ class _attatchmentContentsState extends State<attatchmentContents> {
                 await FilePicker.platform.pickFiles(type: FileType.image);
               },
               child: Column(
-                children: [
+                children: const [
                   CircleAvatar(
                     radius: 30,
                     backgroundColor: Colors.purpleAccent,
@@ -559,7 +601,7 @@ class _attatchmentContentsState extends State<attatchmentContents> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Gallery'),
                   )
                 ],
@@ -567,7 +609,7 @@ class _attatchmentContentsState extends State<attatchmentContents> {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Padding(
@@ -576,13 +618,13 @@ class _attatchmentContentsState extends State<attatchmentContents> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Column(
-                children: [
+                children: const [
                   CircleAvatar(
                     radius: 30,
                     child: Icon(Icons.location_on),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Text('Location'),
                   )
                 ],
@@ -620,40 +662,247 @@ class allContactsList extends StatefulWidget {
 
 class _allContactsListState extends State<allContactsList> {
   @override
+  void initState() {
+    listItems;
+    super.initState();
+  }
+
+  String searchString = "";
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: Future.delayed(const Duration(seconds: 3)),
+      builder: ((context, snapshot) {
+        return listItems.isEmpty
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    child: Card(
+                      elevation: 5,
+                      child: TextFormField(
+                          onChanged: (value) {
+                            setState(() {
+                              searchString = value.toLowerCase();
+                            });
+                          },
+                          decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              prefixIcon: Icon(Icons.search),
+                              hintText: 'Search',
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 15))),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                        shrinkWrap: true,
+                        itemCount: listItems.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return listItems[index]
+                                  .Name
+                                  .toString()
+                                  .toLowerCase()
+                                  .contains(searchString)
+                              ? ListTile(
+                                  onTap: widget.onTap,
+                                  leading: CircleAvatar(
+                                    child: ClipOval(
+                                      child: CachedNetworkImage(
+                                        fit: BoxFit.cover,
+                                        imageUrl:
+                                            listItems[index].photourl ?? "",
+                                        progressIndicatorBuilder: (context, url,
+                                                downloadProgress) =>
+                                            CircularProgressIndicator(
+                                                value:
+                                                    downloadProgress.progress),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(
+                                          Icons.person,
+                                          size: 22,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  title: Text(listItems[index].Name),
+                                  subtitle: Text(listItems[index].jobProfile),
+                                  trailing: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      listItems[index].status == "online"
+                                          ? Container(
+                                              height: 10,
+                                              width: 10,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  color: Colors.green),
+                                            )
+                                          : Container(
+                                              height: 10,
+                                              width: 10,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  color: Colors.red),
+                                            ),
+                                      widget.msgdte$tme
+                                    ],
+                                  ),
+                                )
+                              : Container();
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return listItems[index]
+                                  .toString()
+                                  .toLowerCase()
+                                  .contains(searchString)
+                              ? const Divider()
+                              : Container();
+                        }),
+                  ),
+                ],
+              );
+      }),
+    );
+  }
+}
+
+class GroupChatList extends StatefulWidget {
+  final profIcon;
+  final msgText;
+  final contactName;
+  final ntfctnCnt;
+  final msgdte$tme;
+  final ItmCnt;
+  final onTap;
+
+  const GroupChatList(
+      {required this.profIcon,
+      required this.msgText,
+      required this.contactName,
+      required this.ntfctnCnt,
+      required this.msgdte$tme,
+      required this.ItmCnt,
+      required this.onTap,
+      super.key});
+
+  @override
+  State<GroupChatList> createState() => _GroupChatListState();
+}
+
+class _GroupChatListState extends State<GroupChatList> {
+  @override
+  void initState() {
+    LoadGroupData();
+    super.initState();
+  }
+
+  var GroupNames = [];
+  var GroupImages = [];
+  var GroupCreated = [];
+  var GroupName_Length;
+  var responseStatusCode;
+  LoadGroupData() async {
+    final prefs = await SharedPreferences.getInstance();
+    var mobileNumber = prefs.getString('mobileNumber');
+    // final LocalStorage storage = LocalStorage('localstorage_app');
+
+    // mobileNumber = storage.getItem('mobileNumber');
+    print('--------------->$mobileNumber');
+
+    Response response = await post(Uri.parse(Group_List), body: {
+      'uid': "$mobileNumber",
+    }, headers: {
+      "Content-type": "application/x-www-form-urlencoded",
+      "Accept": "application/json",
+      "charset": "utf-8"
+    });
+    responseStatusCode = response.statusCode;
+    print(response.body);
+    var Data = jsonDecode(response.body);
+    // var Data = d1;
+    print(Data);
+    print(Data.length);
+    // var ;
+    if (Data != null || Data != []) {
+      for (var i = 0; i < Data.length; i++) {
+        GroupNames.add(Data[i]['groupname']);
+        GroupImages.add(Data[i]['groupimage']);
+        GroupCreated.add(Data[i]['groupcreated']);
+      }
+    }
+    print('--------->$GroupNames');
+    setState(() {
+      GroupName_Length = GroupNames.length;
+      print('--------->$GroupName_Length');
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.separated(
-          shrinkWrap: true,
-          itemCount: listItems.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Column(
-              children: [
-                ListTile(
-                  onTap: widget.onTap,
-                  leading: CircleAvatar(
-                      // radius: 25,
-                      backgroundColor: Colors.grey.withOpacity(0.1),
-                      backgroundImage:
-                          NetworkImage(listItems[index].photourl ?? "")),
-                  title: Text(listItems[index].Name),
-                  subtitle: Text(listItems[index].jobProfile),
-                  trailing: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      widget.ntfctnCnt,
-                      SizedBox(
-                        height: 5,
+      child: FutureBuilder(
+        future: Future.delayed(const Duration(seconds: 1)),
+        builder: ((context, snapshot) {
+          if (responseStatusCode == 200) {
+            return ListView.separated(
+                shrinkWrap: true,
+                itemCount: GroupName_Length ?? 0,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    onTap: widget.onTap,
+                    leading: CircleAvatar(
+                      child: ClipOval(
+                        child: CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          imageUrl: GroupImages[index],
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) =>
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
+                          errorWidget: (context, url, error) => const Icon(
+                            Icons.groups_rounded,
+                            size: 22,
+                          ),
+                        ),
                       ),
-                      widget.msgdte$tme
-                    ],
-                  ),
-                ),
-              ],
+                    ),
+                    // leading: CircleAvatar(
+                    //     // radius: 25,
+                    //     backgroundColor: Colors.grey.withOpacity(0.1),
+                    //     backgroundImage:
+                    //         ,
+                    title: Text(GroupNames[index]),
+                    subtitle: Text(GroupCreated[index]),
+                    trailing: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        widget.ntfctnCnt,
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        widget.msgdte$tme
+                      ],
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider());
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider()),
+          }
+        }),
+      ),
     );
   }
 }
