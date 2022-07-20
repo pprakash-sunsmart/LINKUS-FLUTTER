@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, non_constant_identifier_names, avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../variables/Api_Control.dart';
 import '../Login Files/login_textfield.dart';
 import 'package:http/http.dart' as http;
+//123456789
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({super.key});
