@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:linkus/variables/Api_Control.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dropdown.dart';
 import 'dropdown_tone.dart';
@@ -38,8 +39,12 @@ class _ProfilePageState extends State<ProfilePage> {
   var branchname;
   var photourl;
   var marital;
+  var mob;
 
   MyProfileData() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    mob = await prefs.getString('mobileNumber');
     showDialog(
         context: context,
         builder: (bc) {
@@ -56,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
         });
 
     Map data = {
-      "mobile": "8903725995",
+      "mobile": mob,
     };
     print(data);
     String body = json.encode(data);

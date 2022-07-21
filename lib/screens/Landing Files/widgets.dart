@@ -1,4 +1,4 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe, unused_field, must_be_immutable, non_constant_identifier_names, prefer_typing_uninitialized_variables, avoid_print, camel_case_types
+// ignore_for_file: import_of_legacy_library_into_null_safe, unused_field, must_be_immutable, non_constant_identifier_names, prefer_typing_uninitialized_variables, avoid_print, camel_case_types, prefer_const_constructors
 
 import 'dart:convert';
 import 'dart:io';
@@ -13,6 +13,9 @@ import '../../variables/Api_Control.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart';
+
+import '../chatscreen Files/groupChat.dart';
+import '../chatscreen Files/individualChat.dart';
 
 //wertyuioiuyfd
 class ChatList extends StatefulWidget {
@@ -42,6 +45,7 @@ class ChatList extends StatefulWidget {
 }
 
 final TextEditingController chatController = TextEditingController();
+final TextEditingController SearchController = TextEditingController();
 
 class _ChatListState extends State<ChatList> {
   @override
@@ -104,7 +108,7 @@ class _ChatListState extends State<ChatList> {
                 child: Card(
                   elevation: 5,
                   child: TextFormField(
-                      controller: chatController,
+                      controller: SearchController,
                       // controller: ,
                       onChanged: (value) {
                         setState(() {
@@ -128,7 +132,15 @@ class _ChatListState extends State<ChatList> {
                               .toLowerCase()
                               .contains(searchString)
                           ? ListTile(
-                              onTap: widget.onTap,
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PersonalChat(
+                                              names: usernames[index],
+                                              images: profilePics[index],
+                                            )));
+                              },
                               leading: CircleAvatar(
                                 radius: 25,
                                 child: ClipOval(
@@ -667,11 +679,12 @@ class _allContactsListState extends State<allContactsList> {
     super.initState();
   }
 
+  final TextEditingController SearchController = TextEditingController();
   String searchString = "";
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Future.delayed(const Duration(seconds: 3)),
+      future: Future.delayed(const Duration(seconds: 5)),
       builder: ((context, snapshot) {
         return listItems.isEmpty
             ? const Center(
@@ -685,6 +698,7 @@ class _allContactsListState extends State<allContactsList> {
                     child: Card(
                       elevation: 5,
                       child: TextFormField(
+                          controller: SearchController,
                           onChanged: (value) {
                             setState(() {
                               searchString = value.toLowerCase();
@@ -709,7 +723,16 @@ class _allContactsListState extends State<allContactsList> {
                                   .toLowerCase()
                                   .contains(searchString)
                               ? ListTile(
-                                  onTap: widget.onTap,
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => PersonalChat(
+                                                  names: listItems[index].Name,
+                                                  images:
+                                                      listItems[index].photourl,
+                                                )));
+                                  },
                                   leading: CircleAvatar(
                                     child: ClipOval(
                                       child: CachedNetworkImage(
@@ -798,6 +821,7 @@ class GroupChatList extends StatefulWidget {
 }
 
 class _GroupChatListState extends State<GroupChatList> {
+  final TextEditingController SearchController = TextEditingController();
   @override
   void initState() {
     LoadGroupData();
@@ -857,7 +881,14 @@ class _GroupChatListState extends State<GroupChatList> {
                 itemCount: GroupName_Length ?? 0,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    onTap: widget.onTap,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => groupChat(
+                                  GroupNames: GroupNames[index],
+                                  GroupImages: GroupImages[index])));
+                    },
                     leading: CircleAvatar(
                       child: ClipOval(
                         child: CachedNetworkImage(

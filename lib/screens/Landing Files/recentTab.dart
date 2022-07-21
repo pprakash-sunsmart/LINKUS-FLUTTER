@@ -16,10 +16,7 @@ class _recentTabState extends State<recentTab> {
   Widget build(BuildContext context) {
     // int index = 0;
     return ChatList(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => PersonalChat()));
-      },
+      onTap: () {},
       ntfctnCnt: CircleAvatar(
           radius: 10,
           child: Text(

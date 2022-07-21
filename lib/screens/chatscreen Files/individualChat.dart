@@ -9,7 +9,9 @@ import 'package:linkus/screens/filters/searchFilter.dart';
 import '../profile/my_profile.dart';
 
 class PersonalChat extends StatefulWidget {
-  const PersonalChat({super.key});
+  var names;
+  var images;
+  PersonalChat({super.key, this.images, this.names});
 
   @override
   State<PersonalChat> createState() => _PersonalChatState();
@@ -51,9 +53,7 @@ class _PersonalChatState extends State<PersonalChat> {
                     SizedBox(
                       width: 10,
                     ),
-                    isTextfield
-                        ? Text('data', style: TextStyle(fontSize: 18))
-                        : Text('xyz')
+                    Text(widget.names, style: TextStyle(fontSize: 18))
                   ],
                 ),
                 actions: [

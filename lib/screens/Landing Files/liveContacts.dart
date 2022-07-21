@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_typing_uninitialized_variables, camel_case_types, non_constant_identifier_names, file_names
+// ignore_for_file: prefer_typing_uninitialized_variables, camel_case_types, non_constant_identifier_names, file_names, prefer_const_constructors
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +30,7 @@ class liveContacts extends StatefulWidget {
 }
 
 class _liveContactsState extends State<liveContacts> {
+  final TextEditingController SearchController = TextEditingController();
   String searchString = "";
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,7 @@ class _liveContactsState extends State<liveContacts> {
           child: Card(
             elevation: 5,
             child: TextFormField(
+                controller: SearchController,
                 onChanged: (value) {
                   setState(() {
                     searchString = value.toLowerCase();
@@ -70,7 +72,10 @@ class _liveContactsState extends State<liveContacts> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const PersonalChat()));
+                                  builder: (context) => PersonalChat(
+                                        names: liveItems[index].Name,
+                                        images: liveItems[index].photourl,
+                                      )));
                         },
                         leading: CircleAvatar(
                           child: ClipOval(

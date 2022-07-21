@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/chatscreen%20Files/NewGroup.dart';
+import 'package:linkus/screens/chatscreen%20Files/dataList.dart';
 import 'package:linkus/screens/chatscreen%20Files/groupChat.dart';
 
 import 'widgets.dart';
@@ -57,10 +58,7 @@ class _groupTabState extends State<groupTab> {
                   ),
                 ))),
         GroupChatList(
-          onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => groupChat()));
-          },
+          onTap: () {},
           profIcon: Icon(Icons.group),
           msgText: null,
           msgdte$tme: Text(''),

@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_literals_to_create_immutables, unused_local_variable, avoid_unnecessary_containers, prefer_const_constructors
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:linkus/screens/filters/searchFilter.dart';
@@ -9,7 +10,9 @@ import '../filters/mediaFilter.dart';
 import '../profile/groupProfile.dart';
 
 class groupChat extends StatefulWidget {
-  const groupChat({super.key});
+  var GroupNames;
+  var GroupImages;
+  groupChat({super.key, this.GroupNames, this.GroupImages});
 
   @override
   State<groupChat> createState() => _groupChatState();
@@ -45,16 +48,29 @@ class _groupChatState extends State<groupChat> {
                 leadingWidth: 30,
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
+                  children: [
                     CircleAvatar(
-                      child: Icon(Icons.person),
+                      child: ClipOval(
+                        child: CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          imageUrl: widget.GroupImages,
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) =>
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
+                          errorWidget: (context, url, error) => const Icon(
+                            Icons.groups_rounded,
+                            size: 22,
+                          ),
+                        ),
+                      ),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Expanded(
-                        child:
-                            Text('Group Chat', style: TextStyle(fontSize: 18)))
+                        child: Text(widget.GroupNames,
+                            style: TextStyle(fontSize: 18)))
                   ],
                 ),
                 actions: [

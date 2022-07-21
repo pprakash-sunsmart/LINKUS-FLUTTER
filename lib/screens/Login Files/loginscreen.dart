@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'dart:developer';
 
@@ -24,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final ScaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
-  bool _showPassword = false;
+  bool _showPassword = true;
 
   bool isChecked = false;
   void _togglevisibility() {
@@ -67,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
           barrierDismissible: false,
           context: context,
           builder: (bc) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           });
@@ -87,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
         var username = data[0]['username'];
         var designation = data[0]['designation'];
         var profilepic = data[0]['photourl'];
+        var compid = data[0]['compid'];
         print(mobile_number);
         final prefs = await SharedPreferences.getInstance();
 
@@ -95,6 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
         await prefs.setString('username', username);
         await prefs.setString('designation', designation);
         await prefs.setString('profilepic', profilepic);
+        await prefs.setString('compid', compid);
 
         Navigator.pushAndRemoveUntil<dynamic>(
           context,
@@ -105,8 +109,8 @@ class _LoginScreenState extends State<LoginScreen> {
           //if you want to disable back feature set to false
         );
 
-        ScaffoldMessenger.maybeOf(context)
-            ?.showSnackBar(SnackBar(content: Text('Logged In Successfully')));
+        ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+            const SnackBar(content: Text('Logged In Successfully')));
 
         print('Login successfully');
       } else {
@@ -122,9 +126,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void AlertDialouge() {
     AlertDialog alert = AlertDialog(
-      content: Text('Please Enter Valid Credentials'),
+      content: const Text('Please Enter Valid Credentials'),
       title: Row(
-        children: [Icon(Icons.error), Text('Error')],
+        children: [const Icon(Icons.error), const Text('Error')],
       ),
       actions: [
         TextButton(
@@ -132,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Navigator.pop(context);
               Navigator.pop(context);
             },
-            child: Text('Ok')),
+            child: const Text('Ok')),
       ],
     );
 
@@ -181,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
         barrierDismissible: false,
         context: context,
         builder: (bc) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         });
@@ -190,15 +194,6 @@ class _LoginScreenState extends State<LoginScreen> {
     print(data);
     String body = json.encode(data);
     print(body);
-    //  showDialog(
-    //     barrierDismissible: false,
-    //     context: context,
-    //     builder: (bc) {
-    //       return Center(
-    //         child: CircularProgressIndicator(),
-    //       );
-    //     });
-
     var response = await http.post(
       Uri.parse(Forgot_Password),
       body: body,
@@ -210,8 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
     var xyz = jsonDecode(response.body);
     print("ssssss:$xyz");
-    // var lngth=jsonDecode(xyz.length.toString());
-    // print(lngth);
+
     print("flag:${xyz["flag"]}");
 
     if (xyz["flag"] == "0") {
@@ -234,7 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text(
+                          const Text(
                             "OK",
                             style: TextStyle(fontSize: 15, color: Colors.black),
                           ),
@@ -265,7 +259,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text(
+                          const Text(
                             "OK",
                             style: TextStyle(fontSize: 15, color: Colors.black),
                           ),
@@ -613,7 +607,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                                 fontSize: 16),
                                                           ),
                                                           content: TextButton(
-                                                            child: Text(
+                                                            child: const Text(
                                                               "OK",
                                                               style: TextStyle(
                                                                   fontSize: 15,
